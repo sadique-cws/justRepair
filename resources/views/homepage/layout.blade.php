@@ -14,9 +14,9 @@
 
     <div class="bg-white border-y flex-1">
         <div class="flex flex-1 justify-center">
-            <div class="w-2/4">
+            <div class="lg:px-[10%]">
                 <div class="flex flex-1 justify-between items-center">
-                    <div class="w-1/12 p-4 flex gap-2 items-center ">
+                    <div class="lg:w-1/12 w-2/12 p-4 flex gap-2 items-center ">
                         <img src="{{asset("images/logo.jpeg")}}"/>
                         <h2 class="font-bold text-xl font-sans">JustRepair</h2>
                     </div>
@@ -29,10 +29,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
-
-
+    </div> 
  <!-- drawer component -->
  <div id="drawer-navigation" class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-64 dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-navigation-label">
      <h5 id="drawer-navigation-label" class="text-base font-semibold text-gray-500 uppercase dark:text-gray-400">Menu</h5>
