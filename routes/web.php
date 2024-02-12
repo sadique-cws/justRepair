@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,5 +22,12 @@ Route::get("/", [HomeController::class,"index"]);
 Route::prefix("admin")->group(function () {
     Route::controller(AdminController::class)->group(function () {
         Route::get('/', 'dashboard');
+
+        //service routes
+        Route::prefix("service")->group(function () {
+            Route::controller(ServiceController::class)->group(function () {
+                Route::get('/', 'index');
+            });
+        });
     });
 });

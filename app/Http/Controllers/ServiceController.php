@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class ServiceController extends Controller
 {
     public function index(){
-        return view("homepage.home");
+        return view("admin.services.manage");
     }
-
 }
