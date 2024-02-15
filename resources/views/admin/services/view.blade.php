@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Manage Services</h1>
+                    <h1 class="m-0 viewtitle">View Services</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -27,7 +27,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">All Services</h3>
+                            <h3 class="card-title viewtitle">All Services</h3>
 
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;">
@@ -45,19 +45,10 @@
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover text-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Icon Image</th>
-                                        <th>Description</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
                                 <tbody id="tableBody">
-                                    <!-- Table rows will be dynamically added here -->
                                 </tbody>
                             </table>
+                            
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -74,26 +65,38 @@
 
 @section('js')
     <script>
-        $(document).ready(function() {
+      $(document).ready(function() {
     // AJAX call to fetch data
     $.ajax({
-        url: "{{route('service.index')}}", // Update with your controller's URL
+        url: '{{route('service.show', 1)}}', // Update with your controller's URL
         type: 'GET',
         success: function(response) {
             // Update the table with the response data
-            if (response && response.length > 0) {
-                var tableRows = '';
-                response.forEach(function(row) {
-                    console.log(response)
-
-                    tableRows += `<tr> 
-                        <td>${row.id}</td>
-                        <td>${row.name}</td>
-                        <td><img src='/uploads/${row.icon}' width='50px'/></td>
-                        <td>${row.description}</td>
-                        <td> <a href='/admin/service/view/${row.id}'class='btn btn-warning'>View</a> </td>
+            if (response) {
+                    $(".viewtitle").html(response.name + " Service View")
+                    let tableRows = `
+                        <tr> 
+                            <th>Id</th>
+                            <td>${response.id}</td>
+                        </tr>
+                        <tr> 
+                            <th>Name</th>
+                            <td>${response.name}</td>
+                        </tr>
+                        <tr>
+                            <th>Icon</th>
+                            <td><img src='/uploads/${response.icon}' width='50px'/></td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td>${response.description}</td>
+                        </tr>
+                            <tr>
+                                <td> 
+                    <a href='/admin/service/view/${response.id}'class='btn btn-warning'>View</a> 
+                    <a href='/admin/service/view/${response.id}'class='btn btn-danger'>Delete</a> 
+                                </td>
                         </tr>`;
-                });
                 $('#tableBody').html(tableRows);
             }
         },
@@ -101,6 +104,28 @@
             console.error(xhr.responseText);
         }
     });
+
+    // AJAX call to delete item
+    $(document).on('click', '.deleteBtn', function() {
+        var id = $(this).data('id');
+        $.ajax({
+            url: '/your-delete-url/' + id, // Update with your delete route
+            type: 'DELETE',
+            success: function(response) {
+                // Handle success response, maybe refresh the table or show a message
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    // AJAX call to edit item
+    $(document).on('click', '.editBtn', function() {
+        var id = $(this).data('id');
+        // Implement edit functionality as needed
+    });
 });
+
     </script>
 @endsection

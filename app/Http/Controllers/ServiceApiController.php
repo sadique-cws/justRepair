@@ -44,7 +44,13 @@ class ServiceApiController extends Controller
    
     public function show(string $id)
     {
-        //
+        $data = Service::find($id); 
+        if($data){
+            return response()->json($data);
+        }
+        else{
+            return response()->json(['success'=> false]);
+        }
     }
 
     public function update(Request $request, string $id)

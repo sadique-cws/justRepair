@@ -15,5 +15,10 @@ class ServiceController extends Controller
         return view("admin.services.insert");
     }
 
+    public function view($id){
+        
+        return view("admin.services.view");
+    }
+
     
 }
