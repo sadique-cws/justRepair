@@ -1,5 +1,8 @@
 @extends('admin.adminBase')
 
+@section('title')
+    Manage Services |
+@endsection
 
 @section('content')
     <div class="content-header">
@@ -18,8 +21,6 @@
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
-
-
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -47,41 +48,14 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>User</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>Reason</th>
+                                        <th>Name</th>
+                                        <th>Icon Image</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>183</td>
-                                        <td>John Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="tag tag-success">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>219</td>
-                                        <td>Alexander Pierce</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="tag tag-warning">Pending</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>657</td>
-                                        <td>Bob Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="tag tag-primary">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>175</td>
-                                        <td>Mike Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="tag tag-danger">Denied</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
+                                <tbody id="tableBody">
+                                    <!-- Table rows will be dynamically added here -->
                                 </tbody>
                             </table>
                         </div>
@@ -96,4 +70,36 @@
     </div>
     <!-- /.content-wrapper -->
 
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+    // AJAX call to fetch data
+    $.ajax({
+        url: "{{route('service.index')}}", // Update with your controller's URL
+        type: 'GET',
+        success: function(response) {
+            // Update the table with the response data
+            console.log(response)
+            if (response && response.length > 0) {
+                var tableRows = '';
+                response.forEach(function(row) {
+                    tableRows += '<tr>' +
+                        '<td>' + row.id + '</td>' +
+                        '<td>' + row.name + '</td>' +
+                        '<td>' + row. + '</td>' +
+                        '<td><span class="tag tag-' + row.status.toLowerCase() + '">' + row.status + '</span></td>' +
+                        '<td>' + row.reason + '</td>' +
+                        '</tr>';
+                });
+                $('#tableBody').html(tableRows);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+        }
+    });
+});
+    </script>
 @endsection
