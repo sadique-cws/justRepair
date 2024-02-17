@@ -10,4 +10,8 @@ class HomeController extends Controller
         return view("homepage.home");
     }
 
+    public function viewService(){
+        return view("homepage.viewService");
+    }
+
 }
