@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -10,8 +12,9 @@ class HomeController extends Controller
         return view("homepage.home");
     }
 
-    public function viewService(){
-        return view("homepage.viewService");
+    public function viewService($id){
+        $data['service'] =Service::findOrFail($id);
+        return view("homepage.viewService", $data);
     }
 
 }

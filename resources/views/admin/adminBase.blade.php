@@ -271,6 +271,30 @@
             <a href="{{route('admin.service.manage')}}" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
+                Service Fees
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('admin.servicefee.manage')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Manage Service Fee</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route("admin.servicefee.insert")}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Insert Fees</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('admin.service.manage')}}" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
                 Users
                 <i class="fas fa-angle-left right"></i>
               </p>

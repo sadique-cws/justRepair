@@ -48,15 +48,13 @@ class ServiceApiController extends Controller
             $req->save();
         }
       
-       
-    
         return response()->json(['success' => true]);
     }
 
    
     public function show(string $id)
     {
-        $data = Service::where("id",$id)->with("requirements")->get(); 
+        $data = Service::where("id",$id)->with("requirements")->first(); 
         if($data){
             return response()->json($data);
         }

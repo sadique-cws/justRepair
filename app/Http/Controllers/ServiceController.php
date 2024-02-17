@@ -16,7 +16,6 @@ class ServiceController extends Controller
     }
 
     public function view($id){
-        
         return view("admin.services.view");
     }
 

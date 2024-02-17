@@ -4,27 +4,36 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="card card-bg-img bg-img mt-2 bg-cover mb-1"
-                    style="background-image:url('/images/ac_rep.jpg'); background-repeat:no-repeat; ">
-                    <div class="card-body py-4 px-3">
-                        <h1 class="text-white">Air Condition Repair </h1>
-                        <p class="mb-3 text-white">
-                            AC Repair/Service, AC AC Repair/Service, AC AC Repair/Service, AC
+                <div class="bg-black bg-opacity-50 flex items-center justify-center">
+                    <div class="relative w-full h-48">
+                      <img src="/images/ac_rep.jpg" alt="Background Image" class="w-full h-full object-cover">
+                      <div class="absolute inset-0 bg-black bg-opacity-65"></div>
+                      <div class="absolute inset-0 flex flex-col items-start px-3 justify-center">
+                        <!-- Your content goes here -->
+                        <h1 class="text-white" id="serviceName">{{$service->name}}</h1>
+                        <p class="mb-3 text-white" id="serviceDescription">
+                        {{$service->description}}
                         </p>
                         <ul class="list-inline mb-1 text-white">
-                            <li class="list-inline-item"><i class="fa-regular fa-circle-check text-success"></i> Low Cost
+                            <li class="list-inline-item">
+                                <i class="fa-solid fa-circle-check text-success"></i> Low Cost
                             </li>
-                            <li class="list-inline-item"><i class="fa-regular fa-circle-check text-success"></i> Low Cost
+                            <li class="list-inline-item">
+                                <i class="fa-solid fa-circle-check text-success"></i> Low Cost
                             </li>
-                            <li class="list-inline-item"><i class="fa-regular fa-circle-check text-success"></i> Low Cost
+                            <li class="list-inline-item">
+                                <i class="fa-solid fa-circle-check text-success"></i> Low Cost
                             </li>
-                            <li class="list-inline-item"><i class="fa-regular fa-circle-check text-success"></i> Low Cost
+                            <li class="list-inline-item">
+                                <i class="fa-solid fa-circle-check text-success"></i> Low Cost
                             </li>
-                            <li class="list-inline-item"><i class="fa-regular fa-circle-check text-success"></i> Low Cost
+                            <li class="list-inline-item">
+                                <i class="fa-solid fa-circle-check text-success"></i> Low Cost
                             </li>
                         </ul>
+                      </div>
                     </div>
-                </div>
+                  </div>
             </div>
         </div>
         <div class="row mt-3">
@@ -54,32 +63,19 @@
                                 <form>
                                     <div class="mb-3 d-flex flex-column">
                                         <label for="">When do you Need service?</label>
-                                        <select name="" id="" class="form-select">
-                                            <option value="" selected>Today</option>
-                                            <option value="">Tommorow</option>
-                                            <option value="">20 feb</option>
-                                            <option value="">20 feb</option>
-                                            <option value="">20 feb</option>
-                                            <option value="">20 feb</option>
-                                            <option value="">20 feb</option>
+                                        <select name="date" class="form-select">
+                                            <option value="{{ \Carbon\Carbon::now()->toDateString() }}" selected>Today</option>
+                                            @for ($i = 1; $i <= 7; $i++)
+                                                <option value="{{ \Carbon\Carbon::now()->addDays($i)->toDateString() }}">
+                                                    {{ \Carbon\Carbon::now()->addDays($i)->format('D d M') }}
+                                                </option>
+                                            @endfor
                                         </select>
                                     </div>
                                     <div class="mb-2 ">
                                         <label for="">Requirement(s)</label>
                                         <div class="mt-1 d-flex flex-row gap-3" id="calling_requirement">
-                                            <div class="mb-1">
-                                                <input type="checkbox" >
-                                                <label for="">AC Repair/Service</label>
-                                            </div>
-                                            <div class="mb-1">
-                                                <input type="checkbox">
-                                                <label for="">AC Installation/Removal</label>
-                                            </div>
-                                            <div class="mb-1">
-
-                                                <input type="checkbox">
-                                                <label for="">AC Repair/Service</label>
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                     <div class="mb-3">
@@ -115,46 +111,26 @@
         </div>
         <div class="row mt-3">
             <div class="col-12">
-                <h4>Book Air Conditioner Repair Service in Patna</h4>
-                <p class="text-muted text-sm"><strong>SevaMart </strong>provides on-demand, onsite quick and hasslefree AC
-                    repair Service in
-                    Patna. Our trained expert technicians offers Air Conditioner repair service in Patna at your doorstep.
-                    We offer lowcost transparent repair service and dont charge single rupees for inspection or visit,
-                    yes book appointment for AC Repair and we provide free home visit/ inspection to provide you estimated
-                    repair cost.</p>
+                <h4>Book Air Conditioner Repair Service in Purnea</h4>
+                <p class="text-muted text-sm"><strong>JustRepair</strong> is your go-to solution for all your repair needs. We specialize in repairing a wide range of appliances, including air conditioners, refrigerators, home appliances, water purifiers, and more. With our team of experienced technicians, we provide efficient and reliable repair services to ensure your appliances are back up and running in no time. Whether it's a minor fix or a major repair, you can trust <strong>JustRepair</strong> to deliver top-notch service at competitive prices. Customer satisfaction is our priority, and we strive to exceed your expectations with every repair</p>
                 <p class="text-muted text-sm">We provide same day quick service including saturday and sunday and all our
                     repair services come with a 7
                     days repair warranty policy. We promise to revisit and re-check incase your AC is not fully working
                     without any additional charges up to 7 days from the date of first service.</p>
-                <h4>Top Reasons to Book AC Repair service in Patna with SevaMart.</h4>
-                <p class="text-muted text-sm">Free/ Zero visiting/inspection charges.</p>
-                <p class="text-muted text-sm">Same day fastest repair service.</p>
-                <p class="text-muted text-sm">7 days repair warranty / cover.</p>
-                <p class="text-muted text-sm">Multi brand AC repair service.</p>
-                <p class="text-muted text-sm">Doorstep convenient repair service accross Patna.</p>
-                <h4>Expert onsite AC repair in Patna.</h4>
-                <p class="text-muted text-sm">Our Skilled, trained technicians from SevaMartdo equally quality job as most
-                    company service centers as many of them are either trained in authorized Air Conditioner repair centers
-                    or have worked for brands in past. Currently we provide AC repair in complete Patna, from patna city, up
-                    to Danapur including Boring Road, Bailey Road, Rajendra Nagar, Kankarbagh and other localities in Patna.
-                </p>
-                <h4>Multibrand AC repair Service Center in Patna.</h4>
-                <p class="text-muted text-sm">You can book Air Conditioner repair service for all major brands like Samsung
-                    AC repair in Patna, LG AC
-                    repair in Patna, Dakin AC, Voltas AC repair in Patna, Whirlpool AC repair in Patna and other Air
-                    Conditioner repair in Patna. We are one stop multi brand AC repair Service center in Patna.</p>
-                <h4>How to Book AC repair in Patna?</h4>
-                <p class="text-muted text-sm">Booking AC repair service in Patna is very easy you can book a appointment
-                    for
-                    AC servicing with
-                    our technician from our website a
-                    target="_blank">SevaMart.com also offer Booking an appointment for AC repair in Patna
-                    over phone call our helpline no is 7480844888 you
-                    can call all days from 8AM to 8PM. If you are an android mobile user you can download our
-
-                    to book AC Repair and other repair services in Patna.
-                </p>
-
+                <h4>Top Reasons to Book AC Repair service in Purnea with JustRepair.</h4>
+                
+                <ul class="flex flex-col gap-3 list-disc">
+                    <li><strong>Expert Technicians:</strong> Our team consists of skilled technicians who are experts in repairing ACs, refrigerators, home appliances, water purifiers, and more. They have the knowledge and experience to diagnose and fix issues quickly and effectively.</li>
+                    <li><strong>Wide Range of Services:</strong> JustRepair offers repair services for a variety of appliances, making us a one-stop solution for all your repair needs. Whether it's a faulty AC, a malfunctioning refrigerator, or a broken water purifier, we've got you covered.</li>
+                    <li><strong>Quality Parts:</strong> We use only high-quality parts for repairs to ensure the longevity and performance of your appliances. Our genuine parts help maintain the integrity of your appliance and provide lasting solutions.</li>
+                    <li><strong>Prompt Service:</strong> We understand the inconvenience of a malfunctioning appliance, which is why we strive to provide prompt service. Our technicians are quick to respond and work efficiently to get your appliance back in working condition as soon as possible.</li>
+                    <li><strong>Transparent Pricing:</strong> At JustRepair, we believe in transparency. We provide upfront pricing for our services, so you know exactly what to expect. There are no hidden costs or surprises, just honest and fair pricing.</li>
+                    <li><strong>Customer Satisfaction Guarantee:</strong> Your satisfaction is our priority. We go above and beyond to ensure that our customers are happy with our services. If you're not satisfied, we'll work with you to make it right.</li>
+                    <li><strong>Convenient Booking:</strong> Booking a service with JustRepair is easy and convenient. You can book online or by phone, and we'll schedule a service at a time that works best for you.</li>
+                    <li><strong>Emergency Services:</strong> For those urgent repair needs, we offer emergency services. Whether it's a broken AC in the middle of summer or a malfunctioning refrigerator, you can count on us to be there when you need us most.</li>
+                    <li><strong>Licensed and Insured:</strong> JustRepair is a licensed and insured company, giving you peace of mind knowing that your appliances are in good hands.</li>
+                    <li><strong>Locally Owned and Operated:</strong> We are proud to be a locally owned and operated business, serving the community of Purnea, Bihar. Supporting local businesses means supporting your community, and we thank you for choosing JustRepair for your repair needs.</li>
+                  </ul>
             </div>
         </div>
     </div>
@@ -162,29 +138,34 @@
      $(document).ready(function() {
             let callingReq = () => {
                 $.ajax({
-                    url: `{{ route('admin/service/${id}') }}`,
+                    url: `{{ route('service.show', 2) }}`,
                     type: "GET",
                     success: function(response) {
-                        let serviceList = $("#calling_requirement")
-                        serviceList.empty();
-
-                        let services = response;
-
-                        services.forEach( (item) => {
-                            serviceList.append(`
+                        let reqList = $("#calling_requirement")
+                        reqList.empty();
+                        let services = response?.requirements;
+                        if(services){
+                            services.forEach( (item) => {
+                            reqList.append(`
                             <div class="mb-1">
                                 <input type="checkbox" >
-                                <label for="">${items.requirements}</label>
+                                <label for="">${item.requirements}</label>
                             </div>
 
                             `)
                         })
+                        }
+                        else{
+                            reqList.append(`
+                                <div class="mb-1">
+                                    <h6 class="text-mutes text-sm"> Requirement not found </h6>
+                                </div>
+                            `)
+                        }
                     }
                 });
             }
             callingReq();
         })
 </script>
-
-
 @endsection
