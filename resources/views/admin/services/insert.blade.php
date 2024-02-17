@@ -55,12 +55,26 @@
                                     <label for="description">Description</label>
                                     <textarea rows="5" class="form-control" id="description" name="description" placeholder="Enter Description"></textarea>
                                 </div>
+                        
+                                <!-- Dynamic Requirement Fields -->
+                                <div class="form-group" id="requirementsGroup">
+                                    <label for="requirements">Requirements:</label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="requirements[]" required>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary addRequirementBtn" type="button">Add</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>
+                        
+                        <div id="message"></div>
+
                     </div>
 
 
@@ -79,12 +93,34 @@
 @section('js')
     <script>
         $(document).ready(function() {
+
+            
+        // Add requirement field dynamically
+        $(document).on('click', '.addRequirementBtn', function() {
+            var html = '<div class="input-group mb-3">' +
+                '<input type="text" class="form-control" name="requirements[]" required>' +
+                '<div class="input-group-append">' +
+                '<button class="btn btn-outline-secondary removeRequirementBtn" type="button">Remove</button>' +
+                '</div>' +
+                '</div>';
+            $('#requirementsGroup').append(html);
+        });
+
+        // Remove requirement field
+        $(document).on('click', '.removeRequirementBtn', function() {
+            $(this).closest('.input-group').remove();
+        });
+        
             $('#submitForm').submit(function(e) {
                 e.preventDefault();
 
-                var formData = new FormData($(this)[0]);
+                var formData = new FormData(this);
 
-                $.ajax({
+                // console.log('All Requirements:');
+                // $('input[name="requirements[]"]').each(function(index) {
+                //     console.log(index + 1 + '. ' + $(this).val());
+                // });
+                    $.ajax({
                     url: "{{route('service.store')}}",
                     type: 'POST',
                     data: formData,
@@ -92,8 +128,15 @@
                     contentType: false,
                     success: function(response) {
                         if (response.success) {
+                            $('#message').html('<div class="alert alert-success">Service and requirements added successfully</div>');
+                            // Clear the form after successful submission
+                            $('#submitForm')[0].reset();
+                            // Remove dynamically added requirement fields
+                            $('#requirementsGroup').empty();
                             alert('Service created successfully!');
                         } else {
+                            $('#message').html('<div class="alert alert-danger">Failed to add service and requirements</div>');
+
                             alert('Failed to create service!');
                         }
                     },

@@ -68,11 +68,16 @@
       $(document).ready(function() {
     // AJAX call to fetch data
     $.ajax({
-        url: '{{route('service.show', 1)}}', // Update with your controller's URL
+        url: '{{route('service.show', request()->segment(4))}}', // Update with your controller's URL
         type: 'GET',
         success: function(response) {
             // Update the table with the response data
+
             if (response) {
+                response = response[0]
+                var reqNames = response.requirements.map(function(item) {
+                    return item.req_name;
+                }).join(', ');
                     $(".viewtitle").html(response.name + " Service View")
                     let tableRows = `
                         <tr> 
@@ -91,10 +96,15 @@
                             <th>Description</th>
                             <td>${response.description}</td>
                         </tr>
+                        <tr>
+                            <th>Requirements</th>
+                            <td>${reqNames}</td>
+                        </tr>
+                       
                             <tr>
                                 <td> 
-                    <a href='/admin/service/view/${response.id}'class='btn btn-warning'>View</a> 
-                    <a href='/admin/service/view/${response.id}'class='btn btn-danger'>Delete</a> 
+                                    <button class="btn btn-danger btn-sm deleteBtn" data-id="${response.id}">Delete</button> 
+                                    <button class="btn btn-primary btn-sm editBtn" data-id="${response.id}">Edit</button>
                                 </td>
                         </tr>`;
                 $('#tableBody').html(tableRows);
@@ -109,10 +119,10 @@
     $(document).on('click', '.deleteBtn', function() {
         var id = $(this).data('id');
         $.ajax({
-            url: '/your-delete-url/' + id, // Update with your delete route
+            url: '/api/admin/service/' + id, 
             type: 'DELETE',
             success: function(response) {
-                // Handle success response, maybe refresh the table or show a message
+                window.location.href = "{{route('admin.service.manage')}}"
             },
             error: function(xhr, status, error) {
                 console.error(xhr.responseText);
@@ -123,7 +133,6 @@
     // AJAX call to edit item
     $(document).on('click', '.editBtn', function() {
         var id = $(this).data('id');
-        // Implement edit functionality as needed
     });
 });
 

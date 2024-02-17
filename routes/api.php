@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentApiController;
 use App\Http\Controllers\ServiceApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,4 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::prefix("admin")->group(function () {
     Route::apiResource("service", ServiceApiController::class);
+    Route::apiResource("appointment", AppointmentApiController::class);
 });
+

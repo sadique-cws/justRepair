@@ -84,7 +84,6 @@
             if (response && response.length > 0) {
                 var tableRows = '';
                 response.forEach(function(row) {
-                    console.log(response)
 
                     tableRows += `<tr> 
                         <td>${row.id}</td>
