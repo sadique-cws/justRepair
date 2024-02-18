@@ -75,7 +75,12 @@
                                     <div class="mb-2 ">
                                         <label for="">Requirement(s)</label>
                                         <div class="mt-1 d-flex flex-row gap-3" id="calling_requirement">
-                                           
+                                            @foreach ($service->requirements as $item)
+                                            <div class="mb-1">
+                                                <input type="checkbox" >
+                                                <label for="">{{$item->req_name}}</label>
+                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                     <div class="mb-3">
@@ -134,38 +139,4 @@
             </div>
         </div>
     </div>
-<script>
-     $(document).ready(function() {
-            let callingReq = () => {
-                $.ajax({
-                    url: `{{ route('service.show', 2) }}`,
-                    type: "GET",
-                    success: function(response) {
-                        let reqList = $("#calling_requirement")
-                        reqList.empty();
-                        let services = response?.requirements;
-                        if(services){
-                            services.forEach( (item) => {
-                            reqList.append(`
-                            <div class="mb-1">
-                                <input type="checkbox" >
-                                <label for="">${item.requirements}</label>
-                            </div>
-
-                            `)
-                        })
-                        }
-                        else{
-                            reqList.append(`
-                                <div class="mb-1">
-                                    <h6 class="text-mutes text-sm"> Requirement not found </h6>
-                                </div>
-                            `)
-                        }
-                    }
-                });
-            }
-            callingReq();
-        })
-</script>
 @endsection
