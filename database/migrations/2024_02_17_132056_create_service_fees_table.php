@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('service_fees', function (Blueprint $table) {
             $table->id();
             $table->foreignId('service_id')->constrained()->onDelete("cascade");
+            $table->string('service_fees_name')->required();
             $table->integer('service_fees')->default(0);
             $table->foreignId('parent_id')->nullable()->constrained('service_fees')->onDelete('cascade');
             $table->timestamps();

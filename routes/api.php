@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AppointmentApiController;
 use App\Http\Controllers\ServiceApiController;
+use App\Http\Controllers\ServiceFeeApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::prefix("admin")->group(function () {
     Route::apiResource("service", ServiceApiController::class);
+    Route::apiResource("servicefee", ServiceFeeApiController::class);
     Route::apiResource("appointment", AppointmentApiController::class);
 });
 
