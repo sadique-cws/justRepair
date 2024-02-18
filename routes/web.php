@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/", [HomeController::class,"index"]);
 Route::get("/view/{id}",[HomeController::class,"viewService"])->name("home.view");
+Route::get("/appointment",[HomeController::class,"bookAppointment"])->name("home.bookAppointment");
  
 
 Route::prefix("admin")->group(function () {
