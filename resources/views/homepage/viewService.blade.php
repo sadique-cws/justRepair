@@ -47,7 +47,7 @@
                 <div id="default-tab-content">
                     <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="book" role="tabpanel"
                         aria-labelledby="profile-tab">
-                        <form method="get" action="{{ route('home.bookAppointment') }}">
+                        <form method="get" action="{{ route('home.bookAppointment',$service->slug) }}">
                             <div class="mb-3 flex flex-col">
                                 <label for="date" class="text-sm font-semibold">When do you Need service?</label>
                                 <select name="date" id="date" class="border border-slate-200 mt-2">
@@ -84,54 +84,81 @@
                         <div id="accordion-flush" data-accordion="collapse"
                             data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
                             data-inactive-classes="text-gray-500 dark:text-gray-400">
-                           
+                            @foreach ($service->servicefees as $item)
+                                @if (!$item->parent_id)
+                                    <h2 id="accordion-flush-heading-{{ $item->id }}">
+                                        <button type="button"
+                                            class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3"
+                                            data-accordion-target="#accordion-flush-body-{{ $item->id }}"
+                                            aria-expanded="true" aria-controls="accordion-flush-body-{{ $item->id }}">
+                                            <span class="capitalize">{{ $item->service_fees_name }}</span>
+                                            <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="2" d="M9 5 5 1 1 5" />
+                                            </svg>
+                                        </button>
+                                    </h2>
+                                    <div id="accordion-flush-body-{{ $item->id }}" class="hidden"
+                                        aria-labelledby="accordion-flush-heading-{{ $item->id }}">
+                                        <div class="py-5 border-b border-gray-200 dark:border-gray-700">
+                                            @foreach ($item->subfees as $subitem)
+                                                <span class="flex justify-between text-sm bg-slate-200 p-2 rounded">
+                                                    <span>{{ $loop->index + 1 }}. {{ $subitem->service_fees_name }}</span>
+                                                    <span>₹{{ $subitem->service_fees }}</span>
+                                                </span>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
                         </div>
 
 
-                </div>
+                    </div>
 
-                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="faq" role="tabpanel"
-                    aria-labelledby="contacts-tab">
-                    {{-- faq --}}
+                    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="faq" role="tabpanel"
+                        aria-labelledby="contacts-tab">
+                        {{-- faq --}}
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="mt-5">
-            <h4 class=" mt-5 mb-3 text-2xl font-bold">Top Reasons to Book AC Repair service in Purnea with JustRepair.
-            </h4>
+            <div class="mt-5">
+                <h4 class=" mt-5 mb-3 text-2xl font-bold">Top Reasons to Book AC Repair service in Purnea with JustRepair.
+                </h4>
 
-            <ul class="flex flex-col gap-3 list-disc">
-                <li><strong>Expert Technicians:</strong> Our team consists of skilled technicians who are experts in
-                    repairing ACs, refrigerators, home appliances, water purifiers, and more. They have the knowledge
-                    and experience to diagnose and fix issues quickly and effectively.</li>
-                <li><strong>Wide Range of Services:</strong> JustRepair offers repair services for a variety of
-                    appliances, making us a one-stop solution for all your repair needs. Whether it's a faulty AC, a
-                    malfunctioning refrigerator, or a broken water purifier, we've got you covered.</li>
-                <li><strong>Quality Parts:</strong> We use only high-quality parts for repairs to ensure the longevity
-                    and performance of your appliances. Our genuine parts help maintain the integrity of your appliance
-                    and provide lasting solutions.</li>
-                <li><strong>Prompt Service:</strong> We understand the inconvenience of a malfunctioning appliance,
-                    which is why we strive to provide prompt service. Our technicians are quick to respond and work
-                    efficiently to get your appliance back in working condition as soon as possible.</li>
-                <li><strong>Transparent Pricing:</strong> At JustRepair, we believe in transparency. We provide upfront
-                    pricing for our services, so you know exactly what to expect. There are no hidden costs or
-                    surprises, just honest and fair pricing.</li>
-                <li><strong>Customer Satisfaction Guarantee:</strong> Your satisfaction is our priority. We go above and
-                    beyond to ensure that our customers are happy with our services. If you're not satisfied, we'll work
-                    with you to make it right.</li>
-                <li><strong>Convenient Booking:</strong> Booking a service with JustRepair is easy and convenient. You
-                    can book online or by phone, and we'll schedule a service at a time that works best for you.</li>
-                <li><strong>Emergency Services:</strong> For those urgent repair needs, we offer emergency services.
-                    Whether it's a broken AC in the middle of summer or a malfunctioning refrigerator, you can count on
-                    us to be there when you need us most.</li>
-                <li><strong>Licensed and Insured:</strong> JustRepair is a licensed and insured company, giving you
-                    peace of mind knowing that your appliances are in good hands.</li>
-                <li><strong>Locally Owned and Operated:</strong> We are proud to be a locally owned and operated
-                    business, serving the community of Purnea, Bihar. Supporting local businesses means supporting your
-                    community, and we thank you for choosing JustRepair for your repair needs.</li>
-            </ul>
+                <ul class="flex flex-col gap-3 list-disc">
+                    <li><strong>Expert Technicians:</strong> Our team consists of skilled technicians who are experts in
+                        repairing ACs, refrigerators, home appliances, water purifiers, and more. They have the knowledge
+                        and experience to diagnose and fix issues quickly and effectively.</li>
+                    <li><strong>Wide Range of Services:</strong> JustRepair offers repair services for a variety of
+                        appliances, making us a one-stop solution for all your repair needs. Whether it's a faulty AC, a
+                        malfunctioning refrigerator, or a broken water purifier, we've got you covered.</li>
+                    <li><strong>Quality Parts:</strong> We use only high-quality parts for repairs to ensure the longevity
+                        and performance of your appliances. Our genuine parts help maintain the integrity of your appliance
+                        and provide lasting solutions.</li>
+                    <li><strong>Prompt Service:</strong> We understand the inconvenience of a malfunctioning appliance,
+                        which is why we strive to provide prompt service. Our technicians are quick to respond and work
+                        efficiently to get your appliance back in working condition as soon as possible.</li>
+                    <li><strong>Transparent Pricing:</strong> At JustRepair, we believe in transparency. We provide upfront
+                        pricing for our services, so you know exactly what to expect. There are no hidden costs or
+                        surprises, just honest and fair pricing.</li>
+                    <li><strong>Customer Satisfaction Guarantee:</strong> Your satisfaction is our priority. We go above and
+                        beyond to ensure that our customers are happy with our services. If you're not satisfied, we'll work
+                        with you to make it right.</li>
+                    <li><strong>Convenient Booking:</strong> Booking a service with JustRepair is easy and convenient. You
+                        can book online or by phone, and we'll schedule a service at a time that works best for you.</li>
+                    <li><strong>Emergency Services:</strong> For those urgent repair needs, we offer emergency services.
+                        Whether it's a broken AC in the middle of summer or a malfunctioning refrigerator, you can count on
+                        us to be there when you need us most.</li>
+                    <li><strong>Licensed and Insured:</strong> JustRepair is a licensed and insured company, giving you
+                        peace of mind knowing that your appliances are in good hands.</li>
+                    <li><strong>Locally Owned and Operated:</strong> We are proud to be a locally owned and operated
+                        business, serving the community of Purnea, Bihar. Supporting local businesses means supporting your
+                        community, and we thank you for choosing JustRepair for your repair needs.</li>
+                </ul>
+            </div>
         </div>
-    </div>
     </div>
     <script>
         $(document).ready(function() {
@@ -147,7 +174,7 @@
                             services.forEach((item) => {
                                 reqList.append(`
                             <div class="mb-1">
-                                <input type="checkbox" >
+                                <input type="checkbox" name='requirements[]' value="${item.req_name}">
                                 <label for="" class='text-sm font-semibold'>${item.req_name}</label>
                             </div>
 
@@ -164,31 +191,6 @@
                 });
             }
             callingReq();
-
-            $.ajax({
-            url: '{{ route("servicefee.index") }}',
-            type: 'GET',
-            success: function(response) {
-                response.forEach(function(item) {
-                    $('#accordion-flush').append(`
-                        <h2 id="accordion-flush-heading-${item.id}">
-                            <button type="button" class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-${item.id}" aria-expanded="false" aria-controls="accordion-flush-body-${item.id}">
-                                <span>${item.service_fees_name}</span>
-                                <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
-                                </svg>
-                            </button>
-                        </h2>
-                        <div id="accordion-flush-body-${item.id}" class="hidden" aria-labelledby="accordion-flush-heading-${item.id}">
-                            <div class="py-5 border-b border-gray-200 dark:border-gray-700">
-                                <p class="mb-2 text-gray-500 dark:text-gray-400">${item.service_fees_name} is an open-source library of interactive components built on top of Tailwind CSS including buttons, dropdowns, modals, navbars, and more.</p>
-                                <p class="text-gray-500 dark:text-gray-400">Check out this guide to learn how to <a href="/docs/getting-started/introduction/" class="text-blue-600 dark:text-blue-500 hover:underline">get started</a> and start developing websites even faster with components on top of Tailwind CSS.</p>
-                            </div>
-                        </div>
-                    `);
-                });
-            }
-        });
         })
     </script>
 @endsection

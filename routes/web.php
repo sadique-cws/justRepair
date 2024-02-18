@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/", [HomeController::class,"index"]);
 Route::get("/view/{id}",[HomeController::class,"viewService"])->name("home.view");
-Route::get("/appointment",[HomeController::class,"bookAppointment"])->name("home.bookAppointment");
+Route::get("/{slug}/appointment",[HomeController::class,"bookAppointment"])->name("home.bookAppointment");
 Route::get("/login", [HomeController::class,"login"])->name('login');
 Route::get("/register", [HomeController::class,"register"])->name('register');
  
