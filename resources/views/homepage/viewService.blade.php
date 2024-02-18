@@ -60,7 +60,7 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel"
                                 aria-labelledby="home-tab">
-                                <form>
+                                <form action="get">
                                     <div class="mb-3 d-flex flex-column">
                                         <label for="">When do you Need service?</label>
                                         <select name="date" class="form-select">
@@ -79,8 +79,8 @@
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <button class="btn btn-success rounded-pill w-100" type="submit"><i
-                                                class="fa-solid fa-calendar-days"></i> Book Appointment Online</button>
+                                        <a class="btn btn-success rounded-pill w-100" href="{{route('home.bookAppointment')}}"><i
+                                                class="fa-solid fa-calendar-days"></i> Book Appointment Online</a>
                                                 
                                     </div>
                                     <div class="mb-2  d-flex justify-content-center align-items-center">

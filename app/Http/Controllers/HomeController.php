@@ -17,4 +17,10 @@ class HomeController extends Controller
         return view("homepage.viewService", $data);
     }
 
+    // under process
+    public function bookAppointment(){
+        // $data['service'] =Service::findOrFail($id);
+        return view("homepage.book_appointment");
+    }
+
 }
