@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <form action="">
+        <form action="" id="createAppointment">
             <div class="row">
                 <div class="col-12 mt-3">
                     <h6>You are Booking</h6>
@@ -22,8 +22,8 @@
                 <div class="col-12 mt-3">
                     <h6>Requirement(s)</h6>
                     <div class="card mb-3 mt-3">
-                        <div class="card-body p-2 d-flex py-3">
-                            <div class="form-check form-check-inline">
+                        <div class="card-body p-2 d-flex py-3" id="calling_requirement">
+                            {{-- <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="checkbox" id="checkbox1">
                                 <label class="form-check-label" for="checkbox1">Refrigeratir Repair</label>
                             </div>
@@ -35,7 +35,7 @@
                                 <input class="form-check-input" type="checkbox" id="checkbox1">
                                 <label class="form-check-label" for="checkbox1">Any Other Refrigerator Related
                                     issues</label>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -135,4 +135,51 @@
 
         </form>
     </div>
+
+<script>
+    $(document).ready(function(){
+
+        function calling_requirement(){
+            $.ajax({
+                    url: `{{ route('service.show', 2) }}`,
+                    type: "GET",
+                    success: function(response) {
+                        let reqList = $("#calling_requirement")
+                        reqList.empty();
+                        let services = response?.requirements;
+                   
+                    services.forEach((item) => {
+                        reqList.append(`
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="checkbox1">
+                                <label class="form-check-label" for="checkbox1">${item.req_name}</label>
+                            </div>
+                        `);
+                    });             
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            })
+           }
+           calling_requirement();
+
+
+        });
+
+        $("#createAppointment").submit(function(e){
+            e.preventDefault();
+
+            $.ajax({
+                type:"POST",
+                url:'{{route('appointment.store')}}',
+                data:$('#createAppointment').serialize(),
+                success:function(response){
+                    alert(response.msg)
+                    $("#createAppointment").trigger("reset");
+                }
+            });
+        });
+</script>
+
 @endsection
