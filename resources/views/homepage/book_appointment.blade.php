@@ -17,148 +17,102 @@
                 </div>
 
             </div>
-            <div class="mt-3 w-full">
-                <h6>When You Need It ?</h6>
+            <div class=" w-full">
+                <h6 class="text-sm font-semibold">When You Need It ?</h6>
 
-                <div id="calling_requirement">
-
-                </div>
+                <div id="calling_requirement" class="flex w-full gap-10"></div>
 
                 <div class="mt-3">
                     <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                        <div class="px-4 py-5 sm:px-6">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900">Preferred Date and Time</h3>
+                        <div class="">
+                            <h3 class="text-sm font-semibold">Preferred Date and Time</h3>
                         </div>
-                        <div class="border-t border-gray-200">
-                            <dl>
-                                <div class="bg-white px-4 py-5  flex items-center">
-                                        <label for="date" class="text-sm font-medium text-gray-500 flex-1">Preferred
-                                            Date</label>
-                                    <div class="mt-1 flex-[10] text-sm text-gray-900">
-                                        <select name="date" id="date" class="border border-slate-200">
-                                            <option value="{{ \Carbon\Carbon::now()->toDateString() }}" selected>Today
+                        <div class="flex items-center flex-col md:flex-row my-3">
+                            <div class="bg-white px-5 flex-[0.5]  flex items-center">
+                                <label for="date" class="text-sm font-medium text-gray-500 flex-1">Preferred
+                                    Date</label>
+                                <div class="mt-1 flex-[3] text-sm text-gray-900">
+                                    <select name="date" id="date" class="border border-slate-200">
+                                        <option value="{{ \Carbon\Carbon::now()->toDateString() }}" selected>Today
+                                        </option>
+                                        @for ($i = 1; $i <= 7; $i++)
+                                            <option value="{{ \Carbon\Carbon::now()->addDays($i)->toDateString() }}">
+                                                {{ \Carbon\Carbon::now()->addDays($i)->format('D d M') }}
                                             </option>
-                                            @for ($i = 1; $i <= 7; $i++)
-                                                <option value="{{ \Carbon\Carbon::now()->addDays($i)->toDateString() }}">
-                                                    {{ \Carbon\Carbon::now()->addDays($i)->format('D d M') }}
-                                                </option>
-                                            @endfor
-                                        </select>
-                                    </div>
+                                        @endfor
+                                    </select>
                                 </div>
-                                <div class=" px-4 py-5 flex flex-1">
-                                        <label for="time" class="text-sm flex-1 font-medium text-gray-500">Preferred
-                                            Time</label>
-                                    <div class="flex  flex-[10] justify-start gap-4">
+                            </div>
+                            <div class="flex flex-1 justify-center">
+                                <label for="time" class="text-sm flex-1 font-medium text-gray-500">Preferred
+                                    Time</label>
+                                <div class="flex  flex-[5] justify-start gap-4">
+                                     
+                                    @php
+                                        $time = ['09 AM - 11 AM', '11 AM - 01 PM', '01 PM - 03 PM', '03 PM - 05 PM', '05 PM - 07 PM'];
+                                    @endphp
+
+                                    @foreach ($time as $item)
                                         <div class=" flex items-start">
-                                            <input id="9am10am" type="radio" class="hidden peer" name="time" value="9am10am">
-                                            <label for="9am10am" class="inline-flex items-center  rounded-2xl justify-between py-1 px-2 font-medium tracking-tight border cursor-pointer bg-brand-light text-brand-black border-green-500 peer-checked:border-green-400 peer-checked:bg-green-700 peer-checked:text-white text-sm">
+                                            <input id="{{ $loop->index }}" type="radio" class="hidden peer"
+                                                name="time" value="{{ $item }}">
+                                            <label for="{{ $loop->index }}"
+                                                class="inline-flex items-center  rounded-2xl justify-between py-1 px-2 font-medium tracking-tight border cursor-pointer bg-brand-light text-brand-black border-green-500 peer-checked:border-green-400 peer-checked:bg-green-700 peer-checked:text-white">
                                                 <div class="flex items-center justify-center w-full">
-                                                    <div class="text-sm text-brand-black">9 AM - 10 AM</div>
+                                                    <div class="text-xs text-brand-black">9 AM - 11 AM</div>
                                                 </div>
                                             </label>
                                         </div>
-                                        <div class=" flex items-start">
-                                            <input id="9am10am" type="radio" class="hidden peer" name="time" value="9am10am">
-                                            <label for="9am10am" class="inline-flex items-center  rounded-2xl justify-between py-1 px-2 font-medium tracking-tight border cursor-pointer bg-brand-light text-brand-black border-green-500 peer-checked:border-green-400 peer-checked:bg-green-700 peer-checked:text-white text-sm">
-                                                <div class="flex items-center justify-center w-full">
-                                                    <div class="text-sm text-brand-black">9 AM - 10 AM</div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <div class=" flex items-start">
-                                            <input id="9am10am" type="radio" class="hidden peer" name="time" value="9am10am">
-                                            <label for="9am10am" class="inline-flex items-center  rounded-2xl justify-between py-1 px-2 font-medium tracking-tight border cursor-pointer bg-brand-light text-brand-black border-green-500 peer-checked:border-green-400 peer-checked:bg-green-700 peer-checked:text-white text-sm">
-                                                <div class="flex items-center justify-center w-full">
-                                                    <div class="text-sm text-brand-black">9 AM - 10 AM</div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <div class=" flex items-start">
-                                            <input id="9am10am" type="radio" class="hidden peer" name="time" value="9am10am">
-                                            <label for="9am10am" class="inline-flex items-center  rounded-2xl justify-between py-1 px-2 font-medium tracking-tight border cursor-pointer bg-brand-light text-brand-black border-green-500 peer-checked:border-green-400 peer-checked:bg-green-700 peer-checked:text-white text-sm">
-                                                <div class="flex items-center justify-center w-full">
-                                                    <div class="text-sm text-brand-black">9 AM - 10 AM</div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <div class=" flex items-start">
-                                            <input id="9am10am" type="radio" class="hidden peer" name="time" value="9am10am">
-                                            <label for="9am10am" class="inline-flex items-center  rounded-2xl justify-between py-1 px-2 font-medium tracking-tight border cursor-pointer bg-brand-light text-brand-black border-green-500 peer-checked:border-green-400 peer-checked:bg-green-700 peer-checked:text-white text-sm">
-                                                <div class="flex items-center justify-center w-full">
-                                                    <div class="text-sm text-brand-black">9 AM - 10 AM</div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                       
-                                    </div>
+                                    @endforeach
                                 </div>
-                            </dl>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="mt-3">
+            <div class="mt-3 pb-10">
                 <h6 class="font-bold">Your Details</h6>
                 <div class="mt-3">
                     <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                        <div class="px-4 py-5 sm:px-6">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900">Personal Information</h3>
-                        </div>
-                        <div class="border-t border-gray-200">
-                            <dl>
-                                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt>
-                                        <label for="full_name" class="text-sm font-medium text-gray-500">Full Name</label>
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2">
-                                        <input type="text" id="full_name" name="full_name" class="form-input"
-                                            placeholder="Your Name">
-                                    </dd>
+                            <h3 class="text-sm font-semibold">Personal Information</h3>
+                        <div class="flex flex-col gap-4">
+                            <div class="flex gap-3">
+                                <div class="bg-white flex flex-1 flex-col">
+                                    <label for="full_name" class="text-sm font-medium text-gray-500">Full Name</label>
+                                    <input type="text" id="full_name" name="full_name" class="border"
+                                        placeholder="Your Name">
                                 </div>
-                                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt>
-                                        <label for="mobile_no" class="text-sm font-medium text-gray-500">Mobile No.</label>
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2">
-                                        <input type="tel" id="mobile_no" name="mobile_no" class="form-input"
-                                            placeholder="Mobile No.">
-                                    </dd>
+                                <div class="bg-white flex flex-1 flex-col">
+                                    <label for="mobile_no" class="text-sm font-medium text-gray-500">Mobile
+                                        No.</label>
+                                    <input type="tel" id="mobile_no" name="mobile_no" class="border"
+                                        placeholder="Mobile No.">
                                 </div>
-                                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt>
-                                        <label for="address" class="text-sm font-medium text-gray-500">Address</label>
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2">
-                                        <textarea id="address" name="address" class="form-textarea" rows="3" placeholder="Address"></textarea>
-                                    </dd>
+                            </div>
+                            <div class="flex gap-3">
+                                <div class="bg-white flex flex-1 flex-col">
+                                    <label for="address" class="text-sm font-medium text-gray-500">Address</label>
+                                    <input type="text" id="address" name="address" class="" rows="3"
+                                        placeholder="Address">
                                 </div>
-                                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt>
-                                        <label for="landmark" class="text-sm font-medium text-gray-500">Landmark</label>
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2">
-                                        <input type="text" id="landmark" name="landmark" class="form-input"
-                                            placeholder="Landmark">
-                                    </dd>
+                            </div>
+                            <div class="flex gap-3">
+                                <div class="bg-white flex flex-1 flex-col">
+                                    <label for="city" class="text-sm font-medium text-gray-500">City</label>
+                                    <input type="text" id="city" name="city" class="border" placeholder="City">
                                 </div>
-                                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt>
-                                        <label for="city" class="text-sm font-medium text-gray-500">City</label>
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2">
-                                        <input type="text" id="city" name="city" class="form-input"
-                                            placeholder="City">
-                                    </dd>
+                                <div class="bg-white flex flex-1 flex-col">
+                                    <label for="landmark" class="text-sm font-medium text-gray-500">Landmark</label>
+                                    <input type="text" id="landmark" name="landmark" class="border"
+                                        placeholder="Landmark">
                                 </div>
-                                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <div class="sm:col-span-2 sm:flex sm:justify-end">
-                                        <button type="submit"
-                                            class="btn btn-outline-success rounded-pill w-full sm:w-auto">Submit
-                                            Booking</button>
-                                    </div>
-                                </div>
-                            </dl>
+                            </div>
+
+
+                            <div class="flex gap-3 flex-1 mt-4">
+                                <button type="submit" class="bg-indigo-700 px-3 py-2 rounded fixed bottom-0 w-[94%]">Submit
+                                    Booking</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -172,8 +126,8 @@
             const requirements = urlParams.getAll('requirements[]');
             const dateParam = urlParams.get('date');
 
-// Select the <select> element
-const dateSelect = document.getElementById('date');
+            // Select the <select> element
+            const dateSelect = document.getElementById('date');
 
             let callingReq = () => {
 
