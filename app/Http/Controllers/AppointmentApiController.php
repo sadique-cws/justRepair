@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AppointmentApiController extends Controller
 {
@@ -27,18 +28,22 @@ class AppointmentApiController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'fullname' => 'required|string|max:255',
-            'mobileno' => 'required|string|max:12',
+       
+        $validator = Validator::make($request->all(), [
+            'fullname' => 'required|string',
+            'mobileno' => 'required|string',
             'address' => 'required|string',
             'landmark' => 'required|string',
             'city' => 'required|string',
-            'requirement_id'=>'required',
+            'requirements' => 'required|array',
+            'requirements.*' => 'string|nullable',
             'preferred_date' => 'required|date',
-            'preferred_time' => 'required|time',
+            'preferred_time' => 'required|string',
         ]);
     
-
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()], 400);
+        }
         // Store the service
         $appointment = new appointment();
         $appointment->fullname = $request->fullname;
@@ -46,10 +51,13 @@ class AppointmentApiController extends Controller
         $appointment->address = $request->address;
         $appointment->landmark = $request->landmark;
         $appointment->city = $request->city;
-        $appointment->requirement_id = $request->requirement_id;
+        $appointment->requirements = json_encode($request->requirements); // Assuming 'requirements' is a JSON field
+
         $appointment->preferred_date = $request->preferred_date;
         $appointment->preferred_time = $request->preferred_time;
         $appointment->save();
+
+        
       
         return response()->json(['success' => true,'data'=>$appointment,'msg'=>'Appointment has been successfully Booked']);
     }
