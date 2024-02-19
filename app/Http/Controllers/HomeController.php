@@ -14,13 +14,14 @@ class HomeController extends Controller
 
     public function viewService($id){
         $data['service'] =Service::findOrFail($id);
+        // dd($data['service']['servicefees']);
         return view("homepage.viewService", $data);
     }
 
     // under process
-    public function bookAppointment(){
-        // $data['service'] =Service::findOrFail($id);
-        return view("homepage.book_appointment");
+    public function bookAppointment($slug){
+        $data['service'] =Service::where("slug",$slug)->first();
+        return view("homepage.book_appointment", $data);
     }
 
     public function login(){
