@@ -27,16 +27,16 @@ class AppointmentApiController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'fullname' => 'required|string|max:255',
-            'mobileno' => 'required|string|max:12',
-            'address' => 'required|string',
-            'landmark' => 'required|string',
-            'city' => 'required|string',
-            'requirement_id'=>'required',
-            'preferred_date' => 'required|date',
-            'preferred_time' => 'required|time',
-        ]);
+        // $request->validate([
+        //     'fullname' => 'required|string|max:255',
+        //     'mobileno' => 'required|string|max:12',
+        //     'address' => 'required|string',
+        //     'landmark' => 'required|string',
+        //     'city' => 'required|string',
+        //     'requirement_id'=>'required',
+        //     'preferred_date' => 'required|date',
+        //     'preferred_time' => 'required|time',
+        // ]);
     
 
         // Store the service
