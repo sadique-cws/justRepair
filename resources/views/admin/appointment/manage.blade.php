@@ -30,10 +30,13 @@
                             <h3 class="card-title">All Services</h3>
 
                             <div class="card-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control float-right"
-                                        placeholder="Search">
-
+                                <div class="input-group input-group-sm" style="width: 450px;">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default filter-btn" data-filter="today">Today</button>
+                                        <button type="button" class="btn btn-default filter-btn" data-filter="this_week">This Week</button>
+                                        <button type="button" class="btn btn-default filter-btn" data-filter="this_month">This Month</button>
+                                    </div>
+                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default">
                                             <i class="fas fa-search"></i>
@@ -53,8 +56,6 @@
                                         <th>Preferred Time</th>
                                         <th>Requirements</th>
                                         <th>Contact</th>
-                                        <th>Address</th>
-                                        <th>City</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -98,14 +99,12 @@
                                     `<span class="badge bg-success">${requirement}</span> `;
                             });
                             tableRows += `<tr> 
-                        <td>${row.id}</td>
+                        <td>${row.complain_no}</td>
                         <td>${row.fullname}</td>
                         <td>${row.preferred_date}</td>
                         <td>${row.preferred_time}</td>
                         <td>${requirementsHtml}</td>
                         <td>${row.mobileno}</td>
-                        <td>${row.address}</td>
-                        <td>${row.city}</td>
                         <td> <a href='/admin/service/view/${row.id}'class='btn btn-warning'>View</a> </td>
                         </tr>`;
                         });

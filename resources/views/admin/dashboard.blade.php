@@ -6,7 +6,7 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0">Dashboard v3</h1>
+        <h1 class="m-0">Dashboard</h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
@@ -27,7 +27,7 @@
         <!-- small box -->
         <div class="small-box bg-info">
           <div class="inner">
-            <h3>150</h3>
+            <h3>{{$count_appointment}}</h3>
 
             <p>Appointments</p>
           </div>
@@ -42,7 +42,7 @@
         <!-- small box -->
         <div class="small-box bg-success">
           <div class="inner">
-            <h3>53<sup style="font-size: 20px">%</sup></h3>
+            <h3>{{$count_user}}</h3>
 
             <p>New Appointments</p>
           </div>
@@ -58,7 +58,7 @@
         <div class="small-box bg-warning">
 
           <div class="inner">
-            <h3>44</h3>
+            <h3>{{$count_user}}</h3>
             <p>Total User</p>
           </div>
           <div class="icon">
@@ -102,17 +102,15 @@
             </div>
           </div>
           <div class="card-body table-responsive p-0">
-            <table class="table table-striped table-valign-middle">
+            <table class="table table-sm text-sm table-striped table-valign-middle">
               <thead>
               <tr>
                 <th>Complain No</th>
                 <th>Name</th>
-                <th>Address</th>
-                <th>Service</th>
+                <th>Date</th>
                 <th>Requirement</th>
                 <th>Contact</th>
                 <th>Address</th>
-                <th>City</th>
                 <th>Action</th>
               </tr>
               </thead>
@@ -171,14 +169,12 @@
             // Append the table row with badge to the table body
             var tableRow = `
                 <tr>
-                    <td>${row.id}</td>
+                    <td>${row.complain_no}</td>
                     <td>${row.fullname}</td>
-                    <td>${row.preferred_date}</td>
-                    <td>${row.preferred_time}</td>
+                    <td>${row.preferred_date} (${row.preferred_time})</td>
                     <td>${requirementsHtml}</td>
                     <td>${row.mobileno}</td>
-                    <td>${row.address}</td>
-                    <td>${row.city}</td>
+                    <td>${row.address} ${row.city}</td>
                     <td><a href='/admin/service/view/${row.id}' class='btn btn-warning'>View</a></td>
                 </tr>`;
             tableBody.append(tableRow);

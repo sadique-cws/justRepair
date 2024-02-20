@@ -19,12 +19,7 @@ class AppointmentApiController extends Controller
         $appointments = Appointment::all();
 
         // If there's a complaint number stored in the session, include it in the response
-        if ($complain_no) {
-            return response()->json(["appointments" => $appointments,'complain_no' => $complain_no]);
-        } else {
-            // If no complaint number is stored, return only the appointments
-            return response()->json(["appointments" => $appointments]);
-        }
+        return response()->json($appointments);
     }
 
     /**
@@ -61,7 +56,7 @@ class AppointmentApiController extends Controller
         // Generating Complain Number
         
         do {
-            $complain_no = 'JR' . date('Ymd') . mt_rand(1000, 9999);
+            $complain_no = 'JR' . date('ymd') . mt_rand(1000, 9999);
             // Check if the generated unique number already exists in the database
             $existing = Appointment::where('complain_no', $complain_no)->exists();
         } while ($existing);
@@ -93,7 +88,8 @@ class AppointmentApiController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $appointment = Appointment::find($id);
+        return response()->json($appointment);
     }
 
     /**

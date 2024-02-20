@@ -184,29 +184,39 @@
                     url: '{{ route('appointment.store') }}',
                     data: $('#createAppointment').serialize(),
                     success: function(response) {
-                        alert(response.msg)
                         $("#createAppointment").trigger("reset");
-                        window.open("{{route('confirmed_appointment')}}","_self");
+                        let id = response.data.id
+                        localStorage.setItem('id', id);
+                        window.open("{{ route('confirmed_appointment') }}", "_self");
                     },
                     error: function(xhr, status, error) {
                         console.error(xhr.responseText)
                         // Handle error response
                         if (xhr.responseJSON.errors) {
                             var errorsHtml =
-                                    
+
                                 '<ul class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">';
                             $.each(xhr.responseJSON.errors, function(key, value) {
                                 errorsHtml += '<li>' + value[0] +
-                                '</li>'; // Assuming only one error per field
+                                    '</li>'; // Assuming only one error per field
                             });
                             errorsHtml += '</ul>';
 
                             $('#errors').html(errorsHtml);
                         } else {
-                            // alert('Failed to book appointment. Please check your input.');
+                            console.error('Failed to book appointment. Please check your input.');
                         }
                     }
                 });
+            });
+
+
+            // mobile no check
+            $('#mobile_no').on('keydown', function(e) {
+                var maxLength = 10;
+                if ($(this).val().length >= maxLength && e.keyCode !== 8) {
+                    e.preventDefault();
+                }
             });
 
 
