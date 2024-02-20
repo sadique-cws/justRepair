@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('landmark')->nullable();
             $table->string('city');
+            $table->string('complain_no')->unique();
             $table->timestamps();
         });
     }

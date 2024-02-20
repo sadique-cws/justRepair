@@ -186,6 +186,7 @@
                     success: function(response) {
                         alert(response.msg)
                         $("#createAppointment").trigger("reset");
+                        window.open("{{route('confirmed_appointment')}}","_self");
                     },
                     error: function(xhr, status, error) {
                         console.error(xhr.responseText)

@@ -32,4 +32,8 @@ class HomeController extends Controller
         return view("homepage.register");
     }
 
+    public function confirmed_appointment(){
+        return view("homepage.confirmed_appointment");
+    }
+
 }
