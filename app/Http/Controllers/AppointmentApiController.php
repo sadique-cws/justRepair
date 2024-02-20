@@ -12,7 +12,7 @@ class AppointmentApiController extends Controller
      */
     public function index()
     {
-        return response()->json(["appointments"=>Appointment::all()]);
+        return response()->json(Appointment::all());
     }
 
     /**

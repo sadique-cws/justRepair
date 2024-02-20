@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceFeesController;
 use Illuminate\Support\Facades\Route;
@@ -19,14 +20,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/", [HomeController::class,"index"]);
 Route::get("/view/{id}",[HomeController::class,"viewService"])->name("home.view");
-Route::get("/{slug}/appointment",[HomeController::class,"bookAppointment"])->name("home.bookAppointment");
 Route::get("/login", [HomeController::class,"login"])->name('login');
 Route::get("/register", [HomeController::class,"register"])->name('register');
  
 
 Route::prefix("admin")->group(function () {
     Route::controller(AdminController::class)->group(function () {
-        Route::get('/', 'dashboard');
+        Route::get('/', 'dashboard')->name("admin.dashboard");
 
         //service routes
         Route::prefix("service")->group(function () {
@@ -45,5 +45,12 @@ Route::prefix("admin")->group(function () {
                 Route::post('/store', 'store')->name("admin.servicefee.store");
             });
         });
+        Route::prefix("appointment")->group(function () {
+            Route::controller(AppointmentController::class)->group(function () {
+                Route::get('/', 'index')->name("admin.appointment.manage");
+               });
+        });
     });
 });
+
+Route::get("/{slug}/appointment",[HomeController::class,"bookAppointment"])->name("home.bookAppointment");

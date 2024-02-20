@@ -210,7 +210,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="#" class="nav-link">
+            <a href="{{route("admin.dashboard")}}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -244,7 +244,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="{{route('admin.service.manage')}}" class="nav-link">
+            <a href="{{route('admin.appointment.manage')}}" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 Appointments
@@ -253,7 +253,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('admin.service.manage')}}" class="nav-link">
+                <a href="{{route('admin.appointment.manage')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Manage Appointment</p>
                 </a>
@@ -267,30 +267,7 @@
              
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="{{route('admin.service.manage')}}" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Service Fees
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('admin.servicefee.manage')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Manage Service Fee</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route("admin.servicefee.insert")}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Insert Fees</p>
-                </a>
-              </li>
-             
-            </ul>
-          </li>
+         
           <li class="nav-item">
             <a href="{{route('admin.service.manage')}}" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
