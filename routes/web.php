@@ -22,6 +22,8 @@ Route::get("/", [HomeController::class,"index"]);
 Route::get("/view/{id}",[HomeController::class,"viewService"])->name("home.view");
 Route::get("/login", [HomeController::class,"login"])->name('login');
 Route::get("/register", [HomeController::class,"register"])->name('register');
+
+Route::get("/confirmed_appointment", [HomeController::class,"confirmed_appointment"])->name('confirmed_appointment');
  
 
 Route::prefix("admin")->group(function () {
