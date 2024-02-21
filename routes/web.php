@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceFeesController;
@@ -17,8 +18,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::match(['get','post'],'/login',[AuthController::class,"login"])->name("login");
+Route::post('/register',[AuthController::class,"register"])->name("register");
 
-Route::get("/", [HomeController::class,"index"])->name("homepage");
+Route::get("/", [HomeController::class,"index"])->name("index");
 Route::get("/view/{id}",[HomeController::class,"viewService"])->name("home.view");
 Route::get("/login", [HomeController::class,"login"])->name('login');
 Route::get("/register", [HomeController::class,"register"])->name('register');
