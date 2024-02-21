@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="flex px-10 flex-1">
-        <form action="" id="createAppointment" method="post" class="flex-1">
+        <form action="" id="createAppointment" method="post" class="flex-1 mb-20">
             <div class="row">
                 <div class="flex mt-3 flex-col">
                     <h6>You are Booking</h6>
@@ -112,7 +112,7 @@
 
                             <div class="flex gap-3 flex-1 mt-4">
                                 <button type="submit"
-                                    class="bg-indigo-700 px-3 py-2 rounded fixed bottom-0 w-[94%]">Submit
+                                    class="bg-indigo-700 px-3 py-2 rounded text-white w-full">Submit
                                     Booking</button>
                             </div>
                         </div>
