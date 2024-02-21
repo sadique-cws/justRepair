@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/", [HomeController::class,"index"]);
+Route::get("/", [HomeController::class,"index"])->name("homepage");
 Route::get("/view/{id}",[HomeController::class,"viewService"])->name("home.view");
 Route::get("/login", [HomeController::class,"login"])->name('login');
 Route::get("/register", [HomeController::class,"register"])->name('register');

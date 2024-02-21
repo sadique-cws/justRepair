@@ -4,12 +4,12 @@
     <div class="flex flex-col">
         <div class="w-full">
             <div class="bg-black bg-opacity-50">
-                <div class="relative w-full h-48">
-                    <img src="/images/ac_rep.jpg" alt="Background Image" class="w-full h-full object-cover">
+                <div class="relative w-full h-auto">
+                    <img src="/images/ac_rep.jpg" alt="Background Image" class="w-full h-48 object-cover">
                     <div class="absolute inset-0 bg-black bg-opacity-65"></div>
-                    <div class="absolute inset-0 flex flex-col items-start px-10 justify-center">
-                        <h1 class="text-white md:text-3xl text-xl font-bold" id="serviceName">{{ $service->name }}</h1>
-                        <p class="mb-3 md:flex hidden text-white" id="serviceDescription">{{ $service->description }}</p>
+                    <div class="absolute inset-0 flex flex-col gap-3 items-start px-10 justify-center">
+                        <h1 class="text-white text-xl md:text-4xl  font-bold" id="serviceName">{{ $service->name }}</h1>
+                        <p class="line-clamp-2 text-white" id="serviceDescription">{{ $service->description }}</p>
                         <ul class="list-inline mb-1 text-white">
                             <li class="list-inline-item">
                                 <i class="fa-solid fa-circle-check text-green-200"></i> No Extra Cost
@@ -70,7 +70,7 @@
                                     class="bg-indigo-700 hover:bg-indigo-900 text-white px-3 py-5  shadow-md"><i
                                         class="fa-solid fa-calendar-days"></i> Book Appointment Online</button>
 
-                                <div class="flex flex-col border p-2">
+                                <div class="flex flex-col border p-2 items-center">
                                     <p class="text-xs">OR Book Via Call (9AM to 6PM)</p>
                                     <a href="tel:8425499874" class="text-indigo-900 text-xl font-bold"><i
                                             class="fa-solid fa-phone"></i> 842-547-9874</a>
@@ -123,11 +123,11 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-5">
-                <h4 class=" mt-5 mb-3 text-2xl font-bold">Top Reasons to Book AC Repair service in Purnea with JustRepair.
+            <div class="mt-5 px-10 md:px-5">
+                <h4 class=" mt-5 mb-3 text-xl md:text-2xl font-bold">Top Reasons to Book AC Repair service in Purnea with JustRepair.
                 </h4>
 
-                <ul class="flex flex-col gap-3 list-disc">
+                <ul class="flex flex-col gap-3 list-disc text-justify pb-20">
                     <li><strong>Expert Technicians:</strong> Our team consists of skilled technicians who are experts in
                         repairing ACs, refrigerators, home appliances, water purifiers, and more. They have the knowledge
                         and experience to diagnose and fix issues quickly and effectively.</li>
