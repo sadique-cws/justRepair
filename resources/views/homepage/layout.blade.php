@@ -17,7 +17,7 @@
         <div class="flex flex-1 justify-center">
             <div class="lg:px-[10%]">
                 <div class="flex flex-1 justify-between items-center">
-                    <a href="{{route("homepage")}}" class="lg:w-1/12 w-2/12 p-4 flex gap-2 items-center ">
+                    <a href="{{route("index")}}" class="lg:w-1/12 w-2/12 p-4 flex gap-2 items-center ">
                         <img src="{{asset("images/logo.jpeg")}}"/>
                         <h2 class="font-bold text-xl font-sans">JustRepair</h2>
                     </a>
