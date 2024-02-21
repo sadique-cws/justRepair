@@ -1,7 +1,7 @@
 @extends('homepage.layout')
 @section('content')
 <div class="flex flex-col justify-center items-center mt-8">
-    <div class="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
+    <div class="bg-white p-4 rounded-lg shadow-md max-w-md w-full">
         <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-16 w-16 text-green-600" viewBox="0 0 20 20"
         fill="currentColor">
         <path fill-rule="evenodd"

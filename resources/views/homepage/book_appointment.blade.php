@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="flex px-10 flex-1">
-        <form action="" id="createAppointment" method="post" class="flex-1 pb-20">
+        <form action="" id="createAppointment" method="post" class="flex-1 mb-20">
             <div class="row">
                 <div class="flex mt-3 flex-col">
                     <h6>You are Booking</h6>
