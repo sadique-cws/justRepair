@@ -265,17 +265,18 @@
                     class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500 text-nowrap">My
                     Booking</span>
             </button>
-            <button type="button"
-                class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-6 h-6 text-slate-500">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                </svg>
+            <a href="{{ route('profile') }}">
+                <button type="button"
+                    class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6 text-slate-500">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    </svg>
 
-                <span
-                    class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Profile</span>
-            </button>
+                    <span
+                        class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Profile</span>
+                </button></a>
 
         </div>
     </div>
@@ -357,10 +358,10 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: $(this).attr('/logout'),
-                    data: $(this).serialize(),
+                    url: '/logout', // Directly specify the URL
+                    data: $(this).serialize(), // Serialize the form data
                     success: function() {
-                        console.log("DOne")
+                        console.log("Done");
                         window.location.href = '/';
                     },
                     error: function(xhr, status, error) {
@@ -368,6 +369,7 @@
                     }
                 });
             });
+
         });
     </script>
 

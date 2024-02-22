@@ -24,16 +24,6 @@ class HomeController extends Controller
         return view("homepage.book_appointment", $data);
     }
 
-    public function login(){
-        return view("homepage.login");
-    }
-    public function logout(){
-        return view("homepage.home");
-    }
-
-    public function register(){
-        return view("homepage.register");
-    }
 
     public function confirmed_appointment(){
         return view("homepage.confirmed_appointment");
