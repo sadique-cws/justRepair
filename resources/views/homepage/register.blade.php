@@ -1,11 +1,7 @@
 @extends('homepage.layout')
 
 @section('content')
-<<<<<<< HEAD
    <div class=" mt-5">
-=======
-    <div class="container mt-5">
->>>>>>> d26a2dea1cfa0398b46c60f2448837ed6a4263f1
         <div class="flex justify-center">
             <div class="w-3/4 sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3">
                 <form action="" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" id="register">

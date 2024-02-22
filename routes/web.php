@@ -55,6 +55,7 @@ Route::prefix("admin")->group(function () {
         Route::prefix("appointment")->group(function () {
             Route::controller(AppointmentController::class)->group(function () {
                 Route::get('/', 'index')->name("admin.appointment.manage");
+                Route::get('/view/{id}', 'show')->name("admin.appointment.view");
                });
         });
     });

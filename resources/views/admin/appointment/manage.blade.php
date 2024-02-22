@@ -105,7 +105,7 @@
                         <td>${row.preferred_time}</td>
                         <td>${requirementsHtml}</td>
                         <td>${row.mobileno}</td>
-                        <td> <a href='/admin/service/view/${row.id}'class='btn btn-warning'>View</a> </td>
+                        <td> <a href='/admin/appointment/view/${row.id}'class='btn btn-warning'>View</a> </td>
                         </tr>`;
                         });
                         $('#tableBody').html(tableRows);
