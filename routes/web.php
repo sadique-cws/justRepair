@@ -19,15 +19,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::match(['get','post'],'/login',[AuthController::class,"login"])->name("login");
-Route::post('/register',[AuthController::class,"register"])->name("register");
+Route::post('/register',[AuthController::class,"registerNew"])->name("register");
 Route::post('/logout',[AuthController::class,"logout"])->name("logout");
+
+Route::get("/login", [AuthController::class,"signIn"])->name('login');
+Route::get("/logout", [AuthController::class,"signOut"])->name('logout');
+Route::get("/register", [AuthController::class,"register"])->name('register');
+Route::get("/profile", [AuthController::class,"profile"])->name('profile');
 
 Route::get("/", [HomeController::class,"index"])->name("index");
 Route::get("/view/{id}",[HomeController::class,"viewService"])->name("home.view");
-Route::get("/login", [HomeController::class,"login"])->name('login');
-Route::get("/logout", [HomeController::class,"logout"])->name('logout');
-Route::get("/register", [HomeController::class,"register"])->name('register');
-
 Route::get("/confirmed_appointment", [HomeController::class,"confirmed_appointment"])->name('confirmed_appointment');
  
 
