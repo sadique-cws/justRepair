@@ -16,6 +16,7 @@ return new class extends Migration
             $table->date('preferred_date');
             $table->string('preferred_time');
             $table->json('requirements')->nullable();
+            $table->foreignId("service_id")->constrained()->onDelete("cascade");
             $table->string('fullname');
             $table->string('mobileno');
             $table->string('address');

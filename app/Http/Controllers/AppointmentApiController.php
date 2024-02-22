@@ -4,21 +4,51 @@ namespace App\Http\Controllers;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class AppointmentApiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-            // Check if there's a complaint number stored in the session
-        $complain_no = session()->get('complain_no');
+        $query = Appointment::query();
 
-        // Get all appointments
-        $appointments = Appointment::all();
-
-        // If there's a complaint number stored in the session, include it in the response
+        // Filter appointments based on the date range
+        $dateRange = $request->get('dateRange');
+        if ($dateRange === 'today') {
+            $query->whereDate('created_at', Carbon::today());
+        } elseif ($dateRange === 'yesterday') {
+            $query->whereDate('created_at', Carbon::yesterday());
+        } elseif ($dateRange === 'last_week') {
+            $query->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+        } elseif ($dateRange === 'last_month') {
+            $query->whereMonth('created_at', Carbon::now()->subMonth()->month);
+        } elseif ($dateRange === 'this_year') {
+            $query->whereYear('created_at', Carbon::now()->year);
+        } elseif ($dateRange === 'custom') {
+            $startDate = $request->get('startDate');
+            $endDate = $request->get('endDate');
+    
+            // Ensure both start date and end date are provided
+            if ($startDate && $endDate) {
+                $query->whereBetween('created_at', [Carbon::parse($startDate), Carbon::parse($endDate)]);
+            }
+        }
+    
+        // Search appointments based on the search term
+        $searchTerm = $request->get('search');
+        if ($searchTerm) {
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('fullname', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('mobileno', 'like', '%' . $searchTerm . '%');
+            });
+        }
+    
+        // Fetch appointments
+        $appointments = $query->get();
+    
         return response()->json($appointments);
     }
 
@@ -47,6 +77,7 @@ class AppointmentApiController extends Controller
             'requirements.*' => 'string|nullable',
             'preferred_date' => 'required|date',
             'preferred_time' => 'required|string',
+            'service_id' => 'required',
         ]);
     
         if ($validator->fails()) {
@@ -69,6 +100,7 @@ class AppointmentApiController extends Controller
         $appointment->address = $request->address;
         $appointment->landmark = $request->landmark;
         $appointment->city = $request->city;
+        $appointment->service_id = $request->service_id;
         $appointment->requirements = json_encode($request->requirements); // Assuming 'requirements' is a JSON field
 
         $appointment->preferred_date = $request->preferred_date;
