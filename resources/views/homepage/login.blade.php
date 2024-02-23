@@ -1,7 +1,7 @@
 @extends('homepage.layout')
 
 @section('content')
-    <div class="container mt-5">
+    <div class="mt-5">
         <div class="flex justify-center">
             <div class="w-3/4 sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3">
                 <form action="" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" id="login">
@@ -37,13 +37,13 @@
         $('#login').submit(function(e) {
             e.preventDefault();
             $.ajax({
-                url: '/login',
+                url: 'api/login',
                 type: 'POST',
                 data: $(this).serialize(),
                 success: function(response) {
                     localStorage.setItem('token', response.token);
                     alert('Login Successful');
-                    window.location.href = '/'; // Redirect to dashboard or any other page
+                    window.location.href = '{{route('profile')}}'; // Redirect to dashboard or any other page
                 },
                 error: function(xhr, status, error) {
                     alert('Login Failed. Please check your credentials.');
