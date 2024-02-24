@@ -34,12 +34,29 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
+    <div class="bg-blue-500 border-b border-blue-700 flex-1">
+        <div class="flex flex-1 justify-center">
+            <div class="lg:px-[10%] w-full">
+                <div class="flex flex-1 justify-between items-center">
+                    <a href="{{ route('index') }}" class="lg:w-1/12 w-2/12 p-4 flex gap-2 items-center text-white">
+                        <img src="{{ asset('images/logo.jpeg') }}" />
+                        <h2 class="font-bold text-xl font-sans">JustRepair</h2>
+                    </a>
+                    <button
+                        class="text-white hover:bg-blue-600 bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
+                        type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation"
+                        aria-controls="drawer-navigation">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
 
-                </button>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <!-- drawer component -->
     <div id="drawer-navigation"
@@ -122,10 +139,11 @@
 
 
 
-    <div class="fixed bottom-0 left-0 z-50 w-full bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
-        <div class="grid grid-cols-4 gap-0 h-16 max-w-lg mx-auto font-medium">
-            <a href="{{ route('index') }}"
-                class="flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+    <div
+        class="fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
+        <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
+            <button type="button"
+                class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6 text-slate-500">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -149,17 +167,24 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0 1 18 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3 1.5 1.5 3-3.75" />
                 </svg>
-                <span class="text-sm text-nowrap text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">My Booking</span>
-            </a>
-            <a href="{{ route('profile') }}"
-                class="flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-6 h-6 text-slate-500">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                </svg>
-                <span class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Profile</span>
-            </a>
+
+                <span
+                    class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500 text-nowrap">My
+                    Booking</span>
+            </button>
+            <a href="{{ route('profile') }}">
+                <button type="button"
+                    class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6 text-slate-500">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    </svg>
+
+                    <span
+                        class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Profile</span>
+                </button></a>
+
         </div>
     </div>
     
@@ -168,41 +193,41 @@
         $(document).ready(function() {
 
             var token = localStorage.getItem('token');
-    if (token) {
-        $.ajax({
-            url: '/api/profile',
-            type: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + token
-            },
-            success: function(response) {
-                if (response.hasOwnProperty('name')) {
-                    $("#calling_username").text('Hi, ' + response.name);
-                    $('#login-li').hide();
-                    $('#register-li').hide();
-                    $('#logout-li').show();
-                } else {
-                    $("#calling_username").text('Hi, Guest');
-                    $('#login-li').show();
-                    $('#register-li').show();
-                    $('#logout-li').hide();
-                }
-            },
-            error: function(xhr, status, error) {
+            if (token) {
+                $.ajax({
+                    url: '/api/profile',
+                    type: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    },
+                    success: function(response) {
+                        if (response.hasOwnProperty('name')) {
+                            $("#calling_username").text('Hi, ' + response.name);
+                            $('#login-li').hide();
+                            $('#register-li').hide();
+                            $('#logout-li').show();
+                        } else {
+                            $("#calling_username").text('Hi, Guest');
+                            $('#login-li').show();
+                            $('#register-li').show();
+                            $('#logout-li').hide();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        $("#calling_username").text('Hi, Guest');
+                        $('#login-li').show();
+                        $('#register-li').show();
+                        $('#logout-li').hide();
+                        console.log(xhr.responseText);
+                    }
+                });
+            } else {
+                // Token does not exist, handle the case accordingly
                 $("#calling_username").text('Hi, Guest');
                 $('#login-li').show();
                 $('#register-li').show();
                 $('#logout-li').hide();
-                console.log(xhr.responseText);
             }
-        });
-    } else {
-        // Token does not exist, handle the case accordingly
-        $("#calling_username").text('Hi, Guest');
-        $('#login-li').show();
-        $('#register-li').show();
-        $('#logout-li').hide();
-    }
 
 
             $('#logout').click(function(e) {

@@ -29,4 +29,12 @@ class HomeController extends Controller
         return view("homepage.confirmed_appointment");
     }
 
+    public function myBooking(){
+        return view("homepage.myBooking");
+    }
+
+    public function aboutPage(){
+        return view("homepage.aboutPage");
+    }
+
 }
