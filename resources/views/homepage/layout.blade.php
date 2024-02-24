@@ -34,29 +34,12 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
-    <div class="bg-blue-500 border-b border-blue-700 flex-1">
-        <div class="flex flex-1 justify-center">
-            <div class="lg:px-[10%] w-full">
-                <div class="flex flex-1 justify-between items-center">
-                    <a href="{{ route('index') }}" class="lg:w-1/12 w-2/12 p-4 flex gap-2 items-center text-white">
-                        <img src="{{ asset('images/logo.jpeg') }}" />
-                        <h2 class="font-bold text-xl font-sans">JustRepair</h2>
-                    </a>
-                    <button
-                        class="text-white hover:bg-blue-600 bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
-                        type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation"
-                        aria-controls="drawer-navigation">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                        </svg>
-
-                    </button>
-                </div>
+                </button>
             </div>
         </div>
     </div>
+    </div>
+
 
     <!-- drawer component -->
     <div id="drawer-navigation"
@@ -139,10 +122,9 @@
 
 
 
-    <div
-        class="fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
+    <div class="fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
         <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
-            <button type="button"
+            <a href="" 
                 class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6 text-slate-500">
@@ -171,10 +153,8 @@
                 <span
                     class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500 text-nowrap">My
                     Booking</span>
-            </button>
-            <a href="{{ route('profile') }}">
-                <button type="button"
-                    class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+            </a>
+            <a href="{{ route('profile') }}"   class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6 text-slate-500">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -183,7 +163,7 @@
 
                     <span
                         class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Profile</span>
-                </button></a>
+            </a>
 
         </div>
     </div>

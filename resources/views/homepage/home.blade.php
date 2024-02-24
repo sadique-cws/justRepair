@@ -33,7 +33,7 @@
                             let colorClass = colors[index % colors.length];
 
                             serviceList.append(`
-                                <a href="/view/${item.id}" class="flex flex-col items-center ${colorClass} p-4 rounded-lg shadow-md hover:bg-gray-100 transition duration-300">
+                                <a href="/view/${item.slug}" class="flex flex-col items-center ${colorClass} p-4 rounded-lg shadow-md hover:bg-gray-100 transition duration-300">
                                     <img src="/uploads/${item.icon}" alt="${item.name}" class="w-16 h-16 object-cover rounded-full">
                                     <h3 class="mt-2 text-sm text-center">${item.name}</h3>
                                 </a>

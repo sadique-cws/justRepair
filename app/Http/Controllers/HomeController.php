@@ -12,8 +12,8 @@ class HomeController extends Controller
         return view("homepage.home");
     }
 
-    public function viewService($id){
-        $data['service'] =Service::findOrFail($id);
+    public function viewService($slug){
+        $data['service'] =Service::where("slug", $slug)->first();
         // dd($data['service']['servicefees']);
         return view("homepage.viewService", $data);
     }
