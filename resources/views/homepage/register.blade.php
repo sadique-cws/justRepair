@@ -41,6 +41,9 @@
 
     <script>
         // Registration
+        $(document).ready(function() {
+
+        
         $('#register').submit(function(e) {
             e.preventDefault();
             $.ajax({
@@ -57,6 +60,6 @@
                 }
             });
         });
-
+    });
     </script> 
 @endsection

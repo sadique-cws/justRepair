@@ -21,10 +21,10 @@
                             class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full">
                     </div>
                     <p class=" text-gray-700 text-sm">
-                        <a href="{{ route('register') }}" class="text-blue-500 hover:underline">Don't have an account?</a>
+                        <a href="/register" class="text-blue-500 hover:underline">Don't have an account?</a>
                     </p>
                     <p class="text-end text-gray-700 text-sm">
-                        <a href="{{ route('register') }}" class="text-blue-500 hover:underline">Forgot Password?</a>
+                        <a href="/register" class="text-blue-500 hover:underline">Forgot Password?</a>
 
                     </p>
                 </form>

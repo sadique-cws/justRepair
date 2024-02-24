@@ -8,88 +8,34 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function registerNew(Request $request)
-    {
 
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'mobile_no' => 'required|min:8|string|max:200',
-            'email' => 'required|string|email|unique:users|max:255',
-            'password' => 'required|string|min:8|max:20',
-        ]);
+    public function registerIndex(){
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'mobile_no' => $request->mobile_no,
-            'password' => bcrypt($request->password),
-        ]);
+        $user = Auth::user();
+        return response()->json($user);
+        // try {
+        //     $response = User::get();
+        //     $data = $response->json();
 
-        return response()->json(['message' => 'User registered successfully'], 201);
-    }
-
-    public function login(Request $request)
-    {
-        // $validator = Validator::make($request->all(),[
-        //     'email' => 'required|string|email|unique:users|max:255',
-        //     'password' => 'required|string|min:8|max:20',
-
-        // ]);
-
-        // if ($validator->fails()) {
-        //     return response()->json(['success' => false, 'errors' => $validator->errors()], 400);
+        //     // You can manipulate the data as needed before returning it
+        //     return response()->json($data);
+        // } catch (\Exception $e) {
+        //     // Handle errors appropriately
+        //     return response()->json(['error' => $e->getMessage()], 500);
         // }
 
-        // else{
-        //     $user = User::where('email',$request->email)->first();
-        //     if($user){
-        //         if(Hash::check($request->password,$user->password)){
-        //             $request->session()->put('loggedInUser',$user->id);
-        //             return response()->json(['message' => 'LogIn Successfully'], 200);
-        //         }
-        //         else{
-        //             return response()->json(['message' => 'Incorrect Email or Password'], 401);
-        //         }
-        //     }
-        //     else{
-        //         return response()->json(['message' => 'User Not Found'], 401);
-        //     }
-            
-        // }
-
-
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            $token = $user->createToken('AuthToken')->accessToken;
-            return response()->json(['token' => $token], 200);
-        }
-
-        return response()->json(['error' => 'Unauthorized'], 401);
-    }
-
-    public function logout(Request $request)
-    {
-
-        Auth::logout();
-        // return response()->json(['message' => 'Logout Successfully'], 201);
-        return redirect('/login');
     }
 
     
-    public function signIn(){
-        return view("homepage.login");
-    }
-    public function signOut(){
-        return view("homepage.home");
+
+   
+
+    public function signOut(Request $request)
+    {
+        Auth::logout();
+        // return response()->json(['msg' => 'Logout Successfully'], 201);
+        return redirect('/login');
     }
 
-    public function register(){
-        return view("homepage.register");
-    }
 
-    public function profile(){
-        return view("homepage.profile");
-    }
 }

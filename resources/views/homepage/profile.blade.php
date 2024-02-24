@@ -2,6 +2,7 @@
 
 @section('content')
 
+@auth
 <section class="py-5">
     <div class="container mx-auto">
         <h2 class="text-3xl font-bold mb-5 p-5">Roni's Profile</h2>
@@ -13,14 +14,16 @@
                             alt="avatar" class="rounded-full mx-auto" style="width: 150px;">
                         <h5 class="my-3">Roni Saha</h5>
                         <div class="flex justify-center mb-2">
+                            <form action="" method="post">
                             <button type="button"
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
                                 Change
                             </button>
-                            <button type="button"
+                            <button type="submit"
                                 class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" id="logout">
                                 Logout
                             </button>
+                        </form>
                         </div>
                     </div>
                 </div>
@@ -77,6 +80,19 @@
         </div>
     </div>
 </section>
+@endauth
+@guest
+<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center mt-10" role="alert">
+    <strong class="font-bold">You are not logged in!</strong>
+    <span class="block sm:inline mb-5">Please login to access this feature.</span>
+    <span class="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded">
+        <a href="/login" class="text-sm">
+            Login Now
+        </a>
+    </span>
+  </div>
+  
+@endguest
 
 <script>
            $('#logout').submit(function(e) {
