@@ -5,6 +5,7 @@ use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use JWTAuth;
 
 class AppointmentApiController extends Controller
 {
@@ -52,6 +53,7 @@ class AppointmentApiController extends Controller
         return response()->json($appointments);
     }
 
+ 
     /**
      * Show the form for creating a new resource.
      */
@@ -120,8 +122,7 @@ class AppointmentApiController extends Controller
      */
     public function show(string $id)
     {
-        $appointment = Appointment::find($id);
-        return response()->json($appointment);
+        
     }
 
     /**

@@ -52,9 +52,9 @@ class ServiceApiController extends Controller
     }
 
    
-    public function show(string $id)
+    public function show(string $slug)
     {
-        $data = Service::where("id",$id)->with("requirements")->first(); 
+        $data = Service::where("slug",$slug)->with("requirements")->first(); 
         if($data){
             return response()->json($data);
         }
