@@ -8,21 +8,23 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceFeesController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/login', function () {
-    return view('homepage/login');
-})->name("login");
+// Route::match(['get','post'],'/login',[AuthController::class,"login"])->name("login");
+// Route::post('/register',[AuthController::class,"registerNew"])->name("register");
+// Route::post('/logout',[AuthController::class,"logout"])->name("logout");
 
-Route::get('/register', function () {
-    return view('homepage/register');
-})->name("register");
 
+Route::get("/login", [AuthController::class,"signIn"])->name('login');
+Route::get("/logout", [AuthController::class,"signOut"])->name('logout');
+Route::get("/register", [AuthController::class,"register"])->name('register');
 Route::get("/profile", [AuthController::class,"profile"])->name('profile');
 
 Route::get("/", [HomeController::class,"index"])->name("index");
 Route::get("/myBooking", [HomeController::class,"myBooking"])->name("myBooking");
 Route::get("/view/{id}",[HomeController::class,"viewService"])->name("home.view");
 Route::get("/confirmed_appointment", [HomeController::class,"confirmed_appointment"])->name('confirmed_appointment');
- 
+
+    Route::get("/profile", [AuthController::class,"profile"])->name('profile');    
+
 
 Route::prefix("admin")->group(function () {
     Route::controller(AdminController::class)->group(function () {

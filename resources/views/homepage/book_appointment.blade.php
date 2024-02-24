@@ -82,6 +82,8 @@
                                     <label for="full_name" class="text-sm font-medium text-gray-500">Full Name</label>
                                     <input type="text" id="full_name" name="fullname" class="border"
                                         placeholder="Your Name">
+                                    <input type="hidden" value="{{$service->id}}" id="service_id" name="service_id"
+                                        class="d-flex">
                                 </div>
                                 <div class="bg-white flex flex-1 flex-col">
                                     <label for="mobile_no" class="text-sm font-medium text-gray-500">Mobile
@@ -111,8 +113,7 @@
 
 
                             <div class="flex gap-3 flex-1 mt-4">
-                                <button type="submit"
-                                    class="bg-indigo-700 px-3 py-2 rounded text-white w-full">Submit
+                                <button type="submit" class="bg-indigo-700 px-3 py-2 rounded text-white w-full">Submit
                                     Booking</button>
                             </div>
                         </div>
@@ -204,7 +205,8 @@
 
                             $('#errors').html(errorsHtml);
                         } else {
-                            console.error('Failed to book appointment. Please check your input.');
+                            console.error(
+                                'Failed to book appointment. Please check your input.');
                         }
                     }
                 });
@@ -212,10 +214,17 @@
 
 
             // mobile no check
+            // $('#mobile_no').on('keydown', function(e) {
+            //     var maxLength = 10;
+            //     if ($(this).val().length >= maxLength && e.keyCode !== 8) {
+            //         e.preventDefault();
+            //     }
+            // });
+
             $('#mobile_no').on('keydown', function(e) {
                 var maxLength = 10;
-                if ($(this).val().length >= maxLength && e.keyCode !== 8) {
-                    e.preventDefault();
+                if ($(this).val().length >= maxLength) {
+                    $(this).next('input').focus();
                 }
             });
 

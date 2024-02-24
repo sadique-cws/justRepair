@@ -4,6 +4,7 @@ use App\Http\Controllers\AppointmentApiController;
 use App\Http\Controllers\ServiceApiController;
 use App\Http\Controllers\ServiceFeeApiController;
 use App\Http\Controllers\AuthApiController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,3 +36,13 @@ Route::prefix("admin")->group(function () {
     Route::apiResource("appointment", AppointmentApiController::class);
 });
 
+Route::post('/login', [AuthController::class,"login"]);
+Route::post('/register', [AuthController::class,"register"]);
+Route::post('/logout', [AuthController::class,"logout"])->middleware('jwt.auth');
+Route::post('/refresh-token', [AuthController::class,"refreshToken"]);
+
+
+
+Route::get('/profile', function () {
+    return auth()->user();
+})->middleware('jwt.auth');
