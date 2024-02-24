@@ -37,4 +37,8 @@ class HomeController extends Controller
         return view("homepage.aboutPage");
     }
 
+    public function tandc(){
+        return view("homepage.terms&condition");
+    }
+
 }

@@ -22,6 +22,7 @@ Route::get("/", [HomeController::class,"index"])->name("index");
 Route::get("/myBooking", [HomeController::class,"myBooking"])->name("myBooking");
 Route::get("/view/{id}",[HomeController::class,"viewService"])->name("home.view");
 Route::get("/aboutPage", [HomeController::class,"aboutPage"])->name("aboutPage");
+Route::get("/terms-condition", [HomeController::class,"tandc"])->name("tandc");
 Route::get("/confirmed_appointment", [HomeController::class,"confirmed_appointment"])->name('confirmed_appointment');
 
     Route::get("/profile", [AuthController::class,"profile"])->name('profile');    
