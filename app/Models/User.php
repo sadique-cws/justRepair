@@ -9,14 +9,13 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+
 class User extends Authenticatable implements JWTSubject
+
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
+   
 
     public function getJWTCustomClaims()
     {
@@ -56,4 +55,14 @@ class User extends Authenticatable implements JWTSubject
         'password' => 'hashed',
         'is_admin' => 'boolean',
     ];
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }
