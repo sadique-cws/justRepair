@@ -14,15 +14,13 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get("/login", [AuthController::class,"signIn"])->name('login');
-Route::get("/register", [AuthController::class,"register"])->name('register');
+Route::get("/register", [AuthController::class,"registerForm"])->name('register');
 
 Route::get("/", [HomeController::class,"index"])->name("index");
 Route::get("/view/{id}",[HomeController::class,"viewService"])->name("home.view");
 Route::get("/confirmed_appointment", [HomeController::class,"confirmed_appointment"])->name('confirmed_appointment');
 
-Route::middleware('jwt.auth')->group(function () {
     Route::get("/profile", [AuthController::class,"profile"])->name('profile');    
-});
 
 
 Route::prefix("admin")->group(function () {

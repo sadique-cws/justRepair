@@ -43,6 +43,17 @@ class AuthController extends Controller
         return response()->json(['message' => 'User logged out successfully']);
     }
 
+    public function refreshToken(Request $request)
+    {
+        $token = JWTAuth::getToken();
+        $newToken = JWTAuth::refresh($token);
+
+        return response()->json(['token' => $newToken]);
+    }
+
+    public function registerForm(){
+        return view("homepage.register");
+    }
     
     public function signIn(){
         return view("homepage.login");
@@ -50,10 +61,6 @@ class AuthController extends Controller
     public function signOut(){
         return view("homepage.home");
     }
-
-    // public function register(){
-    //     return view("homepage.register");
-    // }
 
     public function profile(){
         return view("homepage.profile");

@@ -17,29 +17,30 @@
 
 <body>
 
-    <div class="bg-white border-y flex-1">
-        <div class="flex flex-1 justify-center">
-            <div class="lg:px-[10%]">
-                <div class="flex flex-1 justify-between items-center">
-                    <a href="{{ route('index') }}" class="lg:w-1/12 w-2/12 p-4 flex gap-2 items-center ">
-                        <img src="{{ asset('images/logo.jpeg') }}" />
-                        <h2 class="font-bold text-xl font-sans">JustRepair</h2>
-                    </a>
-                    <button
-                        class="text-slate-700 hover:bg-slate-300 bg-slate-200 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
-                        type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation"
-                        aria-controls="drawer-navigation">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                        </svg>
+    <div class="bg-blue-500 border-b border-blue-700 flex-1">
+    <div class="flex flex-1 justify-center">
+        <div class="lg:px-[10%] w-full">
+            <div class="flex flex-1 justify-between items-center">
+                <a href="{{ route('index') }}" class="lg:w-1/12 w-2/12 p-4 flex gap-2 items-center text-white">
+                    <img src="{{ asset('images/logo.jpeg') }}" />
+                    <h2 class="font-bold text-xl font-sans">JustRepair</h2>
+                </a>
+                <button
+                    class="text-white hover:bg-blue-600 bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
+                    type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation"
+                    aria-controls="drawer-navigation">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
 
-                    </button>
-                </div>
+                </button>
             </div>
         </div>
     </div>
+</div>
+
     <!-- drawer component -->
     <div id="drawer-navigation"
         class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-64 dark:bg-gray-800"

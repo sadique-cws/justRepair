@@ -3,98 +3,95 @@
 @section('content')
 
 <section class="py-5">
-    <div class="container mx-auto">
+    <div class="container mx-auto" id="profile-container" style="display: none">
         <h2 class="text-3xl font-bold mb-5 p-5">Roni's Profile</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="md:col-span-1">
-                <div class="bg-white rounded-lg shadow-md">
-                    <div class="p-6 text-center">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-                            alt="avatar" class="rounded-full mx-auto" style="width: 150px;">
-                        <h5 class="my-3">Roni Saha</h5>
-                        <div class="flex justify-center mb-2">
-                            <button type="button"
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
-                                Change
-                            </button>
-                            <button type="button"
-                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" id="logout">
-                                Logout
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="md:col-span-2">
+        <div class="flex">
+            
+            <div class="flex-1">
                 <div class="bg-white rounded-lg shadow-md">
                     <div class="p-4">
-                        <div class="flex items-center border-b border-gray-200 mb-4">
-                            <h3 class="text-lg font-semibold">Details</h3>
-                        </div>
                         <div class="grid grid-cols-3 gap-4 mb-4">
                             <div class="col-span-1">
-                                <p class="mb-0">Full Name</p>
+                                <label for="name" class="font-semibold">Full Name:</label>
                             </div>
                             <div class="col-span-2">
-                                <p class="text-gray-500 mb-0">Roni Saha</p>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-3 gap-4 mb-4">
-                            <div class="col-span-1">
-                                <p class="mb-0">Email</p>
-                            </div>
-                            <div class="col-span-2">
-                                <p class="text-gray-500 mb-0">example@example.com</p>
+                                <p class="text-gray-500" id="name">Roni Saha</p>
                             </div>
                         </div>
                         <div class="grid grid-cols-3 gap-4 mb-4">
                             <div class="col-span-1">
-                                <p class="mb-0">Phone</p>
+                                <label for="email" class="font-semibold">Email:</label>
                             </div>
                             <div class="col-span-2">
-                                <p class="text-gray-500 mb-0">+91 6202067099</p>
+                                <p class="text-gray-500" id="email">roni@example.com</p>
                             </div>
                         </div>
                         <div class="grid grid-cols-3 gap-4 mb-4">
                             <div class="col-span-1">
-                                <p class="mb-0">Mobile</p>
+                                <label for="mobile" class="font-semibold">Mobile Number:</label>
                             </div>
                             <div class="col-span-2">
-                                <p class="text-gray-500 mb-0">+91 6202067099</p>
+                                <p class="text-gray-500" id="mobile">+91 9876543210</p>
                             </div>
                         </div>
                         <div class="grid grid-cols-3 gap-4 mb-4">
                             <div class="col-span-1">
-                                <p class="mb-0">Address</p>
+                                <label for="avatar" class="font-semibold">Display Picture:</label>
                             </div>
                             <div class="col-span-2">
-                                <p class="text-gray-500 mb-0">Line Bazar, Purnea, Bihar-854301</p>
+                                <img src="https://via.placeholder.com/150" alt="avatar" class="rounded-lg"
+                                    style="width: 150px;">
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </section>
 
-<script>
-           $('#logout').submit(function(e) {
-                e.preventDefault();
+<div id="login-register-info" style="display: none;">
+    <p>Please <a href="/login">login</a> or <a href="/register">register</a> to view profile.</p>
+</div>
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/logout', // Directly specify the URL
-                    data: $(this).serialize(), // Serialize the form data
-                    success: function() {
-                        console.log("Done");
-                        window.location.href = '/';
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Error fetching appointment details:', error);
-                    }
-                });
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '/api/profile',
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            success: function (response) {
+                if (response.hasOwnProperty('name')) {
+                    $("#profile-name").text(response.name);
+                    $("#profile-container").show(); // Show the profile container
+                } else {
+                    $("#login-register-info").show();
+                }
+            },
+            error: function (xhr, status, error) {
+                $("#login-register-info").show();
+                console.error('Error fetching profile details:', error);
+            }
+        });
+
+        $('#logout').click(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: '/logout',
+                success: function () {
+                    console.log("Logout successful");
+                    localStorage.removeItem('token');
+                    window.location.href = '/';
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error logging out:', error);
+                }
             });
+        });
+    });
 </script>
 
 @endsection
