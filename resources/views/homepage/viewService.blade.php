@@ -10,20 +10,20 @@
                     <div class="absolute inset-0 flex flex-col gap-3 items-start px-10 justify-center">
                         <h1 class="text-white text-xl md:text-4xl font-bold" id="serviceName">{{ $service->name }}</h1>
                         <p class="line-clamp-2 text-white" id="serviceDescription">{{ $service->description }}</p>
-                        <div class="flex gap-2">
-                            <div class=" p-2 rounded-lg flex items-center space-x-2">
+                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mt-2">
+                            <div class="rounded-lg flex items-center space-x-1">
                                 <i class="fa-solid fa-circle-check text-green-400"></i>
                                 <span class="text-slate-100 text-sm">No Extra Cost</span>
                             </div>
-                            <div class=" p-2 rounded-lg flex items-center space-x-2">
+                            <div class="rounded-lg flex items-center space-x-1">
                                 <i class="fa-solid fa-circle-check text-green-400"></i>
                                 <span class="text-slate-100 text-sm">Free Inspection</span>
                             </div>
-                            <div class=" p-2 rounded-lg flex items-center space-x-2">
+                            <div class="rounded-lg flex items-center space-x-1">
                                 <i class="fa-solid fa-circle-check text-green-400"></i>
                                 <span class="text-slate-100 text-sm">15 days Warranty *</span>
                             </div>
-                            <div class=" p-2 rounded-lg flex items-center space-x-2">
+                            <div class="rounded-lg flex items-center space-x-1">
                                 <i class="fa-solid fa-circle-check text-green-400"></i>
                                 <span class="text-slate-100 text-sm">Expert Technicians</span>
                             </div>

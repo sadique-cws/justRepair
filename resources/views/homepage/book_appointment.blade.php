@@ -17,22 +17,23 @@
                 </div>
 
             </div>
-            <div class=" w-full">
+            <div class=" w-full mt-3 ">
+                <div class="bg-white shadow p-2 border border-slate-200 overflow-hidden sm:rounded-lg">
                 <h6 class="text-sm font-semibold">When You Need It ?</h6>
 
-                <div id="calling_requirement" class="flex w-full gap-10"></div>
-
+                <div id="calling_requirement" class="flex flex-col md:flex-row w-full gap-0 md:gap-5 mt-3"></div>
+            </div>
                 <div class="mt-3">
-                    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                    <div class="bg-white shadow p-2 border border-slate-200 overflow-hidden sm:rounded-lg">
                         <div class="">
                             <h3 class="text-sm font-semibold">Preferred Date and Time</h3>
                         </div>
-                        <div class="flex items-center flex-col md:flex-row my-3">
-                            <div class="bg-white px-5 flex-[0.5]  flex items-center">
-                                <label for="date" class="text-sm font-medium text-gray-500 flex-1">Preferred
+                        <div class="flex flex-col my-3 gap-3">
+                            <div class="bg-white gap-3  flex items-center">
+                                <label for="date" class="text-sm font-medium text-gray-700 flex-1 text-nowrap">Preferred
                                     Date</label>
                                 <div class="mt-1 flex-[3] text-sm text-gray-900">
-                                    <select name="preferred_date" id="date" class="border border-slate-200">
+                                    <select name="preferred_date" id="date" class="border border-slate-200 border border-slate-200-slate-200 px-3 py-2">
                                         <option value="{{ \Carbon\Carbon::now()->toDateString() }}" selected>Today
                                         </option>
                                         @for ($i = 1; $i <= 7; $i++)
@@ -43,70 +44,65 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="flex flex-1 justify-center">
-                                <label for="time" class="text-sm flex-1 font-medium text-gray-500">Preferred
-                                    Time</label>
-                                <div class="flex  flex-[5] justify-start gap-4">
-
+                            <div class="flex flex-1 gap-3 flex-col md:flex-row">
+                                <label for="time" class="text-sm flex-1 font-medium text-gray-700">Preferred Time</label>
+                                <div class="grid lg:flex-[3] lg:grid-cols-10 sm:grid-cols-5 grid-cols-4 justify-start gap-1">
                                     @php
                                         $time = ['09 AM - 11 AM', '11 AM - 01 PM', '01 PM - 03 PM', '03 PM - 05 PM', '05 PM - 07 PM'];
                                     @endphp
-
                                     @foreach ($time as $item)
-                                        <div class=" flex items-start">
-                                            <input id="{{ $loop->index }}" type="radio" class="hidden peer"
-                                                name="preferred_time" value="{{ $item }}">
-                                            <label for="{{ $loop->index }}"
-                                                class="inline-flex items-center  rounded-2xl justify-between py-1 px-2 font-medium tracking-tight border cursor-pointer bg-brand-light text-brand-black border-green-500 peer-checked:border-green-400 peer-checked:bg-green-700 peer-checked:text-white">
-                                                <div class="flex items-center justify-center w-full">
-                                                    <div class="text-xs text-brand-black">{{ $item }}</div>
+                                        <div class="flex md:flex-col md:items-start">
+                                            <input id="{{ $loop->index }}" type="radio" class="hidden peer" name="preferred_time" value="{{ $item }}">
+                                            <label for="{{ $loop->index }}" class="inline-flex items-center rounded-2xl justify-between py-1 px-2 font-medium tracking-tight border border-slate-200 cursor-pointer bg-brand-light text-brand-black border border-slate-200-green-700 peer-checked:border border-slate-200-green-400 peer-checked:bg-green-700 peer-checked:text-white">
+                                                <div class="flex items-center justify-center md:w-full">
+                                                    <div class="text-xs text-brand-black text-nowrap">{{ $item }}</div>
                                                 </div>
                                             </label>
                                         </div>
                                     @endforeach
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="mt-3 pb-10">
-                <h6 class="font-bold">Your Details</h6>
+            <div class="mt-3 pb-10 bg-white shadow p-2 border border-slate-200 overflow-hidden sm:rounded-lg">
+                <h6 class="text-sm flex-1 font-medium text-gray-700">Personal Information</h6>
                 <div id="errors"></div>
                 <div class="mt-3">
-                    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                        <h3 class="text-sm font-semibold">Personal Information</h3>
+                    <div class="bg-white overflow-hidden sm:rounded-lg">
                         <div class="flex flex-col gap-4">
                             <div class="flex gap-3">
                                 <div class="bg-white flex flex-1 flex-col">
-                                    <label for="full_name" class="text-sm font-medium text-gray-500">Full Name</label>
-                                    <input type="text" id="full_name" name="fullname" class="border"
+                                    <label for="full_name" class="text-sm font-medium text-gray-700">Full Name</label>
+                                    <input type="text" id="full_name" name="fullname" class="border border-slate-200"
                                         placeholder="Your Name">
                                     <input type="hidden" value="{{$service->id}}" id="service_id" name="service_id"
                                         class="d-flex">
                                 </div>
                                 <div class="bg-white flex flex-1 flex-col">
-                                    <label for="mobile_no" class="text-sm font-medium text-gray-500">Mobile
+                                    <label for="mobile_no" class="text-sm font-medium text-gray-700">Mobile
                                         No.</label>
-                                    <input type="tel" id="mobile_no" name="mobileno" class="border"
+                                    <input type="tel" id="mobile_no" name="mobileno" class="border border-slate-200"
                                         placeholder="Mobile No.">
                                 </div>
                             </div>
                             <div class="flex gap-3">
                                 <div class="bg-white flex flex-1 flex-col">
-                                    <label for="address" class="text-sm font-medium text-gray-500">Address</label>
-                                    <input type="text" id="address" name="address" class="" rows="3"
+                                    <label for="address" class="text-sm font-medium text-gray-700">Address</label>
+                                    <input type="text" id="address" name="address" class="border border-slate-200" rows="3"
                                         placeholder="Address">
                                 </div>
                             </div>
                             <div class="flex gap-3">
                                 <div class="bg-white flex flex-1 flex-col">
-                                    <label for="city" class="text-sm font-medium text-gray-500">City</label>
-                                    <input type="text" id="city" name="city" class="border" placeholder="City">
+                                    <label for="city" class="text-sm font-medium text-gray-700">City</label>
+                                    <input type="text" id="city" name="city" class="border border-slate-200" placeholder="City">
                                 </div>
                                 <div class="bg-white flex flex-1 flex-col">
-                                    <label for="landmark" class="text-sm font-medium text-gray-500">Landmark</label>
-                                    <input type="text" id="landmark" name="landmark" class="border"
+                                    <label for="landmark" class="text-sm font-medium text-gray-700">Landmark</label>
+                                    <input type="text" id="landmark" name="landmark" class="border border-slate-200"
                                         placeholder="Landmark">
                                 </div>
                             </div>
@@ -135,7 +131,7 @@
             let callingReq = () => {
 
                 $.ajax({
-                    url: `{{ route('service.show', $service->id) }}`,
+                    url: `{{ route('service.show', $service->slug) }}`,
                     type: "GET",
                     success: function(response) {
                         let reqList = $("#calling_requirement")
@@ -154,7 +150,7 @@
                         } else {
                             reqList.append(`
                                 <div class="mb-1">
-                                    <h6 class="text-mutes text-sm text-red-500"> Requirement not found </h6>
+                                    <h6 class="text-mutes text-sm text-red-700"> Requirement not found </h6>
                                 </div>
                             `)
                         }
@@ -196,7 +192,7 @@
                         if (xhr.responseJSON.errors) {
                             var errorsHtml =
 
-                                '<ul class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">';
+                                '<ul class="bg-red-100 border border-slate-200 border border-slate-200-red-400 text-red-700 px-4 py-3 rounded relative">';
                             $.each(xhr.responseJSON.errors, function(key, value) {
                                 errorsHtml += '<li>' + value[0] +
                                     '</li>'; // Assuming only one error per field
