@@ -120,7 +120,7 @@ class AppointmentApiController extends Controller
      */
     public function show(string $id)
     {
-        $appointment = Appointment::find($id);
+        $appointment = Appointment::where("id",$id)->with("services")->first();
         return response()->json($appointment);
     }
 

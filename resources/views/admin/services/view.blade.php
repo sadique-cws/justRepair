@@ -110,7 +110,6 @@
     @section('js')
         <script>
             $(document).ready(function() {
-
                 $.ajax({
                     url: '{{route('servicefee.index')}}',
                     type: 'GET',

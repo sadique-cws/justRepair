@@ -12,9 +12,9 @@ class ServiceFeeApiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $serviceFee = ServiceFees::where("parent_id", null)->with("subFees")->get();
+        $serviceFee = ServiceFees::where("parent_id", null)->where("service_id", $request->service_id)->with("subFees")->get();
         return response()->json($serviceFee, 200);
     }
 

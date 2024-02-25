@@ -15,4 +15,9 @@ class Appointment extends Model
         return $this->hasMany(Requirement::class);
 
     }
+    public function services()
+    {
+        return $this->hasOne(Service::class,"id","service_id");
+
+    }
 }

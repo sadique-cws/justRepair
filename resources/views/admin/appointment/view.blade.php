@@ -111,6 +111,7 @@
         <script>
             $(document).ready(function() {
 
+                console.log("data" + service_id)
                 $.ajax({
                     url: '{{ route('servicefee.index') }}',
                     type: 'GET',
@@ -183,6 +184,10 @@
                             <td>${response.mobileno}</td>
                         </tr>
                         <tr>
+                            <th>Service</th>
+                            <td>${response.services.name}</td>
+                        </tr>
+                        <tr>
                             <th>Requirements</th>
                             <td>${requirementsHtml}</td>
                         </tr>
@@ -193,12 +198,12 @@
                     error: function(xhr, status, error) {
                         console.error(xhr.responseText);
                     }
+                    
                 });
 
                 $.ajax({
                     url: '{{ route('servicefee.index') }}',
                     type: 'GET',
-                    dataType: 'json',
                     success: function(response) {
                         // Populate the select dropdown with service fees
                         var select = $('#parent_id');
@@ -233,6 +238,8 @@
                 $(document).on('click', '.editBtn', function() {
                     var id = $(this).data('id');
                 });
+                
+               
             });
         </script>
     @endsection
