@@ -90,7 +90,7 @@
                         <td>${row.name}</td>
                         <td><img src='/uploads/${row.icon}' width='50px'/></td>
                         <td>${row.description.substr(0,50)}...</td>
-                        <td> <a href='/admin/service/view/${row.id}'class='btn btn-warning'>View</a> </td>
+                        <td> <a href='/admin/service/view/${row.slug}'class='btn btn-warning'>View</a> </td>
                         </tr>`;
                 });
                 $('#tableBody').html(tableRows);

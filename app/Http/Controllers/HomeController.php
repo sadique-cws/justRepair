@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use App\Models\Appointment;
 
 class HomeController extends Controller
 {
@@ -12,11 +13,20 @@ class HomeController extends Controller
         return view("homepage.home");
     }
 
-    public function viewService($id){
-        $data['service'] =Service::findOrFail($id);
+    public function viewService($slug){
+        $data['service'] =Service::where("slug", $slug)->first();
         // dd($data['service']['servicefees']);
         return view("homepage.viewService", $data);
     }
+
+
+    public function myBookingApi(Request $request){
+        $user = auth()->user();
+        $appointment = Appointment::where("mobileno", $user->mobile_no)->get();
+        return response()->json($appointment);
+}
+
+
 
     // under process
     public function bookAppointment($slug){
@@ -32,13 +42,19 @@ class HomeController extends Controller
     public function myBooking(){
         return view("homepage.myBooking");
     }
+    public function ourSevices(){
+        return view("homepage.ourService");
+    }
 
     public function aboutPage(){
         return view("homepage.aboutPage");
     }
 
-    public function searchAppointment(){
-        return view("homepage.searchAppointment");
+    public function tandc(){
+        return view("homepage.terms&condition");
+    }
+    public function loginRequired(){
+        return view("homepage.ifNotAuth");
     }
 
 }

@@ -15,11 +15,14 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+
    
 
     public function getJWTCustomClaims()
     {
-        return [];
+        return [
+            'is_admin' => $this->is_admin,
+        ];
     }
 
     /**

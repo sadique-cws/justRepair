@@ -15,47 +15,52 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/login", [AuthController::class,"signIn"])->name('login');
 Route::get("/logout", [AuthController::class,"signOut"])->name('logout');
-Route::get("/register", [AuthController::class,"register"])->name('register');
+Route::get("/register", [AuthController::class,"registerForm"])->name('register');
 Route::get("/profile", [AuthController::class,"profile"])->name('profile');
 
 Route::get("/", [HomeController::class,"index"])->name("index");
-Route::get("/myBooking", [HomeController::class,"myBooking"])->name("myBooking");
-Route::get("/view/{id}",[HomeController::class,"viewService"])->name("home.view");
+Route::get("/my-booking", [HomeController::class,"myBooking"])->name("myBooking");
+Route::get("/view/{slug}",[HomeController::class,"viewService"])->name("home.view");
 Route::get("/aboutPage", [HomeController::class,"aboutPage"])->name("aboutPage");
+Route::get("/terms-condition", [HomeController::class,"tandc"])->name("tandc");
+Route::get("/login-required", [HomeController::class,"loginRequired"])->name("loginRequired");
+Route::get("/services", [HomeController::class,"ourSevices"])->name("ourSevices");
 Route::get("/confirmed_appointment", [HomeController::class,"confirmed_appointment"])->name('confirmed_appointment');
 Route::get("/search", [HomeController::class,"searchAppointment"])->name('search');
 
     Route::get("/profile", [AuthController::class,"profile"])->name('profile');    
 
 
-Route::prefix("admin")->group(function () {
-    Route::controller(AdminController::class)->group(function () {
-        Route::get('/', 'dashboard')->name("admin.dashboard");
-
-        //service routes
-        Route::prefix("service")->group(function () {
-            Route::controller(ServiceController::class)->group(function () {
-                Route::get('/', 'index')->name("admin.service.manage");
-                Route::get('/insert', 'insert')->name("admin.service.insert");
-                Route::get('/view/{id}', 'view')->name("admin.service.view");
-                Route::post('/store', 'store')->name("admin.service.store");
+// Route::middleware()->group(function () {
+    Route::prefix("admin")->group(function () {
+        Route::controller(AdminController::class)->group(function () {
+            Route::get('/', 'dashboard')->name("admin.dashboard");
+    
+            //service routes
+            Route::prefix("service")->group(function () {
+                Route::controller(ServiceController::class)->group(function () {
+                    Route::get('/', 'index')->name("admin.service.manage");
+                    Route::get('/insert', 'insert')->name("admin.service.insert");
+                    Route::get('/view/{id}', 'view')->name("admin.service.view");
+                    Route::post('/store', 'store')->name("admin.service.store");
+                });
             });
-        });
-        Route::prefix("service-fee")->group(function () {
-            Route::controller(ServiceFeesController::class)->group(function () {
-                Route::get('/', 'index')->name("admin.servicefee.manage");
-                Route::get('/insert', 'insert')->name("admin.servicefee.insert");
-                Route::get('/view/{id}', 'view')->name("admin.servicefee.view");
-                Route::post('/store', 'store')->name("admin.servicefee.store");
+            Route::prefix("service-fee")->group(function () {
+                Route::controller(ServiceFeesController::class)->group(function () {
+                    Route::get('/', 'index')->name("admin.servicefee.manage");
+                    Route::get('/insert', 'insert')->name("admin.servicefee.insert");
+                    Route::get('/view/{id}', 'view')->name("admin.servicefee.view");
+                    Route::post('/store', 'store')->name("admin.servicefee.store");
+                });
             });
-        });
-        Route::prefix("appointment")->group(function () {
-            Route::controller(AppointmentController::class)->group(function () {
-                Route::get('/', 'index')->name("admin.appointment.manage");
-                Route::get('/view/{id}', 'show')->name("admin.appointment.view");
-               });
+            Route::prefix("appointment")->group(function () {
+                Route::controller(AppointmentController::class)->group(function () {
+                    Route::get('/', 'index')->name("admin.appointment.manage");
+                    Route::get('/view/{id}', 'show')->name("admin.appointment.view");
+                   });
+            });
         });
     });
-});
+// });
 
 Route::get("/{slug}/appointment",[HomeController::class,"bookAppointment"])->name("home.bookAppointment");

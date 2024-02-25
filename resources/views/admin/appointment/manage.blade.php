@@ -74,7 +74,8 @@
                                 <div class="col-md-6"></div>
                                 <div class="col-md-6">
                                     <div class="input-group input-group-sm">
-                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                        <input type="text" name="table_search" class="form-control float-right"
+                                            placeholder="Search">
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default" id="searchButton">
                                                 <i class="fas fa-search"></i>
@@ -133,7 +134,7 @@
                 format: 'yyyy-mm-dd',
                 autoclose: true
             });
-            
+
             $('.dropdown-item[data-range="custom"]').click(function() {
                 $('#customDateRangePicker').show();
             });
@@ -154,7 +155,18 @@
                 $('#customDateRangePicker').hide();
             });
             // AJAX call to fetch data
-            function filterAppointments(dateRange, startDate = null, endDate = null, search = null) {
+            function filterAppointments(dateRange = "today", startDate = null, endDate = null, search = null) {
+
+                if (dateRange === 'today') {
+                    var today = new Date();
+                    var dd = String(today.getDate()).padStart(2, '0');
+                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                    var yyyy = today.getFullYear();
+
+                    startDate = yyyy + '-' + mm + '-' + dd;
+                    endDate = yyyy + '-' + mm + '-' + dd;
+                }
+
                 var data = {
                     dateRange: dateRange,
                     startDate: startDate,
@@ -210,6 +222,9 @@
                 var search = $(this).val();
                 filterAppointments('custom', null, null, search);
             });
+
+            filterAppointments();
+
         });
     </script>
 @endsection

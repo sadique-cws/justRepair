@@ -5,18 +5,34 @@
         <div class="w-full">
             <div class="bg-black bg-opacity-50">
                 <div class="relative w-full h-auto">
-                    <img src="/images/ac_rep.jpg" alt="Background Image" class="w-full h-48 object-cover">
-                    <div class="absolute inset-0 bg-black bg-opacity-65"></div>
+                    <img src="/images/ac_rep.jpg" alt="Background Image" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="absolute inset-0 bg-black bg-opacity-65 rounded-t-lg"></div>
                     <div class="absolute inset-0 flex flex-col gap-3 items-start px-10 justify-center">
-                        <h1 class="text-white text-xl md:text-4xl  font-bold" id="serviceName">{{ $service->name }}</h1>
+                        <h1 class="text-white text-xl md:text-4xl font-bold" id="serviceName">{{ $service->name }}</h1>
                         <p class="line-clamp-2 text-white" id="serviceDescription">{{ $service->description }}</p>
-                        <ul class="list-inline mb-1 text-white">
-                            <li class="list-inline-item">
-                                <i class="fa-solid fa-circle-check text-green-200"></i> No Extra Cost
-                            </li>
-                        </ul>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mt-2">
+                            <div class="rounded-lg flex items-center space-x-1">
+                                <i class="fa-solid fa-circle-check text-green-400"></i>
+                                <span class="text-slate-100 text-sm">No Extra Cost</span>
+                            </div>
+                            <div class="rounded-lg flex items-center space-x-1">
+                                <i class="fa-solid fa-circle-check text-green-400"></i>
+                                <span class="text-slate-100 text-sm">Free Inspection</span>
+                            </div>
+                            <div class="rounded-lg flex items-center space-x-1">
+                                <i class="fa-solid fa-circle-check text-green-400"></i>
+                                <span class="text-slate-100 text-sm">15 days Warranty *</span>
+                            </div>
+                            <div class="rounded-lg flex items-center space-x-1">
+                                <i class="fa-solid fa-circle-check text-green-400"></i>
+                                <span class="text-slate-100 text-sm">Expert Technicians</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+
+
             </div>
         </div>
         <div class="sm:px-2 md:px-10">
@@ -31,13 +47,13 @@
                         </li>
                         <li class="me-2" role="presentation">
                             <button
-                                class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                                class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-400 hover:border-gray-300 dark:hover:text-gray-300"
                                 id="dashboard-tab" data-tabs-target="#rate" type="button" role="tab"
                                 aria-controls="dashboard" aria-selected="false">Our Pricing</button>
                         </li>
                         <li class="me-2" role="presentation">
                             <button
-                                class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                                class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-400 hover:border-gray-300 dark:hover:text-gray-300"
                                 id="settings-tab" data-tabs-target="#faq" type="button" role="tab"
                                 aria-controls="settings" aria-selected="false">FAQ's</button>
                         </li>
@@ -47,10 +63,10 @@
                 <div id="default-tab-content">
                     <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="book" role="tabpanel"
                         aria-labelledby="profile-tab">
-                        <form method="get" action="{{ route('home.bookAppointment',$service->slug) }}">
+                        <form method="get" action="{{ route('home.bookAppointment', $service->slug) }}">
                             <div class="mb-3 flex flex-col">
                                 <label for="date" class="text-sm font-semibold">When do you Need service?</label>
-                                <select name="date" id="date" class="border border-slate-200 mt-2">
+                                <select name="date" id="date" class="border border-slate-200 mt-2 px-3 py-2">
                                     <option value="{{ \Carbon\Carbon::now()->toDateString() }}" selected>Today</option>
                                     @for ($i = 1; $i <= 7; $i++)
                                         <option value="{{ \Carbon\Carbon::now()->addDays($i)->toDateString() }}">
@@ -81,6 +97,16 @@
                     <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="rate" role="tabpanel"
                         aria-labelledby="dashboard-tab">
 
+                        <div class="bg-green-500 rounded-md text-white px-3 py-2 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
+                            </svg>
+
+                            <p>Our onsite Inspection is 100% free to give estimated cost for job.</p>
+                        </div>
+
                         <div id="accordion-flush" data-accordion="collapse"
                             data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
                             data-inactive-classes="text-gray-500 dark:text-gray-400">
@@ -91,11 +117,22 @@
                                             class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3"
                                             data-accordion-target="#accordion-flush-body-{{ $item->id }}"
                                             aria-expanded="true" aria-controls="accordion-flush-body-{{ $item->id }}">
-                                            <span class="capitalize">{{ $item->service_fees_name }}</span>
-                                            <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2" d="M9 5 5 1 1 5" />
+
+                                            <span class="capitalize flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                </svg>
+
+
+                                                {{ $item->service_fees_name }}</span>
+                                            <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0"
+                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 10 6">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5" />
                                             </svg>
                                         </button>
                                     </h2>
@@ -120,11 +157,16 @@
                     <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="faq" role="tabpanel"
                         aria-labelledby="contacts-tab">
                         {{-- faq --}}
+                        <p class="text-bold text-black">Q. Do we offer any VISIT / Inspection Charge for Air Conditioner
+                            Repair Service?</p>
+                        <p class="text-sm mt-2">Ans: No we don't charge any amount to visit your home and quote price for
+                            repair after getting quote you can decide to get repair done or not.</p>
                     </div>
                 </div>
             </div>
             <div class="mt-5 px-10 md:px-5">
-                <h4 class=" mt-5 mb-3 text-xl md:text-2xl font-bold">Top Reasons to Book AC Repair service in Purnea with JustRepair.
+                <h4 class=" mt-5 mb-3 text-xl md:text-2xl font-bold">Top Reasons to Book AC Repair service in Purnea with
+                    JustRepair.
                 </h4>
 
                 <ul class="flex flex-col gap-3 list-disc text-justify pb-20">

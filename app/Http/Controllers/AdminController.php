@@ -16,5 +16,7 @@ class AdminController extends Controller
     public function manageServices(Request $request){   
         return view("admin.manageServices");    
     }
+
+    
 }
  
