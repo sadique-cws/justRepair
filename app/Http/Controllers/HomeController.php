@@ -42,6 +42,9 @@ class HomeController extends Controller
     public function myBooking(){
         return view("homepage.myBooking");
     }
+    public function ourSevices(){
+        return view("homepage.ourService");
+    }
 
     public function aboutPage(){
         return view("homepage.aboutPage");

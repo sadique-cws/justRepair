@@ -30,7 +30,7 @@
                         </div>
                     </div>
                 </div>
-                
+
 
 
             </div>
@@ -98,10 +98,12 @@
                         aria-labelledby="dashboard-tab">
 
                         <div class="bg-green-500 rounded-md text-white px-3 py-2 flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
-                              </svg>
-                              
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
+                            </svg>
+
                             <p>Our onsite Inspection is 100% free to give estimated cost for job.</p>
                         </div>
 
@@ -115,7 +117,17 @@
                                             class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3"
                                             data-accordion-target="#accordion-flush-body-{{ $item->id }}"
                                             aria-expanded="true" aria-controls="accordion-flush-body-{{ $item->id }}">
-                                            <span class="capitalize">{{ $item->service_fees_name }}</span>
+
+                                            <span class="capitalize flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                </svg>
+
+
+                                                {{ $item->service_fees_name }}</span>
                                             <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0"
                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                                 viewBox="0 0 10 6">
@@ -145,6 +157,10 @@
                     <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="faq" role="tabpanel"
                         aria-labelledby="contacts-tab">
                         {{-- faq --}}
+                        <p class="text-bold text-black">Q. Do we offer any VISIT / Inspection Charge for Air Conditioner
+                            Repair Service?</p>
+                        <p class="text-sm mt-2">Ans: No we don't charge any amount to visit your home and quote price for
+                            repair after getting quote you can decide to get repair done or not.</p>
                     </div>
                 </div>
             </div>
