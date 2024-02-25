@@ -34,7 +34,7 @@
         let callingData = () => {
             $.ajax({
                 type: "GET",
-                url: "/searchComplain/"+ $('#search').val(),
+                url: "api/search-complain/"+ $('#search').val(),
                 data: $('#searchForm').serialize(),
                 success: function(response) {
                     let li = $("#searchResults");
