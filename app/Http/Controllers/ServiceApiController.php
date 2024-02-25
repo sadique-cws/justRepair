@@ -13,9 +13,7 @@ class ServiceApiController extends Controller
      */
     public function index()
     {
-        $data = Service::with("requirements")->get();
-
-    
+        $data = Service::with("requirements")->get();    
         return response()->json($data);
     }
 
