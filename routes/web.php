@@ -23,6 +23,7 @@ Route::get("/my-booking", [HomeController::class,"myBooking"])->name("myBooking"
 Route::get("/view/{slug}",[HomeController::class,"viewService"])->name("home.view");
 Route::get("/aboutPage", [HomeController::class,"aboutPage"])->name("aboutPage");
 Route::get("/terms-condition", [HomeController::class,"tandc"])->name("tandc");
+Route::get("/login-required", [HomeController::class,"loginRequired"])->name("loginRequired");
 Route::get("/confirmed_appointment", [HomeController::class,"confirmed_appointment"])->name('confirmed_appointment');
 
     Route::get("/profile", [AuthController::class,"profile"])->name('profile');    

@@ -50,5 +50,8 @@ class HomeController extends Controller
     public function tandc(){
         return view("homepage.terms&condition");
     }
+    public function loginRequired(){
+        return view("homepage.ifNotAuth");
+    }
 
 }

@@ -38,7 +38,11 @@
 
                         `)
                     })
-                }
+                }, 
+                error: function (xhr, status, error) {
+                window.location.href = "{{route('loginRequired')}}"
+            }
+                
             });
         }
         callingAppointment();

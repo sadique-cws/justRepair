@@ -96,8 +96,7 @@
                 }
             },
             error: function (xhr, status, error) {
-                $("#login-register-info").show();
-                console.error('Error fetching profile details:', error);
+                window.location.href = "{{route('loginRequired')}}"
             }
         });
 
