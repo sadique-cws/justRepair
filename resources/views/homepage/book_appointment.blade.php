@@ -1,16 +1,18 @@
 @extends('homepage.layout')
 
 @section('content')
-    <div class="flex px-10 flex-1">
+    <div class="flex md:px-10 px-3 flex-1">
         <form action="" id="createAppointment" method="post" class="flex-1 mb-20">
             <div class="row">
                 <div class="flex mt-3 flex-col">
                     <h6>You are Booking</h6>
                     <div class=" flex">
                         <div class="card-body p-2 flex">
-                            <img src="/icons/ac2.png" height="50px" width="50px" alt="" class="rounded">
+                            <img src="{{asset("uploads/".$service->icon)}}" height="50px" width="50px" alt="" class="rounded">
                             <div class="ml-5">
-                                <h6>Refrigertaor Repair <br> in <b>Repair & Maintenance</b></h6>
+                                <h6>
+                                    <span class="text-xl font-semibold">{{$service->name}}</span>
+                                    <br> in <b>Repair & Maintenance</b></h6>
                             </div>
                         </div>
                     </div>

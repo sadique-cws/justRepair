@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/login", [AuthController::class,"signIn"])->name('login');
 Route::get("/logout", [AuthController::class,"signOut"])->name('logout');
-Route::get("/register", [AuthController::class,"register"])->name('register');
+Route::get("/register", [AuthController::class,"registerForm"])->name('register');
 Route::get("/profile", [AuthController::class,"profile"])->name('profile');
 
 Route::get("/", [HomeController::class,"index"])->name("index");
