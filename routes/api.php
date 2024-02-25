@@ -32,6 +32,8 @@ Route::post('/register', [AuthController::class,"register"]);
 Route::post('/logout', [AuthController::class,"logout"])->middleware('jwt.auth');
 Route::post('/refresh-token', [AuthController::class,"refreshToken"]);
 
+Route::get('searchComplain/{complain_no}',[AppointmentApiController::class,"searchComplain"]);
+
 
 
 Route::get('/profile', function () {
