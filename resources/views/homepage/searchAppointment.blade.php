@@ -10,21 +10,34 @@
             <button type="submit" class="ml-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Search</button>
         </div>
     </form>
-    <!-- Replace the following section with your appointment search results -->
+
     <div class="border-t border-gray-200 pt-4">
-        <h2 class="text-lg font-semibold mb-2">Search Results</h2>
-        <!-- Sample appointment search results (replace with your logic) -->
         <ul id="searchResults">
-            {{-- <li class="mb-2" >
-                <strong>Appointment ID:</strong> #123456<br>
-                <strong>Date:</strong> January 20, 2024<br>
-                <strong>Time:</strong> 10:00 AM<br>
-                <strong>Location:</strong> Your Clinic<br>
-                <!-- Add more appointment details as needed -->
+            {{-- <li class="mb-8 border rounded-lg p-4 shadow-md">
+                <div class="mb-4">
+                    <strong class="text-gray-800">Customer Name:</strong>
+                    <span class="text-gray-600">#123456</span>
+                </div>
+                <div class="mb-4">
+                    <strong class="text-gray-800">Service Name:</strong>
+                    <span class="text-gray-600">Refrigerator Repair</span>
+                </div>
+                <div class="mb-4">
+                    <strong class="text-gray-800">Date:</strong>
+                    <span class="text-gray-600">January 20, 2024</span>
+                </div>
+                <div class="mb-4">
+                    <strong class="text-gray-800">Time:</strong>
+                    <span class="text-gray-600">10:00 AM</span>
+                </div>
+                <div class="mb-4">
+                    <strong class="text-gray-800">Location:</strong>
+                    <span class="text-gray-600">Your Clinic</span>
+                </div>
             </li> --}}
-            <!-- Add more search result items here -->
         </ul>
     </div>
+    
 </div>
 
 
@@ -44,12 +57,28 @@
 
                     liList.forEach((item) => {
                         li.append(`
-                        <li class="mb-2" >
-                            <strong>Appointment ID:</strong> ${item.id}<br>
-                            <strong>Date:</strong> ${item.preferred_date}<br>
-                            <strong>Time:</strong> ${item.preferred_time}<br>
-                            <strong>Location:</strong> ${item.landmark}, ${item.address}, ${item.city}<br>
-                        </li>
+                            <li class="mb-8 border rounded-lg p-4 shadow-md">
+                                <div class="mb-4">
+                                    <strong class="text-gray-800">Customer Name:</strong>
+                                    <span class="text-gray-600">${item.fullname}</span>
+                                </div>
+                                <div class="mb-4">
+                                    <strong class="text-gray-800">Service Name:</strong>
+                                    <span class="text-gray-600">${item.service_id}</span>
+                                </div>
+                                <div class="mb-4">
+                                    <strong class="text-gray-800">Date:</strong>
+                                    <span class="text-gray-600">${item.preferred_date}</span>
+                                </div>
+                                <div class="mb-4">
+                                    <strong class="text-gray-800">Time:</strong>
+                                    <span class="text-gray-600">${item.preferred_time}</span>
+                                </div>
+                                <div class="mb-4">
+                                    <strong class="text-gray-800">Location:</strong>
+                                    <span class="text-gray-600">${item.landmark}, ${item.address}, ${item.city}</span>
+                                </div>
+                            </li>
                          `);
                     });
                 }
@@ -59,6 +88,10 @@
         // Submit form via AJAX
         $("#searchForm").submit(function(e) {
             e.preventDefault();
+            callingData(); // Fetch search results
+        });
+
+        $("#search").keyup(function() {
             callingData(); // Fetch search results
         });
 

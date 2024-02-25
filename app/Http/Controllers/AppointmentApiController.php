@@ -47,8 +47,7 @@ class AppointmentApiController extends Controller
         }
     
         // Fetch appointments
-        $appointments = $query->get();
-    
+        $appointments = $query->get();    
         return response()->json($appointments);
     }
 
@@ -153,16 +152,5 @@ class AppointmentApiController extends Controller
         $searchResults =  Appointment::where("complain_no",$request)->get();
         return response()->json(['data' => $searchResults]);
     }
-
-    // public function searchComplain($request)
-    // {
-    //     // Get the complain number from the request
-    //     $complainNo = $request->input('search');
-
-    //     // Perform the search using the searchComplain method from the Appointment model
-    //     $searchResults = Appointment::where('complain_no', $complainNo)->get();
-
-    //     // Return the search results as JSON
-    // }
 
 }
