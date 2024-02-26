@@ -36,12 +36,16 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            // \App\Http\Middleware\CheckTokenExpiration::class,
+
         ],
 
         'api' => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            // \App\Http\Middleware\CheckTokenExpiration::class,
+
         ],
     ];
 
@@ -68,5 +72,7 @@ class Kernel extends HttpKernel
         // 'admin.jwt' => \App\Http\Middleware\AdminJWTMiddleware::class,
         'jwt.refresh' => \Tymon\JWTAuth\Http\Middleware\RefreshToken::class,
         'auth.redirect' => \App\Http\Middleware\RedirectIfNotAuthenticated::class,
+        'checkTokenExpiration' => \App\Http\Middleware\CheckTokenExpiration::class,
+
     ];
 }

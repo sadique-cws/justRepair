@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Appointment extends Model
 {
@@ -16,7 +17,7 @@ class Appointment extends Model
 
     }
 
-    public function service():hasOne
+    public function services():hasOne
     {
         return $this->hasOne(Service::class,'id','service_id');
     }
