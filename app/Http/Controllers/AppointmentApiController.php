@@ -153,4 +153,18 @@ class AppointmentApiController extends Controller
         return response()->json(['data' => $searchResults]);
     }
 
+    public function updateStatus(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:appointments,id',
+            'status' => 'required|in:accept,reject,process,done,close',
+        ]);
+
+        $appointment = Appointment::findOrFail($request->id);
+        $appointment->status = $request->status;
+        $appointment->save();
+
+        return response()->json(['message' => 'Appointment status updated successfully', "data" => $appointment], 200);
+    }
+
 }

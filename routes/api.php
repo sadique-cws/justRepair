@@ -22,7 +22,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get("/appointment/my-booking", [HomeController::class,"myBookingApi"])->middleware('jwt.auth')->name("appointment.mybooking");
+Route::get("appointment/my-booking", [HomeController::class,"myBookingApi"])->middleware('jwt.auth')->name("appointment.mybooking");
+Route::post('appointment/updateStatus', [AppointmentApiController::class, 'updateStatus'])->name('appointment.updateStatus');
 
 Route::prefix("admin")->group(function () {
     Route::apiResource("service", ServiceApiController::class);

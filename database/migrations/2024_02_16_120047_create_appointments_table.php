@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('landmark')->nullable();
             $table->string('city');
             $table->string('complain_no')->unique();
+            $table->enum('status', ['accept', 'reject', 'process', 'done', 'close'])->default('process');
             $table->timestamps();
         });
     }
