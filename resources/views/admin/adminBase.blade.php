@@ -287,6 +287,15 @@
             </ul>
           </li>
 
+          <li class="nav-item">
+            <a href="{{route('adminLogout')}}" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Logout
+              </p>
+            </a>
+          </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -352,4 +361,3 @@
     @yield('js')
     </body>
     </html>
-    
