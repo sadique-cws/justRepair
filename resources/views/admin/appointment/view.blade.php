@@ -81,7 +81,7 @@
                     type: 'GET',
                     success: function(response) {
                         // Update the table with the response data
-                        $("#service_id").val(response.id)
+                        var service_id = response.services.id;
                         let date = new Date(response.created_at);
                         if (response) {
                             var requirements = JSON.parse(response.requirements);
@@ -152,7 +152,6 @@
                         $('.status-select').change(function() {
                             var appointmentId = $(this).data('id');
                             var newStatus = $(this).val();
-
                             // Update status via AJAX
                             $.ajax({
                                 url: '{{ route('appointment.updateStatus') }}',
@@ -165,24 +164,41 @@
                                     $(".error-msg").text(response.message)
                                     if (response.data.status === "done") {
                                         $("#tablefooter").show();
-
+                                        
                                         $.ajax({
                                             url: '{{ route('servicefee.index') }}',
                                             type: 'GET',
-                                            data:{}
+                                            data:{
+                                                service_id
+                                            },
                                             dataType: 'json',
                                             success: function(response) {
                                                 var select = $('#serviceFeeCalling');
                                                 select.empty();
-                                                $.each(response, function(
-                                                    index, item) {
+                                                $.each(response, function(index, item) {
+                                                let sublist = item.sub_fees;
+                                                select.append($('<option>')
+                                                    .text(item.service_fees_name)
+                                                    .attr('value', item.id)
+                                                    .data('amount', item.service_fees) // Assuming 'service_fee_amount' is the key for fee amount
+                                                );
+                                                $.each(sublist, function(subindex, subitem) {
                                                     select.append($('<option>')
-                                                        .text(
-                                                            item.service_fees_name
-                                                            )
-                                                        .attr('value',item.id)
-                                                        );
-                                                });
+                                                        .text("--" + subitem.service_fees_name)
+                                                        .attr('value', subitem.id)
+                                                        .data('amount', subitem.service_fees) // Assuming 'service_fee_amount' is the key for fee amount
+                                                    );
+                                                })
+                                            });
+
+                                                // add amount 
+                                                $("#serviceFeeCalling").change(function() {
+                                                    var selectedOption = $(this).children("option:selected");
+                                                    var selectedAmount = selectedOption.data("amount");
+
+                                                    $("#serviceFeeAmount").val(selectedAmount);
+                                    })
+                                                
                                             },
                                             error: function(xhr, status,
                                             error) {
