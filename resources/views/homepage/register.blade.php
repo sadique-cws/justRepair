@@ -18,7 +18,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="mobile_no" class="block text-gray-700 text-sm font-bold mb-2">Mobile No.</label>
-                        <input type="text" id="mobile_no" name="mobile_no" placeholder="Ex: 8210461693"
+                        <input type="tel" id="mobile_no" name="mobile_no" placeholder="Ex: 8210461693"
                             class="form-input w-full py-2 px-3 border border-gray-300 rounded-md">
                     </div>
                     <div class="mb-4">
@@ -47,7 +47,7 @@
         $('#register').submit(function(e) {
             e.preventDefault();
             $.ajax({
-                url: '/register',
+                url: '/api/register',
                 type: 'POST',
                 data: $(this).serialize(),
                 success: function(response) {
