@@ -37,68 +37,32 @@
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover text-nowrap">
                                 <tbody id="tableBody">
+
+
+
                                 </tbody>
+                                <tfoot id="tablefooter">
+
+                                    <tr>
+                                        <th colspan="2">Invoice Information</th>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <select name="" class="form-control" id="serviceFeeCalling"></select>
+                                        </th>
+                                        <th>
+                                            <input type="number" class="form-control" id="serviceFeeAmount">
+                                        </th>
+                                    </tr>
+
+                                </tfoot>
                             </table>
 
                         </div>
                         <!-- /.card-body -->
                     </div>
 
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Services Fees</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h2 class="card-title">Insert Here</h2>
-                                        </div>
-                                        <div class="card-body">
-                                            <form id="createServiceFeeForm">
-                                                @csrf
-                                                <div class="mb-3">
 
-                                                    <label for="service_id">Service ID:</label>
-                                                    <input type="text" class="form-control" id="service_id"
-                                                        name="service_id" required>
-                                                </div>
-                                                <div class="mb-3">
-
-                                                    <label for="service_fees_name">Service Fees Name:</label>
-                                                    <input type="text" class="form-control" id="service_fees_name"
-                                                        name="service_fees_name" required>
-                                                </div>
-                                                <div class="mb-3">
-
-                                                    <label for="service_fees">Service Fees:</label>
-                                                    <input type="text" class="form-control" id="service_fees"
-                                                        name="service_fees" required>
-                                                </div>
-                                                <div class="mb-3">
-
-                                                    <label for="parent_id">Parent ID:</label>
-                                                    <select type="text" class="form-control" id="parent_id"
-                                                        name="parent_id">
-
-                                                    </select>
-                                                </div>
-
-                                                <button type="submit">Submit</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="accordion" id="accordionExample">
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.card -->
-                    </div>
                 </div>
 
             </div>
@@ -110,56 +74,15 @@
     @section('js')
         <script>
             $(document).ready(function() {
-
-                console.log("data" + service_id)
-                $.ajax({
-                    url: '{{ route('servicefee.index') }}',
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(response) {
-                        console.log(response)
-                        response.forEach(function(item) {
-                            var accordionItem = `
-                <div class="card">
-                    <div class="card-header" id="heading${item.id}">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link text-capitalize btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse${item.id}" aria-expanded="true" aria-controls="collapse${item.id}">
-                                ${item.service_fees_name}
-                            </button>
-                        </h2>
-                    </div>
-                    <div id="collapse${item.id}" class="collapse" aria-labelledby="heading${item.id}" data-parent="#accordionExample">
-                        <div class="card-body">
-                            <ul class="list-group">
-                            `;
-                            item.sub_fees.forEach(function(subFee) {
-                                accordionItem += `
-                    <li class="list-group-item d-flex justify-content-between"><span>${subFee.service_fees_name}:</span> <span>${subFee.service_fees}</span></li>
-                    `;
-                            });
-                            accordionItem += `
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                `;
-                            $('#accordionExample').append(accordionItem);
-                        });
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(error);
-                    }
-                });
-                // insertion
-
+                $("#tablefooter").hide();
                 // AJAX call to fetch data
                 $.ajax({
                     url: '{{ route('appointment.show', request()->segment(4)) }}', // Update with your controller's URL
                     type: 'GET',
                     success: function(response) {
                         // Update the table with the response data
-                        $("#service_id").val(response.id)
-
+                        var service_id = response.services.id;
+                        let date = new Date(response.created_at);
                         if (response) {
                             var requirements = JSON.parse(response.requirements);
                             var requirementsHtml = '';
@@ -169,11 +92,15 @@
                                 requirementsHtml +=
                                     `<span class="badge bg-success">${requirement}</span> `;
                             });
-                            $(".viewtitle").html(response.name + " Service View")
+                            $(".viewtitle").html(response.fullname + "'s Service View")
                             let tableRows = `
                         <tr> 
                             <th>Id</th>
                             <td>${response.id}</td>
+                        </tr>
+                        <tr> 
+                            <th>Complain No</th>
+                            <td><span class='bg-danger px-2 py-1 rounded'>${response.complain_no}</span></td>
                         </tr>
                         <tr> 
                             <th>Name</th>
@@ -188,58 +115,118 @@
                             <td>${response.services.name}</td>
                         </tr>
                         <tr>
+                            <th>Preferred Date & Time</th>
+                            <td><span class='bg-warning px-2 py-1 rounded '>${response.preferred_date} (${response.preferred_time})</span></td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td>${response.address}, ${response.city}</td>
+                        </tr>
+                        <tr>
                             <th>Requirements</th>
                             <td>${requirementsHtml}</td>
                         </tr>
+                        <tr>
+                            <th>Date</th>
+                            <td>${date.toLocaleString()}</td>
+                        </tr>
+                        <tr>
+                        <th>Status</th>
+                        <td>
+                            <select class="form-control status-select" data-id="${response.id}">
+                                <option value="accept" ${response.status === 'accept' ? 'selected' : ''}>Accept</option>
+                                <option value="reject" ${response.status === 'reject' ? 'selected' : ''}>Reject</option>
+                                <option value="process" ${response.status === 'process' ? 'selected' : ''}>Process</option>
+                                <option value="done" ${response.status === 'done' ? 'selected' : ''}>Done</option>
+                                <option value="close" ${response.status === 'close' ? 'selected' : ''}>Close</option>
+                            </select>
+                            <span class='error-msg text-success text-small'></span>
+                        </td>
+                    </tr>
+
                        `;
                             $('#tableBody').html(tableRows);
                         }
+
+
+                        $('.status-select').change(function() {
+                            var appointmentId = $(this).data('id');
+                            var newStatus = $(this).val();
+                            // Update status via AJAX
+                            $.ajax({
+                                url: '{{ route('appointment.updateStatus') }}',
+                                type: 'POST',
+                                data: {
+                                    id: appointmentId,
+                                    status: newStatus
+                                },
+                                success: function(response) {
+                                    $(".error-msg").text(response.message)
+                                    if (response.data.status === "done") {
+                                        $("#tablefooter").show();
+                                        
+                                        $.ajax({
+                                            url: '{{ route('servicefee.index') }}',
+                                            type: 'GET',
+                                            data:{
+                                                service_id
+                                            },
+                                            dataType: 'json',
+                                            success: function(response) {
+                                                var select = $('#serviceFeeCalling');
+                                                select.empty();
+                                                $.each(response, function(index, item) {
+                                                let sublist = item.sub_fees;
+                                                select.append($('<option>')
+                                                    .text(item.service_fees_name)
+                                                    .attr('value', item.id)
+                                                    .data('amount', item.service_fees) // Assuming 'service_fee_amount' is the key for fee amount
+                                                );
+                                                $.each(sublist, function(subindex, subitem) {
+                                                    select.append($('<option>')
+                                                        .text("--" + subitem.service_fees_name)
+                                                        .attr('value', subitem.id)
+                                                        .data('amount', subitem.service_fees) // Assuming 'service_fee_amount' is the key for fee amount
+                                                    );
+                                                })
+                                            });
+
+                                                // add amount 
+                                                $("#serviceFeeCalling").change(function() {
+                                                    var selectedOption = $(this).children("option:selected");
+                                                    var selectedAmount = selectedOption.data("amount");
+
+                                                    $("#serviceFeeAmount").val(selectedAmount);
+                                    })
+                                                
+                                            },
+                                            error: function(xhr, status,
+                                            error) {
+                                                console.error(error);
+                                            }
+                                        });
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error(xhr.responseText);
+                                }
+                            });
+                        });
                     },
                     error: function(xhr, status, error) {
                         console.error(xhr.responseText);
                     }
-                    
+
+
+
+
                 });
 
-                $.ajax({
-                    url: '{{ route('servicefee.index') }}',
-                    type: 'GET',
-                    success: function(response) {
-                        // Populate the select dropdown with service fees
-                        var select = $('#parent_id');
-                        select.empty();
-                        select.append($('<option>').text('Main Category').attr('value', ""));
-                        $.each(response, function(index, item) {
-                            select.append($('<option>').text(item.service_fees_name).attr('value',
-                                item.id));
-                        });
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(error);
-                    }
-                });
 
-                // AJAX call to delete item
-                $(document).on('click', '.deleteBtn', function() {
-                    var id = $(this).data('id');
-                    $.ajax({
-                        url: '/api/admin/service/' + id,
-                        type: 'DELETE',
-                        success: function(response) {
-                            window.location.href = "{{ route('admin.service.manage') }}"
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(xhr.responseText);
-                        }
-                    });
-                });
 
-                // AJAX call to edit item
-                $(document).on('click', '.editBtn', function() {
-                    var id = $(this).data('id');
-                });
-                
-               
+
+
+
             });
         </script>
     @endsection
