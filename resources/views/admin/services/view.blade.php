@@ -112,13 +112,14 @@
             $(document).ready(function() {
                 let service_id = @json($service->id);
 
-                $.ajax({
+                const CallingServiceFees = () => {
+                    $.ajax({
                     url: '{{route('servicefee.index')}}',
                     type: 'GET',
                     dataType: 'json',
                     data:{"service_id":service_id},
                     success: function(response) {
-                        console.log(response)
+                        $('#accordionExample').empty();
                         response.forEach(function(item) {
                             var accordionItem = `
                 <div class="card">
@@ -151,6 +152,11 @@
                         console.error(error);
                     }
                 });
+
+                
+                }
+
+                CallingServiceFees();
                 // insertion
                 $('#createServiceFeeForm').submit(function(e) {
                     e.preventDefault();
@@ -162,6 +168,7 @@
                         success: function(response) {
                             console.log(response);
                             alert('Service Fee created successfully.');
+                            CallingServiceFees();
                             // Optionally, you can redirect the user to another page after successful creation
                         },
                         error: function(xhr, status, error) {
