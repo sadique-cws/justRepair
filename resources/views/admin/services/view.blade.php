@@ -128,7 +128,7 @@
                             <button class="btn btn-link text-capitalize btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse${item.id}" aria-expanded="true" aria-controls="collapse${item.id}">
                                 ${item.service_fees_name}
                             </button>
-                        </h2>
+                         </h2>
                     </div>
                     <div id="collapse${item.id}" class="collapse" aria-labelledby="heading${item.id}" data-parent="#accordionExample">
                         <div class="card-body">
