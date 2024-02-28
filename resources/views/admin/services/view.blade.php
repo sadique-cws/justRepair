@@ -110,10 +110,13 @@
     @section('js')
         <script>
             $(document).ready(function() {
+                let service_id = @json($service->id);
+
                 $.ajax({
                     url: '{{route('servicefee.index')}}',
                     type: 'GET',
                     dataType: 'json',
+                    data:{"service_id":service_id},
                     success: function(response) {
                         console.log(response)
                         response.forEach(function(item) {
@@ -220,6 +223,7 @@
                     url: '{{ route('servicefee.index') }}',
                     type: 'GET',
                     dataType: 'json',
+                    data:{"service_id": service_id},
                     success: function(response) {
                         // Populate the select dropdown with service fees
                         var select = $('#parent_id');
