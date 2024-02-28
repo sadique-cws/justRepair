@@ -14,33 +14,6 @@
         </div>
     </div>
 
-<script>
-    $(document).ready(function() {
-        let callingData = () => {
-            $.ajax({
-                type: "GET",
-                url: {{route('admin.appointment.generate')}},
-                data: $('#calling_invoice').serialize(),
-                success: function(response) {
-                    let li = $("#calling_invoice");
-                    li.empty();
-
-                    let liList = response.data;
-
-                    liList.forEach((item) => {
-                        li.append(`
-                                <p>Invoice Number: </p>
-                                <p>Date:</p>
-                                <p>Amount:</p>
-                            `);
-                    });
-                }
-            });
-        };
-
-        callingData();
-    });
-</script>
 
 
 

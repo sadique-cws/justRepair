@@ -17,13 +17,12 @@
 
 <body>
 
-    <div class="bg-slate-50 border-b border-slate-200 flex-1 shadow">
+    <div class="bg-white border-b border-slate-200 flex-1 shadow">
         <div class="flex flex-1 justify-center px-3 md:px-10">
             <div class="px-5 md:px-[10%]  w-full">
                 <div class="flex flex-1 justify-between items-center">
-                    <a href="{{ route('index') }}" class="lg:w-1/12 w-2/12 p-4 flex gap-2 items-center text-slate-800">
-                        <img src="{{ asset('images/logo.jpeg') }}" />
-                        <h2 class="font-bold text-xl font-sans">JustRepair</h2>
+                    <a href="{{ route('index') }}" class="lg:w-2/12 w-6/12  text-slate-800">
+                        <img src="{{ asset('images/logo.png') }}" class="" />
                     </a>
                     <button
                         class="text-black hover:bg-slate-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"

@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Appointment;
+use App\Models\Invoice;
+use PDF;
 class AdminController extends Controller
 {
     public function dashboard(){
@@ -44,8 +46,17 @@ class AdminController extends Controller
         return redirect()->route("adminLogin")->with("error","Logout Successfully");
     }
 
-    public function viewInvoice(){
-        return view('admin.viewInvoice');
+    public function viewInvoice(Request $request){
+        
+       
+        $invoiceData = Invoice::create([
+            'appointment_id' => $request->appointment_id,
+            'servicefees_id' => $request->servicefees_id,
+            'total_amount' => $request->total_amount,
+        ]);
+        $invoiceId = $invoiceData->id;
+
+        return view('admin.viewInvoice', compact("invoiceId", "invoiceData"));
     }
 
     

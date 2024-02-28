@@ -9,38 +9,26 @@ use PDF;
 
 class InvoiceController extends Controller
 {
-    public function generateInvoice()
+   
+    public function downloadInvoice(Request $request)
     {
-        // $query = Appointment::query();
-        // $appointments = $query->get();
+        $html = '<html><head><link rel="stylesheet" href="' . asset('path/to/your/styles.css') . '"></head><body>' . $request->invoiceContent . '</body></html>';
 
-        // $invoiceData = Invoice::create([
-        //     'id' => $appointments->id(),
-        //     'appointment_id' => $appointments->id(),
-        //     'service_id' => $appointments->service_id(),
-        //     'total_amount' => $appointments->total_amount(),
-        // ]);
-
-         // Generate PDF
-         
-        $pdf = PDF::loadView('admin.invoice', $invoiceData);
-
-         // Download PDF
-
-        return $pdf->download('invoice.pdf');
-        // return response()->json(['message' => 'Invoice Downloaded']);
-    }
-
-    public function viewInvoice(string $id)
-    {
-        $appointment = Appointment::where("id",$id)->with("services")->first();
-        $invoiceData = Invoice::create([
-                'appointment_id' => $appointments->id(),
-                'service_id' => $appointments->service_id(),
-                'total_amount' => $appointments->total_amount(),
-            ]);
-            $invoiceData->save();
+        $pdf = PDF::loadHTML($html);
+        $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']); // Set PDF options
+        $pdf->save(public_path('invoices/invoice.pdf'));
     
+
+        return response()->json([
+            'downloadUrl' => asset('invoices/invoice.pdf'),
+        ]);
+
+    }
+    public function viewInvoice(Request $request, $id)
+    {
+        $invoiceData = Invoice::where("id", $id)->with('appointment')->with('serviceFees')->first();
+
+
         return response()->json($invoiceData);
     }
 

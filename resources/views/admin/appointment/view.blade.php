@@ -41,6 +41,8 @@
 
 
                                 </tbody>
+                                <form method="post" action="{{ route('admin.invoice') }}">
+                                    @csrf
                                 <tfoot id="tablefooter">
 
                                     <tr>
@@ -48,25 +50,23 @@
                                     </tr>
                                     <tr>
                                         <th>
-                                            <select name="" class="form-control" id="serviceFeeCalling"></select>
+                                            <input type="text" name="appointment_id" value="{{request()->segment(4)}}">
+                                            <select name="servicefees_id" class="form-control" id="serviceFeeCalling"></select>
                                         </th>
                                         <th>
-                                            <input type="number" class="form-control" id="serviceFeeAmount">
+                                            <input type="number" class="form-control" name="total_amount" id="serviceFeeAmount">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th><input type="submit" class="btn btn-sm btn-success" value="Proceed To Invoice">
                                         </th>
                                     </tr>
                                 </tfoot>
+                                </form>
                             </table>
 
                         </div>
-                        <!-- /.card-body -->
                     </div>
-                    <div class="card-tools mb-4">
-                        <a href="{{ route('admin.invoice') }}" class="btn btn-sm btn-success">Proceed To Invoice</a>
-                       
-                    </div>
-
-
-
                 </div>
 
             </div>
@@ -85,6 +85,7 @@
                     type: 'GET',
                     success: function(response) {
                         // Update the table with the response data
+                    
                         var service_id = response.services.id;
                         let date = new Date(response.created_at);
                         if (response) {

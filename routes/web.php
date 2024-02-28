@@ -64,11 +64,14 @@ Route::prefix("admin")->group(function () {
                     Route::get('/view/{id}', 'show')->name("admin.appointment.view");
                 });
             });
+            Route::post("/appointment/generate/invoice",[AdminController::class,"viewInvoice"])->name("admin.invoice");
+
+
+
     });
     });
 });
 
 Route::get("/{slug}/appointment",[HomeController::class,"bookAppointment"])->name("home.bookAppointment");
-Route::get("/invoice",[AdminController::class,"viewInvoice"])->name("admin.invoice");
-Route::get("/invoice-generate",[InvoiceController::class,"generateInvoice"])->name("admin.generate");
+
 

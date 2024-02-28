@@ -48,3 +48,4 @@ Route::get('/profile', function () {
 })->middleware('jwt.auth');
 
 Route::get('/invoice/{id}',[InvoiceController::class,"viewInvoice"]);
+Route::post('/invoice/download', [InvoiceController::class, 'downloadInvoice'])->name('invoice.download');
