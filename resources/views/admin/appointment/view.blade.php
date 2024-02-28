@@ -54,13 +54,17 @@
                                             <input type="number" class="form-control" id="serviceFeeAmount">
                                         </th>
                                     </tr>
-
                                 </tfoot>
                             </table>
 
                         </div>
                         <!-- /.card-body -->
                     </div>
+                    <div class="card-tools mb-4">
+                        <a href="{{ route('admin.invoice') }}" class="btn btn-sm btn-success">Proceed To Invoice</a>
+                       
+                    </div>
+
 
 
                 </div>
@@ -164,44 +168,92 @@
                                     $(".error-msg").text(response.message)
                                     if (response.data.status === "done") {
                                         $("#tablefooter").show();
-                                        
+
                                         $.ajax({
                                             url: '{{ route('servicefee.index') }}',
                                             type: 'GET',
-                                            data:{
+                                            data: {
                                                 service_id
                                             },
                                             dataType: 'json',
                                             success: function(response) {
-                                                var select = $('#serviceFeeCalling');
-                                                select.empty();
-                                                $.each(response, function(index, item) {
-                                                let sublist = item.sub_fees;
-                                                select.append($('<option>')
-                                                    .text(item.service_fees_name)
-                                                    .attr('value', item.id)
-                                                    .data('amount', item.service_fees) // Assuming 'service_fee_amount' is the key for fee amount
-                                                );
-                                                $.each(sublist, function(subindex, subitem) {
-                                                    select.append($('<option>')
-                                                        .text("--" + subitem.service_fees_name)
-                                                        .attr('value', subitem.id)
-                                                        .data('amount', subitem.service_fees) // Assuming 'service_fee_amount' is the key for fee amount
+                                                var select = $(
+                                                    '#serviceFeeCalling'
                                                     );
-                                                })
-                                            });
+                                                select.empty();
+                                                $.each(response, function(
+                                                    index, item) {
+                                                    let sublist =
+                                                        item
+                                                        .sub_fees;
+                                                    select.append($(
+                                                            '<option>'
+                                                            )
+                                                        .text(
+                                                            item
+                                                            .service_fees_name
+                                                            )
+                                                        .attr(
+                                                            'value',
+                                                            item
+                                                            .id)
+                                                        .data(
+                                                            'amount',
+                                                            item
+                                                            .service_fees
+                                                            ) // Assuming 'service_fee_amount' is the key for fee amount
+                                                    );
+                                                    $.each(sublist,
+                                                        function(
+                                                            subindex,
+                                                            subitem
+                                                            ) {
+                                                            select
+                                                                .append(
+                                                                    $(
+                                                                        '<option>')
+                                                                    .text(
+                                                                        "--" +
+                                                                        subitem
+                                                                        .service_fees_name
+                                                                        )
+                                                                    .attr(
+                                                                        'value',
+                                                                        subitem
+                                                                        .id
+                                                                        )
+                                                                    .data(
+                                                                        'amount',
+                                                                        subitem
+                                                                        .service_fees
+                                                                        ) // Assuming 'service_fee_amount' is the key for fee amount
+                                                                );
+                                                        })
+                                                });
 
                                                 // add amount 
-                                                $("#serviceFeeCalling").change(function() {
-                                                    var selectedOption = $(this).children("option:selected");
-                                                    var selectedAmount = selectedOption.data("amount");
+                                                $("#serviceFeeCalling")
+                                                    .change(function() {
+                                                        var selectedOption =
+                                                            $(this)
+                                                            .children(
+                                                                "option:selected"
+                                                                );
+                                                        var selectedAmount =
+                                                            selectedOption
+                                                            .data(
+                                                                "amount"
+                                                                );
 
-                                                    $("#serviceFeeAmount").val(selectedAmount);
-                                    })
-                                                
+                                                        $("#serviceFeeAmount")
+                                                            .val(
+                                                                selectedAmount
+                                                                );
+                                                    })
+
                                             },
                                             error: function(xhr, status,
-                                            error) {
+                                                error) {
                                                 console.error(error);
                                             }
                                         });
@@ -217,15 +269,7 @@
                         console.error(xhr.responseText);
                     }
 
-
-
-
                 });
-
-
-
-
-
 
             });
         </script>

@@ -44,5 +44,9 @@ class AdminController extends Controller
         return redirect()->route("adminLogin")->with("error","Logout Successfully");
     }
 
+    public function viewInvoice(){
+        return view('admin.viewInvoice');
+    }
+
     
 }
