@@ -74,11 +74,10 @@
                 success: function(response) {
                     localStorage.setItem('token', response.token);
                     if (response.isAdmin) {
-                        window.location.href =
-                        '{{ route('admin.dashboard') }}'; // Redirect to admin panel
+                        window.location.href = '{{ route('admin.dashboard') }}'; // Redirect to admin panel
                     } else {
-                        window.location.href =
-                        '{{ route('profile') }}'; // Redirect to user profile or dashboard
+                        alert("hello")
+                        window.location.href = '{{ route('profile') }}'; // Redirect to user profile or dashboard
                     }
                 },
                 error: function(xhr, status, error) {
