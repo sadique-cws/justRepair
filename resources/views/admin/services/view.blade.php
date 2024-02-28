@@ -110,12 +110,16 @@
     @section('js')
         <script>
             $(document).ready(function() {
-                $.ajax({
+                let service_id = @json($service->id);
+
+                const CallingServiceFees = () => {
+                    $.ajax({
                     url: '{{route('servicefee.index')}}',
                     type: 'GET',
                     dataType: 'json',
+                    data:{"service_id":service_id},
                     success: function(response) {
-                        console.log(response)
+                        $('#accordionExample').empty();
                         response.forEach(function(item) {
                             var accordionItem = `
                 <div class="card">
@@ -124,7 +128,7 @@
                             <button class="btn btn-link text-capitalize btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse${item.id}" aria-expanded="true" aria-controls="collapse${item.id}">
                                 ${item.service_fees_name}
                             </button>
-                        </h2>
+                         </h2>
                     </div>
                     <div id="collapse${item.id}" class="collapse" aria-labelledby="heading${item.id}" data-parent="#accordionExample">
                         <div class="card-body">
@@ -148,6 +152,11 @@
                         console.error(error);
                     }
                 });
+
+                
+                }
+
+                CallingServiceFees();
                 // insertion
                 $('#createServiceFeeForm').submit(function(e) {
                     e.preventDefault();
@@ -159,6 +168,7 @@
                         success: function(response) {
                             console.log(response);
                             alert('Service Fee created successfully.');
+                            CallingServiceFees();
                             // Optionally, you can redirect the user to another page after successful creation
                         },
                         error: function(xhr, status, error) {
@@ -220,6 +230,7 @@
                     url: '{{ route('servicefee.index') }}',
                     type: 'GET',
                     dataType: 'json',
+                    data:{"service_id": service_id},
                     success: function(response) {
                         // Populate the select dropdown with service fees
                         var select = $('#parent_id');

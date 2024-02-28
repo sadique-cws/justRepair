@@ -16,7 +16,8 @@ class ServiceController extends Controller
     }
 
     public function view($id){
-        return view("admin.services.view");
+        $service = Service::where("slug",$id)->first();
+        return view("admin.services.view",compact("service"));
     }
 
     
