@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Appointment;
 use App\Models\Invoice;
-use PDF;
 class AdminController extends Controller
 {
     public function dashboard(){
