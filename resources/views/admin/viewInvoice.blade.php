@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Invoice</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    </script>
 </head>
 
-<body class="bg-gray-100">
-    <div class="max-w-4xl mx-auto bg-white p-8 mt-8 rounded shadow-md " id="invoiceContent">
+<body class="bg-gray-100" >
+    <div class="max-w-4xl mx-auto bg-white p-8 mt-8 rounded shadow-md " id="body">
         <div class="flex justify-between items-center mb-8 flex-col md:flex-row">
             <img src="{{ asset('images/logo.png') }}" alt="Company Logo" class="w-auto h-24">
             <div class="text-right">
@@ -72,10 +76,37 @@
         </table>
 
         <div class="flex justify-end mt-4">
-            <button id="printButton"
+            <button id="printButton" onclick="window.print()"
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">Print</button>
-            <button id="downloadButton"
+
+                
+            <button id="downloadButton" onclick="downloadFunction()"
                 class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Download</button>
+
+                <script>
+
+                    function hideBtns(){
+                            $("#printButton").hide();
+                            $("#downloadButton").hide();
+                    }
+                    function showBtn(){
+                            $("#printButton").show();
+                            $("#downloadButton").show();
+                    }
+                    function downloadFunction() {
+                        hideBtns();
+                   const element = document.getElementById('body');
+                   const formattedDate = new Date().toLocaleDateString('en-GB').replace(/\//g, '-');
+                   const options = {
+                       filename: 'invoice_' + formattedDate + '.pdf',
+                       // image: { type: 'jpeg', quality: 1.0 },
+                       html2canvas: { scale: 2 },
+                       jsPDF: {format: 'a4' }
+                   };
+                   html2pdf(element, options);
+                   showBtn();
+               }
+           </script>
            
 
 
@@ -83,7 +114,6 @@
 
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         // Your JavaScript code here
         $(document).ready(function() {
@@ -129,28 +159,10 @@
 
 
                         // Print button
-                        $('#printButton').on('click', function() {
-                            
-                            window.print();
-                        });
+                       
 
                         // Download PDF button
-                        $('#downloadButton').on('click', function() {
-                        let invoiceContent = $('#invoiceContent').html(); // Get the HTML content of the invoice
-                            console.log(invoiceContent)
-                $.ajax({
-                    type: "POST",
-                    url: '/api/invoice/download',
-                    data: {
-                        invoiceContent: invoiceContent
-                    },
-                    success: function(response) {
-                        // Redirect to the PDF download link
-                        // alert(response.data)
-                        window.location.href = response.downloadUrl;
-                    }
-                });
-            });
+                       
 
                     }
                 });

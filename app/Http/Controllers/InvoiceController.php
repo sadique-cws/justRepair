@@ -5,29 +5,42 @@ use Illuminate\Http\Request;
 use App\Models\Appointment;
 use App\Models\Invoice;
 use PDF;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 
 class InvoiceController extends Controller
 {
    
-    public function downloadInvoice(Request $request)
-    {
-        $html = '<html><head><link rel="stylesheet" href="' . asset('path/to/your/styles.css') . '"></head><body>' . $request->invoiceContent . '</body></html>';
+    public function downloadInvoicePdf(Request $request)
+{
+    // Retrieve the HTML content from the request
+    $htmlContent = $request->input('invoiceContent');
 
-        $pdf = PDF::loadHTML($html);
-        $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']); // Set PDF options
-        $pdf->save(public_path('invoices/invoice.pdf'));
-    
+    // // Create an instance of Dompdf with options
+    // $options = new Options();
+    // $options->set('isHtml5ParserEnabled', true);
+    // $options->set('isPhpEnabled', true);
 
-        return response()->json([
-            'downloadUrl' => asset('invoices/invoice.pdf'),
-        ]);
+    $dompdf = new Dompdf();
 
-    }
+
+    // Load the HTML content
+    $dompdf->loadHtml($htmlContent);
+
+    // (Optional) Set the paper size and orientation
+    $dompdf->setPaper('A4', 'portrait');
+
+    // Render the HTML content to PDF
+    $dompdf->render();
+
+    return $dompdf->stream("document.pdf");
+
+}
+
     public function viewInvoice(Request $request, $id)
     {
         $invoiceData = Invoice::where("id", $id)->with('appointment')->with('serviceFees')->first();
-
 
         return response()->json($invoiceData);
     }
