@@ -1,5 +1,14 @@
 @extends('homepage.layout')
 
+@section("title")
+{{"Terms & Conditions - " . env("APP_NAME") . " | Book Expert Home Appalince Online | Purnea."}}
+@endsection
+
+@section("description", "Welcome to our website. If you continue to browse and use this website or our web
+application (“JustRepair) you agree to comply with and be bound by the following terms and conditions
+of use, which together with our privacy policy govern “JustRepair” (Owner of JustRepair Group) relationship with
+you in relation to this website and the JustRepair App and the Services provided. ")
+
 @section('content')
     <div class=" bg-gray-100 py-10 px-4 sm:px-6 lg:px-10 xl:px-16 mb-10">
         <div class="text-center">

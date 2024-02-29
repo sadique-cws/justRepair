@@ -1,8 +1,18 @@
 @extends('homepage.layout')
 
+
+
+@section("title")
+{{"Track Appointment - " . env("APP_NAME") . " | Book Expert Home Appalince Online | Purnea."}}
+@endsection
+
+@section("description", "Track your repair appointment with JustRepair. Enter your booking details and get real-time updates on the status of your repair service. ")
+
+
+
 @section('content')
     <div class="max-w-lg mx-auto bg-white p-8 rounded shadow mt-5">
-        <h1 class="text-2xl font-bold mb-4">Search Appointments</h1>
+        <h1 class="text-2xl font-bold mb-4">Track Your Appointments</h1>
         <form action="#" method="GET" id="searchForm">
             <div class="flex mb-4">
                 <input type="text" name="search" id="search" class="w-full border-gray-300 rounded-md p-2"

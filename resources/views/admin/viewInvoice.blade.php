@@ -42,7 +42,7 @@
                 <p class="text-gray-700"><span class="font-semibold">Date:</span> <span id="invoiceDate">January 28,
                         2024</span></p>
                 <p class="text-gray-700"><span class="font-semibold">Due Date:</span> February 28, 2024</p>
-                <p class="text-gray-700"><span class="font-semibold">Amount:</span> ₹<span
+                <p class="text-gray-700"><span class="font-semibold">Amount:</span><span
                         id="invoiceAmount">500.00</span></p>
             </div>
         </div>

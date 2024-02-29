@@ -1,5 +1,12 @@
 @extends('homepage.layout')
 
+@section("title")
+{{" Login Required - " . env("APP_NAME") . " | Book Expert Home Appalince Online | Purnea."}}
+@endsection
+
+@section("description", "This page requires you to be logged in to access its content. Log in to your JustRepair account to view exclusive offers, manage your appointments, and enjoy personalized repair services.")
+
+
 @section('content')
 
 <div id="login-register-info" class=" h-[90vh] bg-gradient-to-r from-orange-200 to-pink-200 text-blue-800 p-4 rounded-lg">

@@ -1,5 +1,12 @@
 @extends('homepage.layout')
 
+@section("title")
+{{$service->name . "-" . env("APP_NAME") . " | Book Expert Home Appalince Online | Purnea."}}
+@endsection
+
+@section("description", $service->description)
+
+
 @section('content')
     <div class="flex flex-col">
         <div class="w-full">

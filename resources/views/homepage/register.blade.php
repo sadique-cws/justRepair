@@ -1,5 +1,13 @@
 @extends('homepage.layout')
 
+@section("title")
+{{"Create an Account - " . env("APP_NAME") . " | Book Expert Home Appalince Online | Purnea."}}
+@endsection
+
+@section("description", "Sign up for an account with JustRepair to schedule repair services for your appliances. Join now and enjoy hassle-free repair solutions.")
+
+
+
 @section('content')
    <div class=" mt-5">
         <div class="flex justify-center">

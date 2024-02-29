@@ -1,4 +1,10 @@
 @extends('homepage.layout')
+
+@section("title", "Confirmed Appointment Successfully - JustRepair | Book Expert Home Appalince Online | Purnea.")
+
+@section("description", "Confirm your scheduled repair service appointment with JustRepair. Review the details of your appointment and proceed to confirm to finalize your booking.")
+
+
 @section('content')
 <div class="flex flex-col justify-center items-center mt-8">
     <div class="bg-white p-4 rounded-lg shadow-md max-w-md w-full">

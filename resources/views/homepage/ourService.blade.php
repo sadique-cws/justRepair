@@ -1,5 +1,12 @@
 @extends('homepage.layout')
 
+@section("title")
+{{" Our Services List - " . env("APP_NAME") . " | Book Expert Home Appalince Online | Purnea."}}
+@endsection
+
+@section("description", "Explore the wide range of repair services offered by JustRepair. From ACs to refrigerators, we provide expert repair solutions for all your home appliances.")
+
+
 @section('content')
     <div class=" mx-auto px-5 py-10">
         <div class="flex items-center gap-5 flex-1">
@@ -8,6 +15,30 @@
 
                 <div class="grid grid-cols-1 gap-2" id="serviceList">
                     <!-- Services will be loaded here dynamically -->
+                    <div class="animate-pulse bg-gray-200 rounded-lg shadow-md p-4">
+                        <div class="w-8 h-8 bg-gray-300 rounded-full mb-2"></div>
+                        <div class="h-4 bg-gray-300 rounded w-3/4"></div>
+                    </div>
+                    <div class="animate-pulse bg-gray-200 rounded-lg shadow-md p-4">
+                        <div class="w-8 h-8 bg-gray-300 rounded-full mb-2"></div>
+                        <div class="h-4 bg-gray-300 rounded w-3/4"></div>
+                    </div>
+                    <div class="animate-pulse bg-gray-200 rounded-lg shadow-md p-4">
+                        <div class="w-8 h-8 bg-gray-300 rounded-full mb-2"></div>
+                        <div class="h-4 bg-gray-300 rounded w-3/4"></div>
+                    </div>
+                    <div class="animate-pulse bg-gray-200 rounded-lg shadow-md p-4">
+                        <div class="w-8 h-8 bg-gray-300 rounded-full mb-2"></div>
+                        <div class="h-4 bg-gray-300 rounded w-3/4"></div>
+                    </div>
+                    <div class="animate-pulse bg-gray-200 rounded-lg shadow-md p-4">
+                        <div class="w-8 h-8 bg-gray-300 rounded-full mb-2"></div>
+                        <div class="h-4 bg-gray-300 rounded w-3/4"></div>
+                    </div>
+                    <div class="animate-pulse bg-gray-200 rounded-lg shadow-md p-4">
+                        <div class="w-8 h-8 bg-gray-300 rounded-full mb-2"></div>
+                        <div class="h-4 bg-gray-300 rounded w-3/4"></div>
+                    </div>
                 </div>
             </div>
            

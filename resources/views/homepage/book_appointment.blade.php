@@ -1,5 +1,11 @@
 @extends('homepage.layout')
 
+
+@section("title", "Book Appointment - JustRepair | Book Expert Home Appalince Online | Purnea.")
+
+@section("description", "Schedule a repair service appointment with JustRepair for your appliances. Choose your preferred date and time, and our experts will take care of the rest.")
+
+
 @section('content')
     <div class="flex md:px-10 px-3 flex-1">
         <form action="" id="createAppointment" method="post" class="flex-1 mb-20">

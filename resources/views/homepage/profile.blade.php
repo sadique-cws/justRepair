@@ -1,5 +1,14 @@
 @extends('homepage.layout')
 
+
+@section("title")
+{{" Our Profile - " . env("APP_NAME") . " | Book Expert Home Appalince Online | Purnea."}}
+@endsection
+
+@section("description", "View and manage your appointment list with JustRepair. Keep track of your scheduled repair services and make changes as needed.")
+
+
+
 @section('content')
 
 <section class="">

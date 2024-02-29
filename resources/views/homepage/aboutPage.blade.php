@@ -1,5 +1,11 @@
 @extends('homepage.layout')
 
+
+@section("title", "About Us - JustRepair | Book Expert Home Appalince Online | Purnea.")
+
+@section("description", "Learn more about JustRepair and our commitment to providing high-quality repair services for your appliances. Discover our team, our values, and our dedication to customer satisfaction.")
+
+
 @section('content')
     <!-- About Us Section -->
     <div class="bg-gray-100 py-10 px-4 sm:px-6 lg:px-10 xl:px-16">
@@ -42,7 +48,7 @@
       
           <!-- Add contact details here -->
           <ul class="mt-6 list-disc list-inside text-gray-500">
-            <li>Phone: +91 6202067099</li>
+            <li>Phone: +91 72-800-800-80</li>
             <li>Email: <a href="mailto:info@electronicsrepair.com" class="text-blue-500 hover:text-blue-700">info@JustRepairepair.com</a></li>
             <li>Address: 123 Line Bazar, Purnea , Bihar-854301</li>
           </ul>
