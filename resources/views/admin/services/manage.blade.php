@@ -77,7 +77,7 @@
         $(document).ready(function() {
     // AJAX call to fetch data
     $.ajax({
-        url: "{{route('service.index')}}", // Update with your controller's URL
+        url: "{{route('service.index')}}", // Update with your controller's URL here:
         type: 'GET',
         success: function(response) {
             // Update the table with the response data
@@ -89,7 +89,7 @@
                         <td>${row.id}</td>
                         <td>${row.name}</td>
                         <td><img src='/uploads/${row.icon}' width='50px'/></td>
-                        <td>${row.description.substr(0,50)}...</td>
+                        <td>${row.description.substr(0,50)}...</td> 
                         <td> <a href='/admin/service/view/${row.slug}'class='btn btn-warning'>View</a> </td>
                         </tr>`;
                 });
