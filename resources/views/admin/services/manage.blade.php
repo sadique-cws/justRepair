@@ -77,7 +77,7 @@
         $(document).ready(function() {
     // AJAX call to fetch data
     $.ajax({
-        url: "{{route('service.index')}}", // Update with your controller's URL
+        url: "{{route('service.index')}}", // Update with your controller's URL here:
         type: 'GET',
         success: function(response) {
             // Update the table with the response data
