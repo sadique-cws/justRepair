@@ -112,6 +112,7 @@
             $(document).ready(function() {
                 let service_id = @json($service->id);
 
+                // service fee calling here
                 const CallingServiceFees = () => {
                     $.ajax({
                         url: '{{ route('servicefee.index') }}',
@@ -130,7 +131,7 @@
                             <button class="btn btn-link text-capitalize btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse${item.id}" aria-expanded="true" aria-controls="collapse${item.id}">
                                 ${item.service_fees_name}
                             </button>
-                         </h2>
+                        </h2>
                     </div>
                     <div id="collapse${item.id}" class="collapse" aria-labelledby="heading${item.id}" data-parent="#accordionExample">
                         <div class="card-body">
@@ -138,8 +139,44 @@
                             `;
                                 item.sub_fees.forEach(function(subFee) {
                                     accordionItem += `
-                    <li class="list-group-item d-flex justify-content-between"><span>${subFee.service_fees_name}:</span> <span>${subFee.service_fees}</span></li>
-                    `;
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>${subFee.service_fees_name}:</span>
+                                <span>
+                                    <span>₹${subFee.service_fees}</span>
+                                    <button class="btn btn-sm btn-primary ml-2 edit-btn" data-id="${subFee.id}" data-toggle="modal" data-target="#editServiceFeeModal_${subFee.id}">Edit</button>
+                                </span>
+
+                                <!-- Edit Modal -->
+                                <div class="modal fade" id="editServiceFeeModal_${subFee.id}" tabindex="-1" role="dialog" aria-labelledby="editServiceFeeModalLabel_${subFee.id}" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="editServiceFeeModalLabel_${subFee.id}">Edit Service Fee</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="post" id="editServiceFeeForm_${subFee.id}">
+                                                    @csrf
+                                                    @method('put')
+                                                    <input type="hidden" id="editServiceFeeId_${subFee.id}" name="id" value="${subFee.id}">
+                                                    <div class="form-group">
+                                                        <label for="editServiceFeeName_${subFee.id}">Service Fee Name</label>
+                                                        <input type="text" class="form-control" id="editServiceFeeName_${subFee.id}" name="service_fees_name" value="${subFee.service_fees_name}" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="editServiceFeeAmount_${subFee.id}">Amount</label>
+                                                        <input type="text" class="form-control" id="editServiceFeeAmount_${subFee.id}" name="service_fees" value="${subFee.service_fees}" required>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Update</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>    
+                            </li>
+                            `;
                                 });
                                 accordionItem += `
                             </ul>
@@ -148,18 +185,74 @@
                 </div>
                 `;
                                 $('#accordionExample').append(accordionItem);
+
+                                // **Moving the edit logic inside the loop to ensure subFee.id is accessible**
+                                $(document).on('submit', '#editServiceFeeForm_' + subFee.id,
+                                    function(e) {
+                                        e
+                                    .preventDefault(); // Prevent the default form submission
+
+                                        const serviceFeeId = $('#editServiceFeeId_' + subFee
+                                            .id).val(); // Get the service fee ID
+                                        const updateUrl =
+                                            `/api/admin/servicefee/${serviceFeeId}`; // Update API URL for service fee
+
+                                        let name = $('#editServiceFeeName_' + subFee.id)
+                                            .val(); // Get the updated service fee name
+                                        let amount = $('#editServiceFeeAmount_' + subFee.id)
+                                            .val(); // Get the updated service fee amount
+
+                                        // Prepare the data to be sent
+                                        let formData = {
+                                            service_fees_name: name,
+                                            service_fees: amount
+                                        };
+                                        console.log(
+                                        formData); // Debug log to verify the data being sent
+
+                                        // Send the update request via AJAX
+                                        $.ajax({
+                                            url: updateUrl,
+                                            type: 'PUT',
+                                            data: JSON.stringify(
+                                            formData), // Convert to JSON string for proper handling
+                                            contentType: 'application/json', // Specify the content type as JSON
+                                            success: function(response) {
+                                                alert(
+                                                    'Service fee updated successfully.');
+                                                $('#editServiceFeeModal_' +
+                                                    subFee.id).modal(
+                                                'hide'); // Close the modal
+                                                CallingServiceFees
+                                            (); // Reload the service fees data to reflect changes
+                                            },
+                                            error: function(xhr) {
+                                                let errorMessage =
+                                                    'Failed to update service fee. Please try again.';
+                                                if (xhr.responseJSON && xhr
+                                                    .responseJSON.errors) {
+                                                    errorMessage = Object
+                                                        .values(xhr.responseJSON
+                                                            .errors).flat()
+                                                        .join('\n');
+                                                }
+                                                alert(errorMessage);
+                                            },
+                                        });
+                                    });
+
                             });
                         },
                         error: function(xhr, status, error) {
                             console.error(error);
                         }
                     });
-
-
                 }
-
                 CallingServiceFees();
-                // insertion
+
+
+
+                // insertion of service fee here
                 $('#createServiceFeeForm').submit(function(e) {
                     e.preventDefault();
 
@@ -179,7 +272,8 @@
                         }
                     });
                 });
-                // AJAX call to fetch data
+
+                // AJAX call to fetch data alongwith the edition work goes here:
                 $.ajax({
                     url: '{{ route('service.show', request()->segment(4)) }}', // Update with your controller's URL
                     type: 'GET',
@@ -216,116 +310,124 @@
                        
                             <tr>
                                 <td> 
-                                    <button class="btn btn-danger btn-sm deleteBtn" data-id="${response.id}">Delete</button> 
+                                    <button class="btn btn-danger btn-sm mr-4 deleteBtn" data-id="${response.id}">Delete</button> 
                                     <button class="btn btn-primary btn-sm editBtn" data-id="${response.slug}">Edit</button>
                                      {{-- model for service-edit work goes here --}}
-                                   <div class="modal fade" id="editServiceModal" tabindex="-1" role="dialog" aria-labelledby="editServiceModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editServiceModalLabel">Edit Service</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="post" id="editServiceForm">
-                    @csrf
-                    @method('put')
-                    <input type="hidden" id="editServiceId" name="id">
-                    <div class="form-group">
-                        <label for="editServiceName">Name</label>
-                        <input type="text" class="form-control" id="editServiceName" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editServiceDescription">Description</label>
-                        <textarea class="form-control" id="editServiceDescription" name="description" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="editServiceIcon">Icon</label>
-                        <input type="file" class="form-control" id="editServiceIcon" name="icon">
-                    </div>
-                    <div class="form-group">
-                        <label for="editServiceRequirements">Requirements</label>
-                        <input type="text" class="form-control" id="editServiceRequirements" name="requirements">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+                                    <div class="modal fade" id="editServiceModal" tabindex="-1" role="dialog" aria-labelledby="editServiceModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="editServiceModalLabel">Edit Service</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="post" id="editServiceForm">
+                                                    @csrf
+                                                    @method('put')
+                                                    <input type="hidden" id="editServiceId" name="id">
+                                                    <div class="form-group">
+                                                        <label for="editServiceName">Name</label>
+                                                        <input type="text" class="form-control" id="editServiceName" name="name" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="editServiceDescription">Description</label>
+                                                        <textarea class="form-control" id="editServiceDescription" name="description" required></textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="editServiceIcon">Icon</label>
+                                                        <input type="file" class="form-control" id="editServiceIcon" name="icon">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="editServiceRequirements">Requirements</label>
+                                                        <input type="text" class="form-control" id="editServiceRequirements" name="requirements">
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Update</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
 
                                 </td>
                         </tr>`;
                             $('#tableBody').html(tableRows);
                         }
                         $(document).on('click', '.editBtn', function() {
-                    const id = $(this).data('id'); // Get the service ID
-                    const url = `/api/admin/service/${id}`; // Construct the API URL
+                            const id = $(this).data('id'); // Get the service ID
+                            const url = `/api/admin/service/${id}`; // Construct the API URL
 
-                    // Fetch the service data via AJAX
-                    $.ajax({
-                        url: url,
-                        type: 'GET',
-                        success: function(response) {
-                            // Debug the requirements structure
-                            // console.log(response.requirements);
+                            // Fetch the service data via AJAX
+                            $.ajax({
+                                url: url,
+                                type: 'GET',
+                                success: function(response) {
+                                    // Debug the requirements structure
+                                    // console.log(response.requirements);
 
-                            // Populate the modal fields with the response data
-                            $('#editServiceId').val(response.slug);
-                            $('#editServiceName').val(response.name);
-                            $('#editServiceDescription').val(response.description);
+                                    // Populate the modal fields with the response data
+                                    $('#editServiceId').val(response.slug);
+                                    $('#editServiceName').val(response.name);
+                                    $('#editServiceDescription').val(response
+                                        .description);
 
-                            // Process requirements safely
-                            if (Array.isArray(response.requirements)) {
-                                var reqNames = response.requirements.map(function(item) {
-                                    return item.req_name;
-                                });
-                                $('#editServiceRequirements').val(reqNames.join(', '));
-                                console.log(reqNames); // Log for debugging
-                            } else {
-                                console.error('Invalid requirements data.');
-                                $('#editServiceRequirements').val(''); // Clear the field if invalid
-                            }
+                                    // Process requirements safely
+                                    if (Array.isArray(response.requirements)) {
+                                        var reqNames = response.requirements.map(
+                                            function(item) {
+                                                return item.req_name;
+                                            });
+                                        $('#editServiceRequirements').val(reqNames.join(
+                                            ', '));
+                                        console.log(reqNames); // Log for debugging
+                                    } else {
+                                        console.error('Invalid requirements data.');
+                                        $('#editServiceRequirements').val(
+                                            ''); // Clear the field if invalid
+                                    }
 
-                            // Open the modal
-                            $('#editServiceModal').modal('show');
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(error);
-                            alert('Failed to fetch service details.');
-                        }
-                    });
+                                    // Open the modal
+                                    $('#editServiceModal').modal('show');
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error(error);
+                                    alert('Failed to fetch service details.');
+                                }
+                            });
 
 
-                });
+                        });
                         //edit work goes here
                         $('#editServiceForm').submit(function(e) {
                             e.preventDefault(); // Prevent the default form submission
 
                             const id = $('#editServiceId').val(); // Get the service ID
                             const updateUrl = `/api/admin/service/${id}`; // Update API URL
-                            
+
                             let name = $('#editServiceName').val();
-                            let description = $('#editServiceDescription').val(); 
-                
-                            
+                            let description = $('#editServiceDescription').val();
+
+
 
                             // Send the update request via AJAX
-                            let formdata = {name, description};
+                            let formdata = {
+                                name,
+                                description
+                            };
                             console.log(formdata);
                             $.ajax({
                                 url: updateUrl,
                                 type: 'PUT',
-                                data: JSON.stringify(formdata), // Convert to JSON string for proper handling
+                                data: JSON.stringify(
+                                    formdata), // Convert to JSON string for proper handling
                                 contentType: 'application/json', // Specify the content type as JSON
                                 success: function(response) {
                                     alert('Service updated successfully.');
                                     $('#editServiceModal').modal(
-                                    'hide'); // Close the modal
-                                    location.href = "/admin/service/"; // Reload the page to reflect changes
+                                        'hide'); // Close the modal
+                                    location.href =
+                                        "/admin/service/"; // Reload the page to reflect changes
                                 },
                                 error: function(xhr) {
                                     let errorMessage =
@@ -354,7 +456,7 @@
                         "service_id": service_id
                     },
                     success: function(response) {
-                        // Populate the select dropdown with service fees
+                        // Populate the selected dropdown with service fees
                         var select = $('#parent_id');
                         select.empty();
                         select.append($('<option>').text('Main Category').attr('value', ""));
@@ -382,11 +484,6 @@
                         }
                     });
                 });
-
-                // AJAX call to edit item
-
-                // Edit service
-            
 
             });
         </script>
