@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\str;
 
 class Service extends Model
 {
@@ -28,6 +29,6 @@ class Service extends Model
 
     public function servicefees(): HasMany
     {
-        return $this->hasMany(servicefees::class,'service_id', 'id');
+        return $this->hasMany(ServiceFees::class,'service_id', 'id');
     }
 }

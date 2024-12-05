@@ -13,26 +13,26 @@ class ServiceApiController extends Controller
      */
     public function index()
     {
-        $data = Service::with("requirements")->get();    
+        $data = Service::with("requirements")->get();
         return response()->json($data);
     }
 
-     public function store(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
             'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'required|string',
         ]);
-    
+
 
         // Store the service
         $service = new Service();
         $service->name = $request->name;
         $service->description = $request->description;
-          // Handle file upload
-          if ($request->hasFile('icon')) {
-            $iconName = time().'.'.$request->icon->getClientOriginalExtension();
+        // Handle file upload
+        if ($request->hasFile('icon')) {
+            $iconName = time() . '.' . $request->icon->getClientOriginalExtension();
             $request->icon->move(public_path('uploads'), $iconName);
             $service->icon = $iconName;
         }
@@ -45,28 +45,56 @@ class ServiceApiController extends Controller
             $req->req_name = $requirement;
             $req->save();
         }
-      
+
         return response()->json(['success' => true]);
     }
 
-   
+
     public function show(string $slug)
     {
-        $data = Service::where("slug",$slug)->with("requirements")->first(); 
-        if($data){
+        $data = Service::where("slug", $slug)->with("requirements")->first();
+        if ($data) {
             return response()->json($data);
-        }
-        else{
-            return response()->json(['success'=> false]);
+        } else {
+            return response()->json(['success' => false]);
         }
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $slug)
     {
-        //
+        // Find the service by its ID
+        $service = Service::where("slug",$slug)->first();
+
+        // Check if the service exists
+        if (!$service) {
+            return response()->json(['error' => 'Service not found'], 404);
+        }
+
+        // Validate the incoming data
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'requirements' => 'nullable|array', // Assuming requirements are passed as an array
+        ]);
+
+        // Update the service fields
+        $service->name = $validatedData['name'];
+        $service->description = $validatedData['description'];
+
+        // If there are requirements, update them
+        if (isset($validatedData['requirements'])) {
+            $service->requirements = json_encode($validatedData['requirements']); // Save as JSON if necessary
+        }
+
+        // Save the updated service
+        $service->save();
+
+        // Return a success response
+        return response()->json(['message' => 'Service updated successfully', 'service' => $service]);
     }
 
-  
+
+
     public function destroy(string $id)
     {
         $service = Service::find($id);
@@ -74,10 +102,10 @@ class ServiceApiController extends Controller
         if (!$service) {
             return response()->json(['error' => 'Service not found'], 404);
         }
-    
+
         // Delete the service
         $service->delete();
-    
+
         return response()->json(['message' => 'Service deleted successfully']);
     }
 }
