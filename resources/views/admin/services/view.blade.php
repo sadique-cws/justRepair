@@ -124,122 +124,71 @@
                         success: function(response) {
                             $('#accordionExample').empty();
                             response.forEach(function(item) {
+                            
                                 var accordionItem = `
-                <div class="card">
-                    <div class="card-header" id="heading${item.id}">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link text-capitalize btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse${item.id}" aria-expanded="true" aria-controls="collapse${item.id}">
-                                ${item.service_fees_name}
-                            </button>
-                        </h2>
-                    </div>
-                    <div id="collapse${item.id}" class="collapse" aria-labelledby="heading${item.id}" data-parent="#accordionExample">
-                        <div class="card-body">
-                            <ul class="list-group">
-                            `;
-                                item.sub_fees.forEach(function(subFee) {
-                                    accordionItem += `
-                            <li class="list-group-item d-flex justify-content-between">
-                                <span>${subFee.service_fees_name}:</span>
-                                <span>
-                                    <span>₹${subFee.service_fees}</span>
-                                    <button class="btn btn-sm btn-primary ml-2 edit-btn" data-id="${subFee.id}" data-toggle="modal" data-target="#editServiceFeeModal_${subFee.id}">Edit</button>
-                                </span>
+                                <div class="card">
+                                    <div class="card-header" id="heading${item.id}">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link text-capitalize btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse${item.id}" aria-expanded="true" aria-controls="collapse${item.id}">
+                                                ${item.service_fees_name}
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="collapse${item.id}" class="collapse" aria-labelledby="heading${item.id}" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <ul class="list-group">
+                                            `;
+                                                item.sub_fees.forEach(function(subFee) {
+                                                    accordionItem += `
+                                            <li class="list-group-item d-flex justify-content-between">
+                                                <span>${subFee.service_fees_name}:</span>
+                                                <span>
+                                                    <span>₹${subFee.service_fees}</span>
+                                                    <button class="btn btn-sm btn-primary ml-2 edit-btn" data-id="${subFee.id}" data-toggle="modal" data-target="#editServiceFeeModal_${subFee.id}">Edit</button>
+                                                </span>
 
-                                <!-- Edit Modal -->
-                                <div class="modal fade" id="editServiceFeeModal_${subFee.id}" tabindex="-1" role="dialog" aria-labelledby="editServiceFeeModalLabel_${subFee.id}" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="editServiceFeeModalLabel_${subFee.id}">Edit Service Fee</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form method="post" id="editServiceFeeForm_${subFee.id}">
-                                                    @csrf
-                                                    @method('put')
-                                                    <input type="hidden" id="editServiceFeeId_${subFee.id}" name="id" value="${subFee.id}">
-                                                    <div class="form-group">
-                                                        <label for="editServiceFeeName_${subFee.id}">Service Fee Name</label>
-                                                        <input type="text" class="form-control" id="editServiceFeeName_${subFee.id}" name="service_fees_name" value="${subFee.service_fees_name}" required>
+                                                <!-- Edit Modal -->
+                                                <div class="modal fade" id="editServiceFeeModal_${subFee.id}" tabindex="-1" role="dialog" aria-labelledby="editServiceFeeModalLabel_${subFee.id}" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="editServiceFeeModalLabel_${subFee.id}">Edit Service Fee</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form method="post" action="{{ request()->segment(4) }}/servicefee/${subFee.id}/update">
+                                                                    @csrf
+                                                                    @method('put')
+                                                                    <input type="hidden" id="editServiceFeeId_${subFee.id}" name="id" value="${subFee.id}">
+                                                                    <div class="form-group">
+                                                                        <label for="editServiceFeeName_${subFee.id}">Service Fee Name</label>
+                                                                        <input type="text" class="form-control" id="editServiceFeeName_${subFee.id}" name="service_fees_name" value="${subFee.service_fees_name}" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="editServiceFeeAmount_${subFee.id}">Amount</label>
+                                                                        <input type="text" class="form-control" id="editServiceFeeAmount_${subFee.id}" name="service_fees" value="${subFee.service_fees}" required>
+                                                                    </div>
+                                                                    <button type="submit" class="btn btn-primary">Update</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="editServiceFeeAmount_${subFee.id}">Amount</label>
-                                                        <input type="text" class="form-control" id="editServiceFeeAmount_${subFee.id}" name="service_fees" value="${subFee.service_fees}" required>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary">Update</button>
-                                                </form>
-                                            </div>
+                                                </div>    
+                                            </li>
+                                            `;
+                                                });
+                                                accordionItem += `
+                                            </ul>
                                         </div>
                                     </div>
-                                </div>    
-                            </li>
-                            `;
-                                });
-                                accordionItem += `
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                `;
+                                </div>
+                                `;
                                 $('#accordionExample').append(accordionItem);
 
                                 // **Moving the edit logic inside the loop to ensure subFee.id is accessible**
-                                $(document).on('submit', '#editServiceFeeForm_' + subFee.id,
-                                    function(e) {
-                                        e
-                                    .preventDefault(); // Prevent the default form submission
 
-                                        const serviceFeeId = $('#editServiceFeeId_' + subFee
-                                            .id).val(); // Get the service fee ID
-                                        const updateUrl =
-                                            `/api/admin/servicefee/${serviceFeeId}`; // Update API URL for service fee
-
-                                        let name = $('#editServiceFeeName_' + subFee.id)
-                                            .val(); // Get the updated service fee name
-                                        let amount = $('#editServiceFeeAmount_' + subFee.id)
-                                            .val(); // Get the updated service fee amount
-
-                                        // Prepare the data to be sent
-                                        let formData = {
-                                            service_fees_name: name,
-                                            service_fees: amount
-                                        };
-                                        console.log(
-                                        formData); // Debug log to verify the data being sent
-
-                                        // Send the update request via AJAX
-                                        $.ajax({
-                                            url: updateUrl,
-                                            type: 'PUT',
-                                            data: JSON.stringify(
-                                            formData), // Convert to JSON string for proper handling
-                                            contentType: 'application/json', // Specify the content type as JSON
-                                            success: function(response) {
-                                                alert(
-                                                    'Service fee updated successfully.');
-                                                $('#editServiceFeeModal_' +
-                                                    subFee.id).modal(
-                                                'hide'); // Close the modal
-                                                CallingServiceFees
-                                            (); // Reload the service fees data to reflect changes
-                                            },
-                                            error: function(xhr) {
-                                                let errorMessage =
-                                                    'Failed to update service fee. Please try again.';
-                                                if (xhr.responseJSON && xhr
-                                                    .responseJSON.errors) {
-                                                    errorMessage = Object
-                                                        .values(xhr.responseJSON
-                                                            .errors).flat()
-                                                        .join('\n');
-                                                }
-                                                alert(errorMessage);
-                                            },
-                                        });
-                                    });
 
                             });
                         },
@@ -395,7 +344,6 @@
                                     alert('Failed to fetch service details.');
                                 }
                             });
-
 
                         });
                         //edit work goes here

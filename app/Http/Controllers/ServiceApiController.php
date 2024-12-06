@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Requirement;
 use App\Models\Service;
+use App\Models\ServiceFees;
 use Illuminate\Http\Request;
 
 class ServiceApiController extends Controller
@@ -63,7 +64,7 @@ class ServiceApiController extends Controller
     public function update(Request $request, string $slug)
     {
         // Find the service by its ID
-        $service = Service::where("slug",$slug)->first();
+        $service = Service::where("slug", $slug)->first();
 
         // Check if the service exists
         if (!$service) {
