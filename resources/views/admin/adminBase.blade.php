@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css')}}">
-
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
 
 </head>
@@ -184,7 +184,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('admin.service.manage')}}" class="nav-link">
+                <a href="{{route('admin.users')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Manage Users</p>
                 </a>

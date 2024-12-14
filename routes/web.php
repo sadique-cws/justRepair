@@ -6,7 +6,6 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ServiceController;
-use App\Http\Controllers\ServiceFeesController;
 use Illuminate\Support\Facades\Route;
 
 // Route::match(['get','post'],'/login',[AuthController::class,"login"])->name("login");
@@ -39,8 +38,11 @@ Route::prefix("admin")->group(function () {
 
     Route::middleware('auth:admin')->group(function () {
         Route::controller(AdminController::class)->group(function () {
+            
             Route::get('/', 'dashboard')->name("admin.dashboard");
-    
+            Route::get('/users' , 'usersProfile')->name('admin.users');
+            Route::get('/unique-visitors','uniqueVisitors')->name('admin.unique.visitors');
+
             //service routes
             Route::prefix("service")->group(function () {
                 Route::controller(ServiceController::class)->group(function () {
@@ -48,16 +50,17 @@ Route::prefix("admin")->group(function () {
                     Route::get('/insert', 'insert')->name("admin.service.insert");
                     Route::get('/view/{id}', 'view')->name("admin.service.view");
                     Route::post('/store', 'store')->name("admin.service.store");
+                    Route::put("view/{id}/servicefee/{servicefees_id}/update", "updateServiceFees");
                 });
             });
-            Route::prefix("service-fee")->group(function () {
-                Route::controller(ServiceFeesController::class)->group(function () {
-                    Route::get('/', 'index')->name("admin.servicefee.manage");
-                    Route::get('/insert', 'insert')->name("admin.servicefee.insert");
-                    Route::get('/view/{id}', 'view')->name("admin.servicefee.view");
-                    Route::post('/store', 'store')->name("admin.servicefee.store");
-                });
-            });
+            // Route::prefix("service-fee")->group(function () {
+            //     Route::controller(ServiceFeesController::class)->group(function () {
+            //         Route::get('/', 'index')->name("admin.servicefee.manage");
+            //         Route::get('/insert', 'insert')->name("admin.servicefee.insert");
+            //         Route::put('/view/{id}', 'view')->name("admin.servicefee.view");
+            //         Route::post('/store', 'store')->name("admin.servicefee.store");
+            //     });
+            // });
             Route::prefix("appointment")->group(function () {
                 Route::controller(AppointmentController::class)->group(function () {
                     Route::get('/', 'index')->name("admin.appointment.manage");
