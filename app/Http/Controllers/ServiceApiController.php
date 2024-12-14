@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Requirement;
 use App\Models\Service;
 use App\Models\ServiceFees;
+use App\Models\ServiceFees;
 use Illuminate\Http\Request;
 
 class ServiceApiController extends Controller
@@ -15,9 +16,11 @@ class ServiceApiController extends Controller
     public function index()
     {
         $data = Service::with("requirements")->get();
+        $data = Service::with("requirements")->get();
         return response()->json($data);
     }
 
+    public function store(Request $request)
     public function store(Request $request)
     {
         $request->validate([
@@ -27,10 +30,14 @@ class ServiceApiController extends Controller
         ]);
 
 
+
         // Store the service
         $service = new Service();
         $service->name = $request->name;
         $service->description = $request->description;
+        // Handle file upload
+        if ($request->hasFile('icon')) {
+            $iconName = time() . '.' . $request->icon->getClientOriginalExtension();
         // Handle file upload
         if ($request->hasFile('icon')) {
             $iconName = time() . '.' . $request->icon->getClientOriginalExtension();
@@ -47,15 +54,21 @@ class ServiceApiController extends Controller
             $req->save();
         }
 
+
         return response()->json(['success' => true]);
     }
+
 
 
     public function show(string $slug)
     {
         $data = Service::where("slug", $slug)->with("requirements")->first();
         if ($data) {
+        $data = Service::where("slug", $slug)->with("requirements")->first();
+        if ($data) {
             return response()->json($data);
+        } else {
+            return response()->json(['success' => false]);
         } else {
             return response()->json(['success' => false]);
         }
@@ -118,6 +131,7 @@ class ServiceApiController extends Controller
 
 
 
+
     public function destroy(string $id)
     {
         $service = Service::find($id);
@@ -126,8 +140,10 @@ class ServiceApiController extends Controller
             return response()->json(['error' => 'Service not found'], 404);
         }
 
+
         // Delete the service
         $service->delete();
+
 
         return response()->json(['message' => 'Service deleted successfully']);
     }

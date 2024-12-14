@@ -113,6 +113,7 @@
                 let service_id = @json($service->id);
 
                 // service fee calling here
+                // service fee calling here
                 const CallingServiceFees = () => {
                     $.ajax({
                         url: '{{ route('servicefee.index') }}',
@@ -202,6 +203,10 @@
 
 
                 // insertion of service fee here
+
+
+
+                // insertion of service fee here
                 $('#createServiceFeeForm').submit(function(e) {
                     e.preventDefault();
 
@@ -221,6 +226,8 @@
                         }
                     });
                 });
+
+                // AJAX call to fetch data alongwith the edition work goes here:
 
                 // AJAX call to fetch data alongwith the edition work goes here:
                 $.ajax({
@@ -428,7 +435,11 @@
                     data: {
                         "service_id": service_id
                     },
+                    data: {
+                        "service_id": service_id
+                    },
                     success: function(response) {
+                        // Populate the selected dropdown with service fees
                         // Populate the selected dropdown with service fees
                         var select = $('#parent_id');
                         select.empty();
