@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Requirement;
 use App\Models\Service;
 use App\Models\ServiceFees;
-use App\Models\ServiceFees;
 use Illuminate\Http\Request;
 
 class ServiceApiController extends Controller
@@ -20,7 +19,6 @@ class ServiceApiController extends Controller
         return response()->json($data);
     }
 
-    public function store(Request $request)
     public function store(Request $request)
     {
         $request->validate([
@@ -55,20 +53,15 @@ class ServiceApiController extends Controller
         }
 
 
-        return response()->json(['success' => true]);
+            return response()->json(['success' => true]);
+        }
     }
-
-
 
     public function show(string $slug)
     {
         $data = Service::where("slug", $slug)->with("requirements")->first();
         if ($data) {
-        $data = Service::where("slug", $slug)->with("requirements")->first();
-        if ($data) {
             return response()->json($data);
-        } else {
-            return response()->json(['success' => false]);
         } else {
             return response()->json(['success' => false]);
         }
@@ -127,10 +120,6 @@ class ServiceApiController extends Controller
         // Return a success response
         return response()->json(['message' => 'Service updated successfully', 'service' => $service]);
     }
-
-
-
-
 
     public function destroy(string $id)
     {
