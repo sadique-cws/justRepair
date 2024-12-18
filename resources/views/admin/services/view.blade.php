@@ -25,23 +25,165 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title viewtitle">All Services</h3>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title viewtitle">All Services</h3>
 
-                            <div class="card-tools">
-                                <a href="{{ route('admin.service.manage') }}" class="btn btn-sm btn-primary">Go Back</a>
+                                    <div class="card-tools">
+                                        <a href="{{ route('admin.service.manage') }}" class="btn btn-sm btn-primary">Go
+                                            Back</a>
+                                    </div>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body table-responsive p-0">
+                                    <table class="table table-hover text-nowrap">
+                                        <tbody id="tableBody">
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <!-- /.card-body -->
                             </div>
                         </div>
-                        <!-- /.card-header -->
-                        <div class="card-body table-responsive p-0">
-                            <table class="table table-hover text-nowrap">
-                                <tbody id="tableBody">
-                                </tbody>
-                            </table>
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="align-items-center text-primary">Manage Requirements</h6>
+                                </div>
+                                <div class="card-body">
+                                    {{-- flash message section starts here --}}
+                                    @if (session('success'))
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            {{ session('success') }}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                        </div>
+                                    @endif
 
+                                    @if (session('error'))
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            {{ session('error') }}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                        </div>
+                                    @endif
+                                    {{-- flash message section ends here --}}
+                                    <form action="{{ route('requirements.store') }}" method="POST"
+                                        class="d-flex align-items-center mb-3">
+                                        @csrf
+                                        <input type="hidden" name="service_id" value="{{ $service->id }}">
+                                        {{-- {{ dd($service->id) }} --}}
+                                        <input type="text" name="req_name" placeholder="Add new requirement" required
+                                            class="form-control">
+                                        <button type="submit" class="btn btn-primary ml-2">Add</button>
+                                    </form>
+                                    <div>
+                                        @foreach ($service->requirements as $req)
+                                            <div
+                                                class="d-flex justify-content-between align-items-center mb-1 p-2 border rounded ">
+                                                {{ $req->req_name }}
+                                                <div>
+                                                    {{-- edit button goes here --}}
+                                                    <button class="btn btn-sm btn-primary ml-2 edit-btn"
+                                                        data-id="{{ $req->id }}" data-toggle="modal"
+                                                        data-target="#editRequirementModal_{{ $req->id }}">Edit
+                                                    </button>
+
+                                                    {{-- delete button goes here --}}
+                                                    <button class="btn btn-sm btn-danger ml-2 delete-btn"
+                                                        data-id="{{ $req->id }}" data-toggle="modal"
+                                                        data-target="#deleteRequirementModal_{{ $req->id }}">Delete
+                                                    </button>
+                                                </div>
+
+                                                <!-- Delete requirements modal starts here -->
+                                                <div class="modal fade" id="deleteRequirementModal_{{ $req->id }}"
+                                                    tabindex="-1" role="dialog"
+                                                    aria-labelledby="deleteRequirementModalLabel_{{ $req->id }}"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title"
+                                                                    id="deleteRequirementModalLabel_{{ $req->id }}">
+                                                                    Delete Requirement
+                                                                </h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Are you sure you want to delete this requirement?</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <form
+                                                                    action="{{ route('requirements.destroy', $req->id) }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-dismiss="modal">Cancel</button>
+                                                                    <button type="submit"
+                                                                        class="btn btn-danger">Delete</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Delete requirements modal ends here -->
+
+                                                {{-- edit requirements modal starts here --}}
+                                                <div class="modal fade" id="editRequirementModal_{{ $req->id }}"
+                                                    tabindex="-1" role="dialog"
+                                                    aria-labelledby="editRequirementModalLabel_{{ $req->id }}"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title"
+                                                                    id="editRequirementModalLabel_{{ $req->id }}">
+                                                                    Edit
+                                                                    Requirement</h5>
+                                                                <button type="button" class="close"
+                                                                    data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form id="editRequirementForm_{{ $req->id }}"
+                                                                    action="{{ route('requirements.update', $req->id) }}"
+                                                                    method="post">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <input type="hidden" name="id"
+                                                                        value="{{ $req->id }}">
+                                                                    <div class="form-group">
+                                                                        <label
+                                                                            for="editReqName_{{ $req->id }}">Requirement
+                                                                            Name</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="editReqName_{{ $req->id }}"
+                                                                            name="req_name" value="{{ $req->req_name }}"
+                                                                            required>
+                                                                    </div>
+                                                                    <button type="submit"
+                                                                        class="btn btn-primary">Update</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {{-- edit requirements modal ends here --}}
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- /.card-body -->
+
                     </div>
 
                     <div class="card">
@@ -112,7 +254,6 @@
             $(document).ready(function() {
                 let service_id = @json($service->id);
 
-                // service fee calling here
                 // service fee calling here
                 const CallingServiceFees = () => {
                     $.ajax({
@@ -203,10 +344,6 @@
 
 
                 // insertion of service fee here
-
-
-
-                // insertion of service fee here
                 $('#createServiceFeeForm').submit(function(e) {
                     e.preventDefault();
 
@@ -228,8 +365,6 @@
                 });
 
                 // AJAX call to fetch data alongwith the edition work goes here:
-
-                // AJAX call to fetch data alongwith the edition work goes here:
                 $.ajax({
                     url: '{{ route('service.show', request()->segment(4)) }}', // Update with your controller's URL
                     type: 'GET',
@@ -238,9 +373,7 @@
                         $("#service_id").val(response.id)
 
                         if (response) {
-                            var reqNames = response.requirements.map(function(item) {
-                                return item.req_name;
-                            }).join(', ');
+
                             $(".viewtitle").html(response.name + " Service View")
                             let tableRows = `
                         <tr> 
@@ -259,10 +392,7 @@
                             <th>Description</th>
                             <td>${response.description}</td>
                         </tr>
-                        <tr>
-                            <th>Requirements</th>
-                            <td>${reqNames}</td>
-                        </tr>
+                      
                        
                             <tr>
                                 <td> 
@@ -380,7 +510,8 @@
                                 function() {
                                     requirements.push({
                                         id: $(this).data(
-                                        'id'), //here fetching the ID from requirements;
+                                            'id'
+                                        ), //here fetching the ID from requirements;
                                         req_name: $(this).val().trim()
                                     });
                                 });
@@ -427,32 +558,28 @@
                     }
                 });
 
-                // here goes the services and the required fee:
-                $.ajax({
-                    url: '{{ route('servicefee.index') }}',
-                    type: 'GET',
-                    dataType: 'json',
-                    data: {
-                        "service_id": service_id
-                    },
-                    data: {
-                        "service_id": service_id
-                    },
-                    success: function(response) {
-                        // Populate the selected dropdown with service fees
-                        // Populate the selected dropdown with service fees
-                        var select = $('#parent_id');
-                        select.empty();
-                        select.append($('<option>').text('Main Category').attr('value', ""));
-                        $.each(response, function(index, item) {
-                            select.append($('<option>').text(item.service_fees_name).attr('value',
-                                item.id));
-                        });
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(error);
-                    }
-                });
+                // // here goes the services and the required fee:
+                // $.ajax({
+                //     url: '{{ route('servicefee.index') }}',
+                //     type: 'GET',
+                //     dataType: 'json',
+                //     data: {
+                //         "service_id": service_id
+                //     },
+                //     success: function(response) {
+                //         // Populate the selected dropdown with service fees
+                //         var select = $('#parent_id');
+                //         select.empty();
+                //         select.append($('<option>').text('Main Category').attr('value', ""));
+                //         $.each(response, function(index, item) {
+                //             select.append($('<option>').text(item.service_fees_name).attr('value',
+                //                 item.id));
+                //         });
+                //     },
+                //     error: function(xhr, status, error) {
+                //         console.error(error);
+                //     }
+                // });
 
                 // AJAX call to delete item
                 $(document).on('click', '.deleteBtn', function() {

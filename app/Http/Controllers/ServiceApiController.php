@@ -15,7 +15,6 @@ class ServiceApiController extends Controller
     public function index()
     {
         $data = Service::with("requirements")->get();
-        $data = Service::with("requirements")->get();
         return response()->json($data);
     }
 
@@ -28,14 +27,10 @@ class ServiceApiController extends Controller
         ]);
 
 
-
         // Store the service
         $service = new Service();
         $service->name = $request->name;
         $service->description = $request->description;
-        // Handle file upload
-        if ($request->hasFile('icon')) {
-            $iconName = time() . '.' . $request->icon->getClientOriginalExtension();
         // Handle file upload
         if ($request->hasFile('icon')) {
             $iconName = time() . '.' . $request->icon->getClientOriginalExtension();
@@ -52,10 +47,9 @@ class ServiceApiController extends Controller
             $req->save();
         }
 
-
-            return response()->json(['success' => true]);
-        }
+        return response()->json(['success' => true]);
     }
+
 
     public function show(string $slug)
     {
@@ -121,6 +115,9 @@ class ServiceApiController extends Controller
         return response()->json(['message' => 'Service updated successfully', 'service' => $service]);
     }
 
+
+
+
     public function destroy(string $id)
     {
         $service = Service::find($id);
@@ -129,10 +126,8 @@ class ServiceApiController extends Controller
             return response()->json(['error' => 'Service not found'], 404);
         }
 
-
         // Delete the service
         $service->delete();
-
 
         return response()->json(['message' => 'Service deleted successfully']);
     }
