@@ -42,7 +42,7 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>{{ $count_user }}</h3>
+                            <h3>{{ $count_accepted_appointments }}</h3>
 
                             <p>New Appointments</p>
                         </div>
