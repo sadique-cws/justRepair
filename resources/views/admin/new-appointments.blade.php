@@ -162,8 +162,8 @@
 
                 // Iterate over the JSON data
                 $.each(response, function(index, row) {
-                    // checking here if the status is 'process':
-                    if (row.status != 'done' && row.status != "reject") {
+                    // Check if the status is 'accept'
+                    if (row.status === 'accept') {
                         // Parse the requirements JSON array
                         var requirements = JSON.parse(row.requirements);
                         var requirementsHtml = '';
@@ -176,16 +176,15 @@
 
                         // Append the table row with badge to the table body
                         var tableRow = `
-                <tr>
-                    <td>${row.complain_no}</td>
-                    <td>${row.fullname}</td>
-                    <td>${row.preferred_date} (${row.preferred_time})</td>
-                    <td>${requirementsHtml}</td>
-                    <td>${row.mobileno}</td>
-                    <td>${row.address} ${row.city}</td>
-                    <td><a href='/admin/appointment/view/${row.id}' class='btn btn-warning'>View</a></td>
-                </tr>`;
-
+                    <tr>
+                        <td>${row.complain_no}</td>
+                        <td>${row.fullname}</td>
+                        <td>${row.preferred_date} (${row.preferred_time})</td>
+                        <td>${requirementsHtml}</td>
+                        <td>${row.mobileno}</td>
+                        <td>${row.address} ${row.city}</td>
+                        <td><a href='/admin/appointment/view/${row.id}' class='btn btn-warning'>View</a></td>
+                    </tr>`;
 
                         tableBody.append(tableRow);
                     }

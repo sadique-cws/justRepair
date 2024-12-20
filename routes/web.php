@@ -42,6 +42,7 @@ Route::prefix("admin")->group(function () {
             Route::get('/', 'dashboard')->name("admin.dashboard");
             Route::get('/users' , 'usersProfile')->name('admin.users');
             Route::get('/unique-visitors','uniqueVisitors')->name('admin.unique.visitors');
+            Route::get('/new-appointments','newAppointments')->name('admin.new.appointments');
 
             //service routes
             Route::prefix("service")->group(function () {

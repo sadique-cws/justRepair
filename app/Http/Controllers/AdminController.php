@@ -71,5 +71,12 @@ class AdminController extends Controller
         return view('admin.unique-visitors',$data);
     }
 
+    public function newAppointments(){
+        $data['count_appointment'] = Appointment::all()->count();
+        $data['count_user'] = User::all()->count();
+        $data['count_accepted_appointments'] = Appointment::where('status','accept')->count();
+        return view('admin.new-appointments',$data);
+    }
+
     
 }
