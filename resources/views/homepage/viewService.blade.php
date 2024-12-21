@@ -95,7 +95,7 @@
 
                                 <div class="flex flex-col border p-2 items-center">
                                     <p class="text-xs">OR Book Via Call (9AM to 6PM)</p>
-                                    <a href="tel:8425499874" class="text-indigo-900 text-xl font-bold"><i
+                                    <a href="tel:7260972994" class="text-indigo-900 text-xl font-bold"><i
                                             class="fa-solid fa-phone"></i> 72-800-800-80</a>
                                 </div>
                             </div>
