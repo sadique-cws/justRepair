@@ -409,14 +409,14 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form method="post" id="editServiceForm">
+                                                    <form method="post" enctype="multipart/form-data" id="editServiceForm">
                                                         @csrf
                                                         @method('put')
                                                         <input type="hidden" id="editServiceId" name="id">
                                                         <div class="form-group">
                                                             <label for="editServiceName">Name</label>
                                                             <input type="text" class="form-control" id="editServiceName" name="name" required>
-                                                        </div>
+                                                        </div>  
                                                         <div class="form-group">
                                                             <label for="editServiceDescription">Description</label>
                                                             <textarea class="form-control" id="editServiceDescription" name="description" required></textarea>
@@ -424,7 +424,9 @@
                                                         <div class="form-group">
                                                             <label for="editServiceIcon">Icon</label>
                                                             <input type="file" class="form-control" id="editServiceIcon" name="icon">
-                                                        </div>
+                                                            <small class="form-text text-muted">Leave empty to keep the current icon.</small>
+                                                            <img src='/uploads/{{ $service->icon }}' width='50px' class="mt-2" />
+                                                        </div>                                                        
                                                         <div class="form-group" id="editServiceRequirementsContainer">
                                                             // appending this in the ajax section with javascript appending method
                                                         </div>
@@ -438,6 +440,96 @@
                                 </td>
                         </tr>`;
                             $('#tableBody').html(tableRows);
+
+                            $('#editServiceForm').submit(function(e) {
+                            e.preventDefault(); // Prevent the default form submission
+                            
+
+                            let name = $('#editServiceName').val().trim();
+                            let description = $('#editServiceDescription').val().trim();
+
+
+                            // Check if required fields are filled
+                            if (name === '' || description === '') {
+                                alert('Please fill in all required fields.');
+                                return; // Stop form submission if validation fails
+                            }
+
+                            const id = $('#editServiceId').val(); // Get the service ID
+                            const updateUrl = `/api/admin/service/${id}`; // Update API URL
+
+                            // let name = $('#editServiceName').val().trim();
+                            // let description = $('#editServiceDescription').val().trim();
+                            let icon = $('#editServiceIcon').prop('files')[
+                            0]; //collect the first file from input
+
+
+
+                            // Collect requirements as an array of objects
+                            let requirements = [];
+                            $('#editServiceRequirementsContainer .requirement-item input').each(
+                                function() {
+                                    requirements.push({
+                                        id: $(this).data(
+                                            'id'
+                                        ), //here fetching the ID from requirements;
+                                        req_name: $(this).val().trim()
+                                    });
+                                });
+
+
+                            // formData object to append data:
+                            let formData = new FormData();
+                            formData.append('name', name);
+                            formData.append('description', description);
+                            formData.append('icon', icon);
+                            formData.append('requirements', JSON.stringify(requirements));
+
+                            console.log(name,description);
+
+
+                            // // Send the update request via AJAX
+                            // let formdata = {
+                            //     name,
+                            //     description,
+                            //     requirements
+                            // };
+
+
+
+                            $.ajax({
+                                url: updateUrl,
+                                type: 'PUT',
+                                data: formData,
+                                // data: JSON.stringify(
+                                //     formdata), // Convert to JSON string for proper handling
+
+                                processData: false,
+                                contentType: false,
+                                // contentType: 'application/json', // Specify the content type as JSON
+
+
+
+                                success: function(response) {
+                                    alert('Service updated successfully.');
+                                    $('#editServiceModal').modal(
+                                        'hide'); // Close the modal
+                                    location.href =
+                                        "/admin/service/"; // Reload the page to reflect changes
+                                },
+                                error: function(xhr) {
+                                    let errorMessage =
+                                        'Failed to update service. Please try again.';
+                                    if (xhr.responseJSON && xhr.responseJSON.errors) {
+                                        errorMessage = Object.values(xhr.responseJSON
+                                                .errors)
+                                            .flat()
+                                            .join('\n');
+                                    }
+                                    alert(errorMessage);
+                                },
+                            });
+                        });
                         }
                         $(document).on('click', '.editBtn', function() {
                             const id = $(this).data('id'); // Get the service ID
@@ -456,6 +548,8 @@
                                     $('#editServiceName').val(response.name);
                                     $('#editServiceDescription').val(response
                                         .description);
+
+
 
                                     // Process requirements safely  
                                     if (Array.isArray(response.requirements)) {
@@ -493,70 +587,15 @@
                         });
 
                         //edit work goes here
-                        $('#editServiceForm').submit(function(e) {
-                            e.preventDefault(); // Prevent the default form submission
-
-                            const id = $('#editServiceId').val(); // Get the service ID
-                            const updateUrl = `/api/admin/service/${id}`; // Update API URL
-
-                            let name = $('#editServiceName').val();
-                            let description = $('#editServiceDescription').val();
-                            // let requirements = $('#editServiceRequirements').val();
-
-
-                            // Collect requirements as an array of objects
-                            let requirements = [];
-                            $('#editServiceRequirementsContainer .requirement-item input').each(
-                                function() {
-                                    requirements.push({
-                                        id: $(this).data(
-                                            'id'
-                                        ), //here fetching the ID from requirements;
-                                        req_name: $(this).val().trim()
-                                    });
-                                });
-
-
-
-                            // Send the update request via AJAX
-                            let formdata = {
-                                name,
-                                description,
-                                requirements
-                            };
-
-                            console.log(formdata);
-                            $.ajax({
-                                url: updateUrl,
-                                type: 'PUT',
-                                data: JSON.stringify(
-                                    formdata), // Convert to JSON string for proper handling
-                                contentType: 'application/json', // Specify the content type as JSON
-                                success: function(response) {
-                                    alert('Service updated successfully.');
-                                    $('#editServiceModal').modal(
-                                        'hide'); // Close the modal
-                                    location.href =
-                                        "/admin/service/"; // Reload the page to reflect changes
-                                },
-                                error: function(xhr) {
-                                    let errorMessage =
-                                        'Failed to update service. Please try again.';
-                                    if (xhr.responseJSON && xhr.responseJSON.errors) {
-                                        errorMessage = Object.values(xhr.responseJSON
-                                                .errors)
-                                            .flat()
-                                            .join('\n');
-                                    }
-                                    alert(errorMessage);
-                                },
-                            });
-                        });
+                      
                     },
                     error: function(xhr, status, error) {
                         console.error(xhr.responseText);
                     }
                 });
+
+
+
 
                 // // here goes the services and the required fee:
                 // $.ajax({
@@ -580,6 +619,9 @@
                 //         console.error(error);
                 //     }
                 // });
+
+
+
 
                 // AJAX call to delete item
                 $(document).on('click', '.deleteBtn', function() {

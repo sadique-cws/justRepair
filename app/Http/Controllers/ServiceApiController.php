@@ -75,10 +75,32 @@ class ServiceApiController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
+            'icon' => 'nullable|image|max:2048',
             'requirements' => 'nullable|array',
             'requirements.*.id' => 'nullable|exists:requirements,id',
             'requirements.*.req_name' => 'required|string|max:255',
         ]);
+
+
+        // // Handle file upload
+        // if ($request->hasFile('icon')) {
+        //     $iconPath = $request->file('icon')->store('service_icons', 'public');
+        //     $service->icon = $iconPath; // Update service with the new file path
+        // }
+
+        if ($request->hasFile('icon')) {
+            // Delete the old icon if it exists
+            if ($service->icon && file_exists(public_path('uploads/' . $service->icon))) {
+                unlink(public_path('uploads/' . $service->icon));
+            }
+
+            // Save the new icon
+            $iconName = time() . '.' . $request->icon->getClientOriginalExtension();
+            $request->icon->move(public_path('uploads'), $iconName);
+            $service->icon = $iconName;
+        }
+
+
 
         // Update the service fields
         $service->name = $validatedData['name'];
@@ -114,7 +136,6 @@ class ServiceApiController extends Controller
         // Return a success response
         return response()->json(['message' => 'Service updated successfully', 'service' => $service]);
     }
-
 
 
 
