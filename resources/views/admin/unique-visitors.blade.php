@@ -25,38 +25,33 @@
             <div class="row">
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-info">
+                    <a href="{{ route('admin.appointment.manage') }}" class="small-box bg-info text-decoration-none">
                         <div class="inner">
                             <h3>{{ $count_appointment }}</h3>
-
                             <p>Appointments</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
                         </div>
-                        <a href="{{ route('admin.appointment.manage') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
+                    </a>
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-success">
+                    <a href="{{ route('admin.new.appointments') }}" class="small-box bg-success text-decoration-none">
                         <div class="inner">
                             <h3>{{ $count_accepted_appointments }}</h3>
-
                             <p>New Appointments</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="{{ route('admin.new.appointments') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
+                    </a>
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-warning">
-
+                    <a href="{{ route('admin.users') }}" class="small-box bg-warning text-decoration-none">
                         <div class="inner">
                             <h3>{{ $count_user }}</h3>
                             <p>Total User</p>
@@ -64,24 +59,22 @@
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a href="{{ route('admin.users') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
+                    </a>
                 </div>
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-danger">
+                    <a href="{{ route('admin.unique.visitors') }}" class="small-box bg-danger text-decoration-none">
                         <div class="inner">
                             <h3>65</h3>
-
                             <p>Unique Visitors</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>
                         </div>
-                        <a href="{{ route('admin.unique.visitors') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
+                    </a>
                 </div>
+
                 <!-- ./col -->
             </div>
             <div class="row">
