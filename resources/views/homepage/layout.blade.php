@@ -99,12 +99,12 @@
                     </a>
                 </li>
 
-                
+
                 <li>
                     <a href="{{ route('aboutPage') }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z" />
                         </svg>
@@ -131,8 +131,8 @@
                 <li id="login-li">
                     <a href="{{ route('login') }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                         </svg>
@@ -144,8 +144,8 @@
                 <li id="register-li">
                     <a href="{{ route('register') }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
                         </svg>
@@ -192,7 +192,7 @@
                 <span
                     class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Home</span>
             </a>
-           
+
             <a href="{{ route('myBooking') }}"
                 class="flex flex-col items-center justify-center px-3 hover:bg-gray-50 dark:hover:bg-gray-800 group">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -205,7 +205,7 @@
                     class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500 text-nowrap">My
                     Booking</span>
             </a>
-            <a href="{{ route('profile') }}"
+            {{-- <a href="{{ route('profile') }}"
                 class="inline-flex flex-col items-center justify-center px-3 hover:bg-gray-50 dark:hover:bg-gray-800 group">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6 text-slate-500">
@@ -215,16 +215,30 @@
 
                 <span
                     class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Profile</span>
+            </a> --}}
+            <a href="https://wa.me/+917280080080" target="_blank"
+                class="inline-flex items-center gap-2 text-white px-3 py-2 rounded-md flex-col">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6 bg-green-500 rounded-full">
+                    <path
+                        d="M20.52 3.48A11.88 11.88 0 0 0 2.46 20.12l-1.3 4.66a1 1 0 0 0 1.22 1.22l4.66-1.3a11.87 11.87 0 0 0 6.32 1.86c6.41 0 11.62-5.21 11.62-11.62 0-3.12-1.23-6.05-3.48-8.28zM12 21.37a9.34 9.34 0 0 1-5.06-1.47l-.36-.23-3.41.96.96-3.41-.23-.36a9.36 9.36 0 0 1 14.2-11.56 9.33 9.33 0 0 1 2.73 6.63c0 5.15-4.19 9.34-9.34 9.34zm5.48-6.89c-.26-.13-1.54-.76-1.78-.85s-.41-.13-.59.13-.68.85-.83 1-.31.19-.57.06-1.11-.41-2.12-1.32a7.92 7.92 0 0 1-1.47-1.82c-.15-.26 0-.41.12-.54.11-.11.25-.28.37-.42.12-.15.15-.26.22-.41s.04-.32-.02-.45-.59-1.42-.81-1.97c-.21-.5-.43-.44-.59-.45l-.5-.01a.95.95 0 0 0-.7.33c-.24.26-.93.91-.93 2.23s.95 2.58 1.09 2.76c.13.18 1.87 2.86 4.53 3.99 1.58.68 2.19.73 2.96.62.48-.07 1.54-.62 1.76-1.21.22-.6.22-1.11.15-1.22-.07-.11-.25-.18-.52-.31z" />
+                </svg>
+                <span
+                    class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">WhatsApp</span>
             </a>
+
             <a href="https://wa.me/7080080080/?text=hi" target="_blank"
                 class="inline-flex flex-col items-center justify-center px-1 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-6 h-6 animate-vibrate  text-slate-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
-                  </svg>
-                  
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                    class="w-6 h-6 animate-vibrate  text-slate-500" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                </svg>
+
 
                 <span
-                    class="text-sm  text-nowrap text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"> 7280080080</span>
+                    class="text-sm  text-nowrap text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">
+                    7280080080</span>
             </a>
 
         </div>
@@ -235,7 +249,7 @@
         $(document).ready(function() {
 
             var token = localStorage.getItem('token');
-            
+
             if (token) {
                 $.ajax({
                     url: '/api/profile',
