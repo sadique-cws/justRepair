@@ -6,6 +6,8 @@ use App\Models\Requirement;
 use App\Models\Service;
 use App\Models\ServiceFees;
 use Illuminate\Http\Request;
+use Validator;
+
 
 class ServiceApiController extends Controller
 {
@@ -60,84 +62,160 @@ class ServiceApiController extends Controller
             return response()->json(['success' => false]);
         }
     }
-
-    public function update(Request $request, string $slug)
+    public function update(Request $request, $slug)
     {
-        // Find the service by its slug
-        $service = Service::where("slug", $slug)->first();
+        // dd($request->icon);
 
-        // Check if the service exists
-        if (!$service) {
-            return response()->json(['error' => 'Service not found'], 404);
-        }
-
-        // Validate the incoming data
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'icon' => 'nullable|image|max:2048',
-            'requirements' => 'nullable|array',
-            'requirements.*.id' => 'nullable|exists:requirements,id',
-            'requirements.*.req_name' => 'required|string|max:255',
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',                      
+            'description' => 'required|string|min:3',                      
+            'icon' => 'nullable',  // Allow optional logo update
         ]);
 
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 422,
+                'error' => $validator->messages()
+            ], 422);
+        }
 
-        // // Handle file upload
+        $service = Service::where("slug", $slug)->first();
+        if (!$service) {
+            return response()->json([
+                'status' => 500,
+                'message' => "No Data Found"
+            ], 500);
+        }
+
+
+        // Handle the file upload
         // if ($request->hasFile('icon')) {
-        //     $iconPath = $request->file('icon')->store('service_icons', 'public');
-        //     $service->icon = $iconPath; // Update service with the new file path
+        //     // Delete the old icon if it exists
+        //     if ($service->icon && file_exists(public_path('uploads/' . $service->icon))) {
+        //         unlink(public_path('uploads/' . $service->icon));
+        //     }
+
+        //     // Save the new icon
+        //     $iconName = time() . '.' . $request->icon->getClientOriginalExtension();
+        //     $request->icon->move(public_path('uploads'), $iconName);
+        //     $service->icon = $iconName;
         // }
 
-        if ($request->hasFile('icon')) {
+        if ($request->filled('icon')) {
+            // Decode the Base64 string
+            $iconData = $request->input('icon');
+        
+            // Extract file information from the Base64 string
+            preg_match('/^data:image\/(\w+);base64,/', $iconData, $matches);
+            $extension = $matches[1]; // File extension (e.g., png, jpg, etc.)
+            $iconData = substr($iconData, strpos($iconData, ',') + 1); // Remove the Base64 prefix
+            $iconData = base64_decode($iconData);
+        
             // Delete the old icon if it exists
             if ($service->icon && file_exists(public_path('uploads/' . $service->icon))) {
                 unlink(public_path('uploads/' . $service->icon));
             }
-
+        
             // Save the new icon
-            $iconName = time() . '.' . $request->icon->getClientOriginalExtension();
-            $request->icon->move(public_path('uploads'), $iconName);
+            $iconName = time() . '.' . $extension;
+            file_put_contents(public_path('uploads/' . $iconName), $iconData);
             $service->icon = $iconName;
         }
 
+        $service->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            // 'icon' => $logo,
+        ]);
 
-
-        // Update the service fields
-        $service->name = $validatedData['name'];
-        $service->description = $validatedData['description'];
-        $service->save(); // Save the updated service
-
-        // Delete requirements that are not in the updated list
-        $existingIds = collect($validatedData['requirements'])->pluck('id')->filter();
-        Requirement::where('service_id', $service->id)
-            ->whereNotIn('id', $existingIds)
-            ->delete();
-
-        // Update the requirements
-        if (isset($validatedData['requirements'])) {
-            foreach ($validatedData['requirements'] as $reqData) {
-                if (isset($reqData['id'])) {
-                    // Update existing requirement
-                    $requirement = Requirement::find($reqData['id']);
-                    if ($requirement) {
-                        $requirement->req_name = $reqData['req_name'];
-                        $requirement->save();
-                    }
-                } else {
-                    // Create a new requirement (if no ID provided)
-                    Requirement::create([
-                        'service_id' => $service->id,
-                        'req_name' => $reqData['req_name'],
-                    ]);
-                }
-            }
-        }
-
-        // Return a success response
-        return response()->json(['message' => 'Service updated successfully', 'service' => $service]);
+        return response()->json([
+            'status' => 200,
+            'message' => "Data Updated Successfully"
+        ], 200);
     }
 
 
+
+    // public function update(Request $request, string $slug)
+    // {
+
+    //     // // Validate the incoming data
+    //     // $validatedData = $request->validate([
+    //     //     'name' => 'required|string|max:255',
+    //     //     'description' => 'required|string',
+    //     //     'icon' => 'nullable|image|max:2048',
+    //     //     'requirements' => 'nullable|array',
+    //     //     'requirements.*.id' => 'nullable|exists:requirements,id',
+    //     //     'requirements.*.req_name' => 'required|string|max:255',
+    //     // ]);
+
+    //     // dd($validatedData);
+
+    //      // Find the service by its slug
+    //      $service = Service::where("slug", $slug)->first();
+
+
+    //      // Check if the service exists
+    //      if (!$service) {
+    //          return response()->json(['error' => 'Service not found'], 404);
+    //      }
+
+
+
+    //     // // Handle file upload
+    //     // if ($request->hasFile('icon')) {
+    //     //     $iconPath = $request->file('icon')->store('service_icons', 'public');
+    //     //     $service->icon = $iconPath; // Update service with the new file path
+    //     // }
+
+    //     if ($request->hasFile('icon')) {
+    //         // Delete the old icon if it exists
+    //         if ($service->icon && file_exists(public_path('uploads/' . $service->icon))) {
+    //             unlink(public_path('uploads/' . $service->icon));
+    //         }
+
+    //         // Save the new icon
+    //         $iconName = time() . '.' . $request->icon->getClientOriginalExtension();
+    //         $request->icon->move(public_path('uploads'), $iconName);
+    //         $service->icon = $iconName;
+    //     }
+
+
+
+    //     // Update the service fields
+    //     $service->name = $validatedData['name'];
+    //     $service->description = $validatedData['description'];
+    //     $service->save(); // Save the updated service
+
+    //     // Delete requirements that are not in the updated list
+    //     // $existingIds = collect($validatedData['requirements'])->pluck('id')->filter();
+    //     // Requirement::where('service_id', $service->id)
+    //     //     ->whereNotIn('id', $existingIds)
+    //     //     ->delete();
+
+    //     // // Update the requirements
+    //     // if (isset($validatedData['requirements'])) {
+    //     //     foreach ($validatedData['requirements'] as $reqData) {
+    //     //         if (isset($reqData['id'])) {
+    //     //             // Update existing requirement
+    //     //             $requirement = Requirement::find($reqData['id']);
+    //     //             if ($requirement) {
+    //     //                 $requirement->req_name = $reqData['req_name'];
+    //     //                 $requirement->save();
+    //     //             }
+    //     //         } else {
+    //     //             // Create a new requirement (if no ID provided)
+    //     //             Requirement::create([
+    //     //                 'service_id' => $service->id,
+    //     //                 'req_name' => $reqData['req_name'],
+    //     //             ]);
+    //     //         }
+    //     //     }
+    //     // }
+
+    //     // Return a success response
+    //     return response()->json(['message' => 'Service updated successfully', 'service' => $service]);
+    // }
 
     public function destroy(string $id)
     {

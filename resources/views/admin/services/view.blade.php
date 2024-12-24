@@ -240,6 +240,45 @@
                             </div>
                         </div>
                         <!-- /.card -->
+
+                        <div class="modal fade" id="editServiceModal" tabindex="-1" role="dialog"
+                            aria-labelledby="editServiceModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editServiceModalLabel">Edit Service</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form enctype="multipart/form-data" id="editServiceForm">
+
+                                            <input type="hidden" id="editServiceSlug" name="slug">
+                                            <div class="form-group">
+                                                <label for="editServiceName">Name</label>
+                                                <input type="text" class="form-control" id="editServiceName"
+                                                    name="name" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="editServiceDescription">Description</label>
+                                                <textarea class="form-control" id="editServiceDescription" name="description" required></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="editServiceIcon">Icon</label>
+                                                <img src='/uploads/{{ $service->icon }}' width='50px'
+                                                    class="mt-2" />
+                                                <input type="file" class="form-control" id="editServiceIcon"
+                                                    name="icon">
+                                                <small class="form-text text-muted">Leave empty to keep the current
+                                                    icon.</small>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Update</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -376,161 +415,34 @@
 
                             $(".viewtitle").html(response.name + " Service View")
                             let tableRows = `
-                        <tr> 
-                            <th>Id</th>
-                            <td>${response.id}</td>
-                        </tr>
-                        <tr> 
-                            <th>Name</th>
-                            <td>${response.name}</td>
-                        </tr>
-                        <tr>
-                            <th>Icon</th>
-                            <td><img src='/uploads/${response.icon}' width='50px'/></td>
-                        </tr>
-                        <tr>
-                            <th>Description</th>
-                            <td>${response.description}</td>
-                        </tr>
-                      
-                       
-                            <tr>
-                                <td> 
-                                    <button class="btn btn-danger btn-sm mr-4 deleteBtn" data-id="${response.id}">Delete</button> 
-                                    <button class="btn btn-primary btn-sm editBtn" data-id="${response.slug}">Edit</button>
-                                     {{-- model for service-edit work goes here --}}
-                                    <div class="modal fade" id="editServiceModal" tabindex="-1" role="dialog" aria-labelledby="editServiceModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="editServiceModalLabel">Edit Service</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form method="post" enctype="multipart/form-data" id="editServiceForm">
-                                                        @csrf
-                                                        @method('put')
-                                                        <input type="hidden" id="editServiceId" name="id">
-                                                        <div class="form-group">
-                                                            <label for="editServiceName">Name</label>
-                                                            <input type="text" class="form-control" id="editServiceName" name="name" required>
-                                                        </div>  
-                                                        <div class="form-group">
-                                                            <label for="editServiceDescription">Description</label>
-                                                            <textarea class="form-control" id="editServiceDescription" name="description" required></textarea>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="editServiceIcon">Icon</label>
-                                                            <input type="file" class="form-control" id="editServiceIcon" name="icon">
-                                                            <small class="form-text text-muted">Leave empty to keep the current icon.</small>
-                                                            <img src='/uploads/{{ $service->icon }}' width='50px' class="mt-2" />
-                                                        </div>                                                        
-                                                        <div class="form-group" id="editServiceRequirementsContainer">
-                                                            // appending this in the ajax section with javascript appending method
-                                                        </div>
-                                                        <button type="submit" class="btn btn-primary">Update</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </td>
-                        </tr>`;
-                            $('#tableBody').html(tableRows);
-
-                            $('#editServiceForm').submit(function(e) {
-                            e.preventDefault(); // Prevent the default form submission
+                                <tr> 
+                                    <th>Id</th>
+                                    <td>${response.id}</td>
+                                </tr>
+                                <tr> 
+                                    <th>Name</th>
+                                    <td>${response.name}</td>
+                                </tr>
+                                <tr>
+                                    <th>Icon</th>
+                                    <td><img src='/uploads/${response.icon}' width='50px'/></td>
+                                </tr>
+                                <tr>
+                                    <th>Description</th>
+                                    <td>${response.description}</td>
+                                </tr>
                             
-
-                            let name = $('#editServiceName').val().trim();
-                            let description = $('#editServiceDescription').val().trim();
-
-
-                            // Check if required fields are filled
-                            if (name === '' || description === '') {
-                                alert('Please fill in all required fields.');
-                                return; // Stop form submission if validation fails
-                            }
-
-                            const id = $('#editServiceId').val(); // Get the service ID
-                            const updateUrl = `/api/admin/service/${id}`; // Update API URL
-
-                            // let name = $('#editServiceName').val().trim();
-                            // let description = $('#editServiceDescription').val().trim();
-                            let icon = $('#editServiceIcon').prop('files')[
-                            0]; //collect the first file from input
-
-
-
-                            // Collect requirements as an array of objects
-                            let requirements = [];
-                            $('#editServiceRequirementsContainer .requirement-item input').each(
-                                function() {
-                                    requirements.push({
-                                        id: $(this).data(
-                                            'id'
-                                        ), //here fetching the ID from requirements;
-                                        req_name: $(this).val().trim()
-                                    });
-                                });
-
-
-                            // formData object to append data:
-                            let formData = new FormData();
-                            formData.append('name', name);
-                            formData.append('description', description);
-                            formData.append('icon', icon);
-                            formData.append('requirements', JSON.stringify(requirements));
-
-                            console.log(name,description);
-
-
-                            // // Send the update request via AJAX
-                            // let formdata = {
-                            //     name,
-                            //     description,
-                            //     requirements
-                            // };
-
-
-
-                            $.ajax({
-                                url: updateUrl,
-                                type: 'PUT',
-                                data: formData,
-                                // data: JSON.stringify(
-                                //     formdata), // Convert to JSON string for proper handling
-
-                                processData: false,
-                                contentType: false,
-                                // contentType: 'application/json', // Specify the content type as JSON
-
-
-
-                                success: function(response) {
-                                    alert('Service updated successfully.');
-                                    $('#editServiceModal').modal(
-                                        'hide'); // Close the modal
-                                    location.href =
-                                        "/admin/service/"; // Reload the page to reflect changes
-                                },
-                                error: function(xhr) {
-                                    let errorMessage =
-                                        'Failed to update service. Please try again.';
-                                    if (xhr.responseJSON && xhr.responseJSON.errors) {
-                                        errorMessage = Object.values(xhr.responseJSON
-                                                .errors)
-                                            .flat()
-                                            .join('\n');
-                                    }
-                                    alert(errorMessage);
-                                },
-                            });
-                        });
+                            
+                                    <tr>
+                                        <td> 
+                                            <button class="btn btn-danger btn-sm mr-4 deleteBtn" data-id="${response.id}">Delete</button> 
+                                            <button class="btn btn-primary btn-sm editBtn" data-id="${response.slug}">Edit</button>
+                                            {{-- model for service-edit work goes here --}}
+                                        </td>
+                                </tr>`;
+                            $('#tableBody').html(tableRows);
                         }
+
                         $(document).on('click', '.editBtn', function() {
                             const id = $(this).data('id'); // Get the service ID
                             const url = `/api/admin/service/${id}`; // Construct the API URL
@@ -544,14 +456,11 @@
                                     // console.log(response.requirements);
 
                                     // Populate the modal fields with the response data
-                                    $('#editServiceId').val(response.slug);
+                                    $('#editServiceSlug').val(response.slug);
                                     $('#editServiceName').val(response.name);
                                     $('#editServiceDescription').val(response
                                         .description);
 
-
-
-                                    // Process requirements safely  
                                     if (Array.isArray(response.requirements)) {
                                         let requirementsHTML =
                                             ''; // To hold the dynamically created input fields
@@ -587,15 +496,12 @@
                         });
 
                         //edit work goes here
-                      
+
                     },
                     error: function(xhr, status, error) {
                         console.error(xhr.responseText);
                     }
                 });
-
-
-
 
                 // // here goes the services and the required fee:
                 // $.ajax({
@@ -639,5 +545,53 @@
                 });
 
             });
+        </script>
+        <script>
+            $('#editServiceForm').submit(function(e) {
+                e.preventDefault();
+
+                let ServiceSlug = $('#editServiceSlug').val();
+
+                // Gather form data
+                let formData = {
+                    name: $('#editServiceName').val(),
+                    description: $('#editServiceDescription').val(),
+                };
+
+                // Check if a file is selected
+                let fileInput = document.getElementById('editServiceIcon');
+                if (fileInput.files && fileInput.files[0]) {
+                    let file = fileInput.files[0];
+                    let reader = new FileReader();
+                    reader.onload = function(event) {
+                        // Add the Base64 file content to formData
+                        formData.icon = event.target.result;
+
+                        // Send the AJAX request
+                        sendRequest(ServiceSlug, formData);
+                    };
+                    reader.readAsDataURL(file); // Convert file to Base64
+                } else {
+                    // If no file is selected, send the request without the icon
+                    sendRequest(ServiceSlug, formData);
+                }
+            });
+
+            function sendRequest(ServiceSlug, formData) {
+                $.ajax({
+                    type: 'PUT',
+                    url: `/api/admin/service/${ServiceSlug}`,
+                    data: JSON.stringify(formData),
+                    contentType: 'application/json', // Send data as JSON
+                    success: function(response) {
+                        alert('Service updated successfully.');
+                        $('#editServiceModal').modal('hide'); // Close the modal
+                        location.href = "/admin/service/"; // Reload the page to reflect changes
+                    },
+                    error: function(xhr) {
+                        alert('Failed to update service. Please try again.');
+                    },
+                });
+            }
         </script>
     @endsection
