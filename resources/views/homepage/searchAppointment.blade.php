@@ -186,8 +186,8 @@
                                                 </li>
                                                 <li class="mb-10 ms-6">            
                                                     <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-800">
-                                                        <svg class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                                        <svg class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16">
+                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.5 7.5v-2a3.5 3.5 0 117 0v2m-7 0h7a1 1 0 011 1v5a1 1 0 01-1 1h-7a1 1 0 01-1-1v-5a1 1 0 011-1z"/>
                                                         </svg>
                                                     </span>
                                                     <h3 class="font-medium leading-tight">Closed</h3>
@@ -195,6 +195,21 @@
                                                 </li>
                                             </ol>
                                     `);
+                            } else {
+                                // Default case for undefined or unexpected status
+                                li.append(`
+                                    <ol  class="relative text-gray-500 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 mt-5">                  
+                                        <li class="mb-10 ms-6">            
+                                            <span class="absolute flex items-center justify-center w-8 h-8 bg-blue-200 rounded-full -start-4 ring-4 ring-white dark:ring-gray-900 dark:bg-blue-800">
+                                                <svg class="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11.5v1M8 2.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zm0 4v2"/>
+                                                </svg>
+                                            </span>
+                                            <h3 class="font-medium leading-tight">Unknown Status</h3>
+                                            <p>The status of your request is currently unknown. Please contact support for further clarification.</p>
+                                        </li>
+                                    </ol>
+                                `);
                             }
                         });
                     },
