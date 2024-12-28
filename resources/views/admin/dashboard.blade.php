@@ -23,7 +23,7 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-4 col-6">
                     <!-- small box -->
                     <a href="{{ route('admin.appointment.manage') }}" class="small-box bg-info text-decoration-none">
                         <div class="inner">
@@ -35,8 +35,7 @@
                         </div>
                     </a>
                 </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-4 col-6">
                     <!-- small box -->
                     <a href="{{ route('admin.new.appointments') }}" class="small-box bg-success text-decoration-none">
                         <div class="inner">
@@ -48,10 +47,9 @@
                         </div>
                     </a>
                 </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-4 col-6">
                     <!-- small box -->
-                    <a href="{{ route('admin.users') }}" class="small-box bg-warning text-decoration-none">
+                    <a href="{{ route('admin.user.manage') }}" class="small-box bg-warning text-decoration-none">
                         <div class="inner">
                             <h3>{{ $count_user }}</h3>
                             <p>Total User</p>
@@ -61,26 +59,10 @@
                         </div>
                     </a>
                 </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <a href="{{ route('admin.unique.visitors') }}" class="small-box bg-danger text-decoration-none">
-                        <div class="inner">
-                            <h3>65</h3>
-                            <p>Unique Visitors</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-pie-graph"></i>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- ./col -->
+               
             </div>
             <div class="row">
                 <div class="col-lg-12">
-
-                    <!-- /.card -->
 
                     <div class="card">
                         <div class="card-header border-0">

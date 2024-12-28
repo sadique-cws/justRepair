@@ -6,6 +6,7 @@ use App\Http\Controllers\ServiceFeeApiController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\UserApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,14 @@ Route::get("appointment/my-booking", [HomeController::class,"myBookingApi"])->mi
 Route::post('appointment/updateStatus', [AppointmentApiController::class, 'updateStatus'])->name('appointment.updateStatus');
 
 Route::prefix("admin")->group(function () {
+
+    Route::prefix("user")->group(function(){
+        Route::controller(UserApiController::class)->group(function(){
+            Route::get('/','users')->name("admin.api.users");
+        });
+    });
+
+
     Route::apiResource("service", ServiceApiController::class);
     Route::apiResource("servicefee", ServiceFeeApiController::class);
     Route::apiResource("appointment", AppointmentApiController::class);

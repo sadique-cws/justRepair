@@ -59,26 +59,15 @@ class AdminController extends Controller
         return view('admin.viewInvoice', compact("invoiceId", "invoiceData"));
     }
 
-    public function usersProfile(){
-        $data['count_appointment'] = Appointment::all()->count();
-        $data['count_user'] = User::all()->count();
-        $data['count_accepted_appointments'] = Appointment::where('status','accept')->count();
-
-        return view('admin.users' , $data);
-    }
-
     public function uniqueVisitors(){
+        // but i don't have to count the appointments in the unique visitors page, i have to resolve it later
         $data['count_appointment'] = Appointment::all()->count();
-        $data['count_user'] = User::all()->count();
-        $data['count_accepted_appointments'] = Appointment::where('status','accept')->count();
 
         return view('admin.unique-visitors',$data);
     }
 
     public function newAppointments(){
         $data['count_appointment'] = Appointment::all()->count();
-        $data['count_user'] = User::all()->count();
-        $data['count_accepted_appointments'] = Appointment::where('status','accept')->count();
         return view('admin.new-appointments',$data);
     }
 
