@@ -26,8 +26,7 @@ class ServiceApiController extends Controller
             'name' => 'required|string|max:255',
             'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'required|string',
-        ]);
-
+        ]); 
 
         // Store the service
         $service = new Service();

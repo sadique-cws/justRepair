@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -14,36 +15,42 @@ use Illuminate\Support\Facades\Route;
 // Route::post('/logout',[AuthController::class,"logout"])->name("logout");
 
 
-Route::get("/login", [AuthController::class,"signIn"])->name('login');
-Route::get("/logout", [AuthController::class,"signOut"])->name('logout');
-Route::get("/register", [AuthController::class,"registerForm"])->name('register');
-Route::get("/profile", [AuthController::class,"profile"])->name('profile');
+Route::get("/login", [AuthController::class, "signIn"])->name('login');
+Route::get("/logout", [AuthController::class, "signOut"])->name('logout');
+Route::get("/register", [AuthController::class, "registerForm"])->name('register');
+Route::get("/profile", [AuthController::class, "profile"])->name('profile');
 
-Route::get("/", [HomeController::class,"index"])->name("index");
-Route::get("/my-booking", [HomeController::class,"myBooking"])->name("myBooking");
-Route::get("/view/{slug}",[HomeController::class,"viewService"])->name("home.view");
-Route::get("/aboutPage", [HomeController::class,"aboutPage"])->name("aboutPage");
-Route::get("/terms-condition", [HomeController::class,"tandc"])->name("tandc");
-Route::get("/login-required", [HomeController::class,"loginRequired"])->name("loginRequired");
-Route::get("/services", [HomeController::class,"ourSevices"])->name("ourSevices");
-Route::get("/confirmed_appointment", [HomeController::class,"confirmed_appointment"])->name('confirmed_appointment');
-Route::get("/search", [HomeController::class,"searchAppointment"])->name('search');
+Route::get("/", [HomeController::class, "index"])->name("index");
+Route::get("/my-booking", [HomeController::class, "myBooking"])->name("myBooking");
+Route::get("/view/{slug}", [HomeController::class, "viewService"])->name("home.view");
+Route::get("/aboutPage", [HomeController::class, "aboutPage"])->name("aboutPage");
+Route::get("/terms-condition", [HomeController::class, "tandc"])->name("tandc");
+Route::get("/login-required", [HomeController::class, "loginRequired"])->name("loginRequired");
+Route::get("/services", [HomeController::class, "ourSevices"])->name("ourSevices");
+Route::get("/confirmed_appointment", [HomeController::class, "confirmed_appointment"])->name('confirmed_appointment');
+Route::get("/search", [HomeController::class, "searchAppointment"])->name('search');
 
-    Route::get("/profile", [AuthController::class,"profile"])->name('profile');    
+Route::get("/profile", [AuthController::class, "profile"])->name('profile');
 
 
 
 Route::prefix("admin")->group(function () {
-    Route::match(["get","post"],'/login', [AdminController::class,"adminLogin"])->name('adminLogin');
-    Route::get("/logout",[AdminController::class,"adminLogout"])->name("adminLogout");
+    Route::match(["get", "post"], '/login', [AdminController::class, "adminLogin"])->name('adminLogin');
+    Route::get("/logout", [AdminController::class, "adminLogout"])->name("adminLogout");
 
     Route::middleware('auth:admin')->group(function () {
+
+        Route::prefix("banner")->group(function () {
+            Route::controller(BannerController::class)->group(function () {
+                Route::get('/insert', 'insert')->name('admin.banner.insert');
+                Route::get('/','index')->name('admin.banner.manage');
+            });
+        });
+
         Route::controller(AdminController::class)->group(function () {
-            
-            Route::get('/');
             Route::get('/', 'dashboard')->name("admin.dashboard");
-            Route::get('/unique-visitors','uniqueVisitors')->name('admin.unique.visitors');
-            Route::get('/new-appointments','newAppointments')->name('admin.new.appointments');
+            Route::get('/unique-visitors', 'uniqueVisitors')->name('admin.unique.visitors');
+            Route::get('/new-appointments', 'newAppointments')->name('admin.new.appointments');
 
 
             //service routes
@@ -54,12 +61,9 @@ Route::prefix("admin")->group(function () {
                     Route::get('/view/{id}', 'view')->name("admin.service.view");
                     Route::post('/store', 'store')->name("admin.service.store");
                     Route::put("view/{id}/servicefee/{servicefees_id}/update", "updateServiceFees");
-                    Route::put('/requirements/{id}','updateRequirements')->name('requirements.update');
+                    Route::put('/requirements/{id}', 'updateRequirements')->name('requirements.update');
                     Route::post('/requirements', 'storeRequirements')->name('requirements.store');
                     Route::delete('/requirements/{id}', 'destroyRequirements')->name('requirements.destroy');
-
-
-
                 });
             });
             // Route::prefix("service-fee")->group(function () {
@@ -76,21 +80,16 @@ Route::prefix("admin")->group(function () {
                     Route::get('/view/{id}', 'show')->name("admin.appointment.view");
                 });
             });
-            Route::post("/appointment/generate/invoice",[AdminController::class,"viewInvoice"])->name("admin.invoice");
+            Route::post("/appointment/generate/invoice", [AdminController::class, "viewInvoice"])->name("admin.invoice");
 
-            Route::prefix("user")->group(function(){
-                Route::controller(UserController::class)->group(function(){
-                    Route::get('/','index')->name("admin.user.manage");
-                    Route::get('/view/{id}','show')->name("admin.user.view");
+            Route::prefix("user")->group(function () {
+                Route::controller(UserController::class)->group(function () {
+                    Route::get('/', 'index')->name("admin.user.manage");
+                    Route::get('/view/{id}', 'show')->name("admin.user.view");
                 });
             });
-
-
-
-    });
+        });
     });
 });
 
-Route::get("/{slug}/appointment",[HomeController::class,"bookAppointment"])->name("home.bookAppointment");
-
-
+Route::get("/{slug}/appointment", [HomeController::class, "bookAppointment"])->name("home.bookAppointment");

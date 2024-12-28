@@ -4,6 +4,8 @@ use App\Http\Controllers\AppointmentApiController;
 use App\Http\Controllers\ServiceApiController;
 use App\Http\Controllers\ServiceFeeApiController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BannerApiController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\UserApiController;
@@ -35,7 +37,7 @@ Route::prefix("admin")->group(function () {
         });
     });
 
-
+    Route::apiResource("banner",BannerApiController::class);
     Route::apiResource("service", ServiceApiController::class);
     Route::apiResource("servicefee", ServiceFeeApiController::class);
     Route::apiResource("appointment", AppointmentApiController::class);

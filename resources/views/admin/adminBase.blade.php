@@ -187,6 +187,30 @@
 
                             </ul>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.appointment.manage') }}" class="nav-link">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    Banners
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.banner.manage') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Manage Banners</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.banner.insert') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Insert Banners</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
 
                         <li class="nav-item">
                             <a href="{{ route('admin.service.manage') }}" class="nav-link">
