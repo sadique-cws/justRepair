@@ -12,7 +12,8 @@ class BannerApiController extends Controller
      */
     public function index()
     {
-        //
+        $data = Banner::all();
+        return response()->json($data);
     }
 
     /**

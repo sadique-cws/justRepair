@@ -45,13 +45,6 @@
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover text-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Banner Image</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
                                 <tbody id="tableBody">
                                     <!-- Table rows will be dynamically added here -->
                                 </tbody>
@@ -74,22 +67,36 @@
         $(document).ready(function() {
             // AJAX call to fetch data
             $.ajax({
-                url: "{{ route('service.index') }}", // Update with your controller's URL here:
+                url: "{{ route('banner.index') }}",
                 type: 'GET',
                 success: function(response) {
                     // Update the table with the response data
                     if (response && response.length > 0) {
                         var tableRows = '';
-                        response.forEach(function(row) {
+                        response.forEach(function(row, index) {
+                            // Start a new row for every two images
+                            if (index % 2 === 0) {
+                                tableRows += '<tr>';
+                            }
 
-                            tableRows += `<tr> 
-                        <td>${row.id}</td>
-                        <td>${row.name}</td>
-                        <td><img src='/uploads/${row.icon}' width='50px'/></td>
-                        <td>${row.description.substr(0,50)}...</td> 
-                        <td> <a href='/admin/service/view/${row.slug}'class='btn btn-warning'>View</a> </td>
-                        </tr>`;
+                            // Add the current image with footer buttons to the row
+                            tableRows +=
+                                `<td style="text-align: center; padding: 10px;">
+                                    <div style="border: 1px solid #ccc; padding: 10px;">
+                                        <img src='/banners/${row.image}' width='500px' style="display: block; margin: auto;"/>
+                                        <div style="margin-top: 10px;">
+                                            <a href='/admin/banner/view/${row.id}' class='btn btn-warning' style="margin-right: 5px;">View</a>
+                                            <a href='/admin/banner/destroy/${row.id}' class='btn btn-danger'>Delete</a>
+                                        </div>
+                                    </div>
+                                </td>`;
+
+                            // Close the row after two images
+                            if (index % 2 === 1 || index === response.length - 1) {
+                                tableRows += '</tr>';
+                            }
                         });
+
                         $('#tableBody').html(tableRows);
                     }
                 },

@@ -44,6 +44,7 @@ Route::prefix("admin")->group(function () {
             Route::controller(BannerController::class)->group(function () {
                 Route::get('/insert', 'insert')->name('admin.banner.insert');
                 Route::get('/','index')->name('admin.banner.manage');
+                Route::get('/view/{id}', 'view')->name('admin.banner.view');
             });
         });
 
