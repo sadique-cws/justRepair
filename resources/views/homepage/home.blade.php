@@ -14,7 +14,8 @@
         <div class="flex items-center gap-5 md:flex-row flex-col ">
             <div class="flex-1">
                 <h2 class="text-2xl font-semibold mb-5">What you Looking For?</h2>
-
+                <div id="loader" class="text-5xl text-slate-300 py-5" style="display: none;">Loading...</div>
+            
                 <div class="grid grid-cols-2 md:grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-5" id="serviceList">
                     <!-- Services will be loaded here dynamically -->
                     <div class="animate-pulse bg-gray-200 rounded-lg shadow-md p-4">
@@ -87,10 +88,12 @@
         </div>
     </div>
 
+
     <script>
         $(document).ready(function() {
 
             let callingServices = (search) => {
+                $('#loader').show();
 
                 $.ajax({
                     url: `{{ route('service.index') }}`,
@@ -100,6 +103,8 @@
                     },
                     // processData:false,
                     success: function(response) {
+                        $('#loader').hide();
+
                         let serviceList = $("#serviceList");
                         serviceList.empty();
                         response.forEach((item, index) => {
