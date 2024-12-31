@@ -37,7 +37,6 @@ class HomeController extends Controller
         return view("homepage.book_appointment", $data);
     }
 
-
     public function confirmed_appointment()
     {
         return view("homepage.confirmed_appointment");
@@ -70,4 +69,6 @@ class HomeController extends Controller
     {
         return view("homepage.searchAppointment");
     }
+
+   
 }

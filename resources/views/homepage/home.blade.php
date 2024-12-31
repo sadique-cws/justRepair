@@ -89,14 +89,19 @@
 
     <script>
         $(document).ready(function() {
-            let callingServices = () => {
+
+            let callingServices = (search) => {
+
                 $.ajax({
                     url: `{{ route('service.index') }}`,
                     type: "GET",
+                    data: {
+                        'search': search
+                    },
+                    // processData:false,
                     success: function(response) {
                         let serviceList = $("#serviceList");
                         serviceList.empty();
-
                         response.forEach((item, index) => {
                             let colors = ['bg-blue-200', 'bg-green-200', 'bg-yellow-200',
                                 'bg-pink-200', 'bg-purple-200'
@@ -109,13 +114,21 @@
                                     <h3 class="mt-2 text-sm text-center">${item.name}</h3>
                                 </a>
                             `)
-
-
                         })
                     }
                 });
             }
             callingServices();
+
+            $('#searchField').on("keyup", function() {
+                let searchValue = $("#searchField").val();
+                if (searchValue.length > 3) {
+                    callingServices(searchValue);
+                } else {
+                    callingServices();
+                }
+            });
+
         })
     </script>
 

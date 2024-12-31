@@ -14,9 +14,14 @@ class ServiceApiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $req)
     {
         $data = Service::with("requirements")->get();
+        if($req->search){
+            $search= $req->search;
+            $data = Service::with("requirements")->where('name','LIKE',"%$search%")->get();
+
+        }
         return response()->json($data);
     }
 

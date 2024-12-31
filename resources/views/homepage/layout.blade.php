@@ -25,6 +25,22 @@
                     <a href="{{ route('index') }}" class="lg:w-2/12 w-6/12  text-slate-800">
                         <img src="{{ asset('images/logo.png') }}" class="" />
                     </a>
+
+                    {{-- search option starts here --}}
+                    <div class="w-full md:w-1/2">
+                        <div class="flex items-center space-x-2">
+                            <input type="text" name="table_search" id="searchField"
+                                class="w-full p-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Search">
+                            <button type="submit" id="searchButton"
+                                class="p-2 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none">
+                                <i class="fas fa-search text-gray-600"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    {{-- search option ends here  --}}
+
                     <button
                         class="text-black hover:bg-slate-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
                         type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation"
@@ -103,8 +119,8 @@
                 <li>
                     <a href="{{ route('aboutPage') }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z" />
                         </svg>
@@ -218,7 +234,8 @@
             </a> --}}
             <a href="https://wa.me/+917280080080" target="_blank"
                 class="inline-flex items-center gap-2 text-white px-3 py-2 rounded-md flex-col">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6 bg-green-500 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
+                    class="w-6 h-6 bg-green-500 rounded-full">
                     <path
                         d="M20.52 3.48A11.88 11.88 0 0 0 2.46 20.12l-1.3 4.66a1 1 0 0 0 1.22 1.22l4.66-1.3a11.87 11.87 0 0 0 6.32 1.86c6.41 0 11.62-5.21 11.62-11.62 0-3.12-1.23-6.05-3.48-8.28zM12 21.37a9.34 9.34 0 0 1-5.06-1.47l-.36-.23-3.41.96.96-3.41-.23-.36a9.36 9.36 0 0 1 14.2-11.56 9.33 9.33 0 0 1 2.73 6.63c0 5.15-4.19 9.34-9.34 9.34zm5.48-6.89c-.26-.13-1.54-.76-1.78-.85s-.41-.13-.59.13-.68.85-.83 1-.31.19-.57.06-1.11-.41-2.12-1.32a7.92 7.92 0 0 1-1.47-1.82c-.15-.26 0-.41.12-.54.11-.11.25-.28.37-.42.12-.15.15-.26.22-.41s.04-.32-.02-.45-.59-1.42-.81-1.97c-.21-.5-.43-.44-.59-.45l-.5-.01a.95.95 0 0 0-.7.33c-.24.26-.93.91-.93 2.23s.95 2.58 1.09 2.76c.13.18 1.87 2.86 4.53 3.99 1.58.68 2.19.73 2.96.62.48-.07 1.54-.62 1.76-1.21.22-.6.22-1.11.15-1.22-.07-.11-.25-.18-.52-.31z" />
                 </svg>
