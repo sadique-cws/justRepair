@@ -44,7 +44,7 @@
         </div>
         <div class="sm:px-2 md:px-10">
             <div class="mt-5">
-                <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+                <div class="mb-4 border-b border-gray-200 ">
                     <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab"
                         data-tabs-toggle="#default-tab-content" role="tablist">
                         <li class="me-2" role="presentation">
@@ -54,13 +54,13 @@
                         </li>
                         <li class="me-2" role="presentation">
                             <button
-                                class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-400 hover:border-gray-300 dark:hover:text-gray-300"
+                                class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-400 hover:border-gray-300 "
                                 id="dashboard-tab" data-tabs-target="#rate" type="button" role="tab"
                                 aria-controls="dashboard" aria-selected="false">Our Pricing</button>
                         </li>
                         <li class="me-2" role="presentation">
                             <button
-                                class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-400 hover:border-gray-300 dark:hover:text-gray-300"
+                                class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-400 hover:border-gray-300 "
                                 id="settings-tab" data-tabs-target="#faq" type="button" role="tab"
                                 aria-controls="settings" aria-selected="false">FAQ's</button>
                         </li>
@@ -68,7 +68,7 @@
                     </ul>
                 </div>
                 <div id="default-tab-content">
-                    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="book" role="tabpanel"
+                    <div class="hidden p-4 rounded-lg bg-gray-50 " id="book" role="tabpanel"
                         aria-labelledby="profile-tab">
                         <form method="get" action="{{ route('home.bookAppointment', $service->slug) }}">
                             <div class="mb-3 flex flex-col">
@@ -101,7 +101,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="rate" role="tabpanel"
+                    <div class="hidden p-4 rounded-lg bg-gray-50 " id="rate" role="tabpanel"
                         aria-labelledby="dashboard-tab">
 
                         <div class="bg-green-500 rounded-md text-white px-3 py-2 flex items-center gap-2">
@@ -115,13 +115,13 @@
                         </div>
 
                         <div id="accordion-flush" data-accordion="collapse"
-                            data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
-                            data-inactive-classes="text-gray-500 dark:text-gray-400">
+                            data-active-classes="bg-white text-gray-900 "
+                            data-inactive-classes="text-gray-500">
                             @foreach ($service->servicefees as $item)
                                 @if (!$item->parent_id)
                                     <h2 id="accordion-flush-heading-{{ $item->id }}">
                                         <button type="button"
-                                            class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3"
+                                            class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200  gap-3"
                                             data-accordion-target="#accordion-flush-body-{{ $item->id }}"
                                             aria-expanded="true" aria-controls="accordion-flush-body-{{ $item->id }}">
 
@@ -145,7 +145,7 @@
                                     </h2>
                                     <div id="accordion-flush-body-{{ $item->id }}" class="hidden"
                                         aria-labelledby="accordion-flush-heading-{{ $item->id }}">
-                                        <div class="py-5 border-b border-gray-200 dark:border-gray-700">
+                                        <div class="py-5 border-b border-gray-200 ">
                                             @foreach ($item->subfees as $subitem)
                                                 <span class="flex justify-between text-sm bg-slate-200 p-2 rounded">
                                                     <span>{{ $loop->index + 1 }}. {{ $subitem->service_fees_name }}</span>
@@ -161,7 +161,7 @@
 
                     </div>
 
-                    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="faq" role="tabpanel"
+                    <div class="hidden p-4 rounded-lg bg-gray-50 " id="faq" role="tabpanel"
                         aria-labelledby="contacts-tab">
                         {{-- faq --}}
                         <p class="text-bold text-black">Q. Do we offer any VISIT / Inspection Charge for Air Conditioner
