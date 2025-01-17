@@ -195,8 +195,7 @@
 
 
 
-    <div
-        class="fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200  ">
+    <div class="fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200  ">
         <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
             <a href="{{ route('index') }}"
                 class="inline-flex flex-col items-center justify-center px-3 hover:bg-gray-50  group">
@@ -205,8 +204,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                 </svg>
-                <span
-                    class="text-sm text-gray-500  group-hover:text-blue-600 ">Home</span>
+                <span class="text-sm text-gray-500  group-hover:text-blue-600 ">Home</span>
             </a>
 
             <a href="{{ route('myBooking') }}"
@@ -217,8 +215,7 @@
                         d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0 1 18 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3 1.5 1.5 3-3.75" />
                 </svg>
 
-                <span
-                    class="text-sm text-gray-500  group-hover:text-blue-600  text-nowrap">My
+                <span class="text-sm text-gray-500  group-hover:text-blue-600  text-nowrap">My
                     Booking</span>
             </a>
             {{-- <a href="{{ route('profile') }}"
@@ -239,24 +236,21 @@
                     <path
                         d="M20.52 3.48A11.88 11.88 0 0 0 2.46 20.12l-1.3 4.66a1 1 0 0 0 1.22 1.22l4.66-1.3a11.87 11.87 0 0 0 6.32 1.86c6.41 0 11.62-5.21 11.62-11.62 0-3.12-1.23-6.05-3.48-8.28zM12 21.37a9.34 9.34 0 0 1-5.06-1.47l-.36-.23-3.41.96.96-3.41-.23-.36a9.36 9.36 0 0 1 14.2-11.56 9.33 9.33 0 0 1 2.73 6.63c0 5.15-4.19 9.34-9.34 9.34zm5.48-6.89c-.26-.13-1.54-.76-1.78-.85s-.41-.13-.59.13-.68.85-.83 1-.31.19-.57.06-1.11-.41-2.12-1.32a7.92 7.92 0 0 1-1.47-1.82c-.15-.26 0-.41.12-.54.11-.11.25-.28.37-.42.12-.15.15-.26.22-.41s.04-.32-.02-.45-.59-1.42-.81-1.97c-.21-.5-.43-.44-.59-.45l-.5-.01a.95.95 0 0 0-.7.33c-.24.26-.93.91-.93 2.23s.95 2.58 1.09 2.76c.13.18 1.87 2.86 4.53 3.99 1.58.68 2.19.73 2.96.62.48-.07 1.54-.62 1.76-1.21.22-.6.22-1.11.15-1.22-.07-.11-.25-.18-.52-.31z" />
                 </svg>
-                <span
-                    class="text-sm text-gray-500  group-hover:text-blue-600 ">WhatsApp</span>
+                <span class="text-sm text-gray-500  group-hover:text-blue-600 ">WhatsApp</span>
             </a>
 
-            <a href="https://wa.me/7080080080/?text=hi" target="_blank"
-                class="inline-flex flex-col items-center justify-center px-1 hover:bg-gray-50  group">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                    class="w-6 h-6 animate-vibrate  text-slate-500" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-6 h-6">
+            <a href="tel:7080080080" target="_blank"
+                class="inline-flex flex-col items-center justify-center px-1 hover:bg-gray-50 group">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-6 h-6 animate-vibrate text-slate-500"
+                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
                 </svg>
 
-
-                <span
-                    class="text-sm  text-nowrap text-gray-500  group-hover:text-blue-600 ">
-                    7280080080</span>
+                <span class="text-sm text-nowrap text-gray-500 group-hover:text-blue-600">
+                    7080080080</span>
             </a>
+
 
         </div>
     </div>
