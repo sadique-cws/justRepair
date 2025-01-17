@@ -19,7 +19,7 @@ class HomeController extends Controller
     public function myBookingApi(Request $request)
     {
         $user = auth()->user();
-        $appointment = Appointment::where("mobileno", $user->mobile_no)->get();
+        $appointment = Appointment::where("user_id", $user->id)->get();
         return response()->json($appointment);
     }
 
