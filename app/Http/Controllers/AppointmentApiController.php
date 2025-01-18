@@ -5,6 +5,7 @@ use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class AppointmentApiController extends Controller
 {
@@ -65,9 +66,7 @@ class AppointmentApiController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        
-       
+    {               
         $validator = Validator::make($request->all(), [
             'fullname' => 'required|string',
             'mobileno' => 'required|string',
@@ -85,6 +84,7 @@ class AppointmentApiController extends Controller
             return response()->json(['success' => false, 'errors' => $validator->errors()], 400);
         }
 
+        
         // Generating Complain Number
         
         do {
@@ -106,6 +106,8 @@ class AppointmentApiController extends Controller
 
         $appointment->preferred_date = $request->preferred_date;
         $appointment->preferred_time = $request->preferred_time;
+
+        // $appointment->user_id = auth()->id();
 
         $appointment->save();
 

@@ -9,7 +9,7 @@
 
 @section('content')
     <div class="flex flex-col md:flex-row md:px-10 px-3 flex-1">
-        <form action="" id="createAppointment" method="post" class="flex-1 mb-20">
+        <form id="createAppointment" class="flex-1 mb-20">
             <div class="row">
                 <div class="flex mt-3 flex-col">
                     <h6 class="text-lg font-medium">You are Booking</h6>
@@ -178,12 +178,15 @@
                 });
             }
             callingReq();
+
+            
             // insert code
             $("#createAppointment").submit(function(e) {
                 e.preventDefault();
                 $.ajax({
                     type: "POST",
                     url: '{{ route('appointment.store') }}',
+                    // url: 'api/admin/appointment',
                     data: $('#createAppointment').serialize(),
                     success: function(response) {
                         $("#createAppointment").trigger("reset");
