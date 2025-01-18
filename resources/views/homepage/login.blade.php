@@ -79,11 +79,13 @@
                 type: 'POST',
                 data: $(this).serialize(),
                 success: function(response) {
+                    console.log(response);
                     localStorage.setItem('token', response.token);
+                    localStorage.setItem("user_id",response.user.id);
                     if (response.isAdmin) {
                         window.location.href = '{{ route('admin.dashboard') }}'; // Redirect to admin panel
                     } else {
-                        alert("hello")
+                        // alert("hello")
                         window.location.href = '{{ route('profile') }}'; // Redirect to user profile or dashboard
                     }
                 },

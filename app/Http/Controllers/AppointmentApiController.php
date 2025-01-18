@@ -107,7 +107,11 @@ class AppointmentApiController extends Controller
         $appointment->preferred_date = $request->preferred_date;
         $appointment->preferred_time = $request->preferred_time;
 
-        // $appointment->user_id = auth()->id();
+        $appointment->user_id = $request->user_id;
+        // $appointment->user_id = Auth::id();
+        // $user_id = auth()->id();
+        // dd($appointment);
+        
 
         $appointment->save();
 

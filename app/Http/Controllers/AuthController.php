@@ -17,7 +17,7 @@ class AuthController extends Controller
             $user = JWTAuth::user(); // Retrieve the authenticated user
             $isAdmin = $user->is_admin; // Assuming 'is_admin' is a column in your users table
             
-            return response()->json(compact('token', "isAdmin"));
+            return response()->json(compact('token', "isAdmin","user"));
         }
 
         return response()->json(['error' => 'Unauthorized'], 401);

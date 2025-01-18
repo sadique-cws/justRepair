@@ -111,6 +111,7 @@
                                 <label for="landmark" class="text-sm font-medium text-gray-700">Landmark</label>
                                 <input type="text" id="landmark" name="landmark"
                                     class="w-full border border-slate-200 px-3 py-2 rounded" placeholder="Landmark">
+                                <input type="hidden" name="user_id" id="set_user_id">
                             </div>
                         </div>
                         <div class="mt-4">
@@ -126,6 +127,8 @@
 
     <script>
         $(document).ready(function() {
+            const user_id = $("#set_user_id");
+            user_id.val(localStorage.getItem("user_id"));
             const urlParams = new URLSearchParams(window.location.search);
             const requirements = urlParams.getAll('requirements[]');
             const dateParam = urlParams.get('date');
