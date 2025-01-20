@@ -13,7 +13,7 @@
 
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-3xl font-semibold mb-8">My Bookings</h1>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8" id="appointmentList">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-10" id="appointmentList">
 
 
             <!-- Add more bookings as needed -->
@@ -44,7 +44,7 @@
                             // creating a badge for each requirements here:
                             $.each(requirements, function(i, requirement) {
                                 requirementsHtml +=
-                                    `<span class="badge bg-green-500">${requirement}</span> `;
+                                    `<span class="badge bg-green-500 text-white text-sm px-2 py-1 rounded">${requirement}</span> `;
                             });
 
                             appointmentList.append(`
@@ -57,7 +57,7 @@
                                         </div>
 
                                         <div class="mb-4">
-                                            <p class="text-gray-700"><strong class="text-sky-500">Requirements:</strong> ${item.requirements}</p>
+                                            <p class=""><strong class="text-sky-500">Requirements:</strong> ${requirementsHtml}</p>
                                         </div>
 
                                         <div class="mb-4">
