@@ -27,17 +27,7 @@
                     </a>
 
                     {{-- search option starts here --}}
-                    <div class="w-full md:w-1/2">
-                        <div class="flex items-center space-x-2">
-                            <input type="text" name="table_search" id="searchField"
-                                class="w-full p-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="Search">
-                            <button type="submit" id="searchButton"
-                                class="p-2 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none">
-                                <i class="fas fa-search text-gray-600"></i>
-                            </button>
-                        </div>
-                    </div>
+                   
 
                     {{-- search option ends here  --}}
 
