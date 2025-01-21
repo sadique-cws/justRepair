@@ -67,8 +67,8 @@
             <ul class="mt-6 list-disc list-inside text-gray-500">
                 <li>Phone: +91 72-800-800-80</li>
                 <li>Email: <a href="mailto:info@electronicsrepair.com"
-                        class="text-blue-500 hover:text-blue-700">info@JustRepairepair.com</a></li>
-                <li>Address: Naka chowk, Purandevi road, Purnia city</li>
+                        class="text-blue-500 hover:text-blue-700">justrepair.info@gmail.com</a></li>
+                <li>Address: Naka chowk, Purandevi road, Purnia city, Purnea , Bihar-854302</li>
             </ul>
         </div>
     </div>
