@@ -10,12 +10,12 @@ of use, which together with our privacy policy govern “JustRepair” (Owner of
 you in relation to this website and the JustRepair App and the Services provided. ")
 
 @section('content')
-    <div class=" bg-gray-100 py-10 px-4 sm:px-6 lg:px-10 xl:px-16 mb-10">
+    <div class=" bg-gray-100 py-10 sm:px-6 lg:px-10 xl:px-16 mb-10">
         <div class="text-center">
             <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">JustRepair's Terms & Conditions</h2>
         </div>
 
-        <div class="mt-8 max-w-4xl mx-auto">
+        <div class="mt-8 mx-auto">
             <h2 class="text-xl font-semibold mb-2">Terms & Conditions</h2>
             <p class="text-gray-700">Welcome to our website. If you continue to browse and use this website or our mobile
                 application (“JustRepair App”) you agree to comply with and be bound by the following terms and conditions
@@ -26,7 +26,7 @@ you in relation to this website and the JustRepair App and the Services provided
                 our website and JustRepair App.</p>
         </div>
         <!-- Section 1 -->
-        <div class="mt-8 max-w-4xl mx-auto">
+        <div class="mt-8  mx-auto">
             <h2 class="text-xl font-semibold mb-2">I. User(s) Eligibility</h2>
             <p class="text-gray-700">User(s) means any individual or business entity/organization that legally operates in
                 India or in other countries and uses and has the right to use the Services provided by JustRepair. The
@@ -43,7 +43,7 @@ you in relation to this website and the JustRepair App and the Services provided
         </div>
 
         <!-- Section 2 -->
-        <div class="mt-8 max-w-4xl mx-auto">
+        <div class="mt-8  mx-auto">
             <h2 class="text-xl font-semibold mb-2">II. User(s) Agreement</h2>
             <p class="text-gray-700">This agreement applies to user(s) if user(s) are visitors, registered - free or paid
                 user(s) who access the website and JustRepair App for any purpose. It also applies to any legal entity which
@@ -57,7 +57,7 @@ you in relation to this website and the JustRepair App and the Services provided
         </div>
 
         <!-- Section 3 -->
-        <div class="mt-8 max-w-4xl mx-auto">
+        <div class="mt-8  mx-auto">
             <h2 class="text-xl font-semibold mb-2">III. Amendment to User(s) Agreement</h2>
             <p class="text-gray-700">JustRepair may change, modify, amend, or update this agreement from time to time
                 without any prior notification to user(s) and the amended and restated terms and conditions of use shall be
@@ -68,7 +68,7 @@ you in relation to this website and the JustRepair App and the Services provided
 
 
         <!-- Section 4 -->
-        <div class="mt-8 max-w-4xl mx-auto">
+        <div class="mt-8  mx-auto">
             <h2 class="text-xl font-semibold mb-2">IV. Intellectual Property Rights</h2>
             <p class="text-gray-700">In consideration of your use of our platforms, you represent that you are of legal age
                 (18 years and above) to form a binding contract and are not a person barred from receiving services under
@@ -79,7 +79,7 @@ you in relation to this website and the JustRepair App and the Services provided
         </div>
 
         <!-- Section 5 -->
-        <div class="mt-8 max-w-4xl mx-auto">
+        <div class="mt-8  mx-auto">
             <h2 class="text-xl font-semibold mb-2">V. Subscriber Account, Security, and Offers & Promotions</h2>
             <p class="text-gray-700">JustRepair reserves the right to collect user data including name, contact information,
                 and other details to facilitate services or use of its platform to avail services. All information collected
@@ -90,7 +90,7 @@ you in relation to this website and the JustRepair App and the Services provided
 
 
         <!-- Section 6 -->
-        <div class="mt-8 max-w-4xl mx-auto">
+        <div class="mt-8  mx-auto">
             <h2 class="text-xl font-semibold mb-2">VI. Intellectual Property Rights</h2>
             <p class="text-gray-700">JustRepair is the sole owner or lawful licensee of all the rights to the website,
                 JustRepair App, and all software created to provide you with the Service. JustRepair provides you with a
@@ -100,7 +100,7 @@ you in relation to this website and the JustRepair App and the Services provided
         </div>
 
         <!-- Section 7 -->
-        <div class="mt-8 max-w-4xl mx-auto">
+        <div class="mt-8  mx-auto">
             <h2 class="text-xl font-semibold mb-2">VII. Links to Third Party Sites and Advertisements</h2>
             <p class="text-gray-700">Links to third-party sites are provided by the website and JustRepair App as a
                 convenience to user(s) and JustRepair does not have any control over such sites i.e. content and resources
@@ -110,7 +110,7 @@ you in relation to this website and the JustRepair App and the Services provided
         </div>
 
         <!-- Section 8 -->
-        <div class="mt-8 max-w-4xl mx-auto">
+        <div class="mt-8  mx-auto">
             <h2 class="text-xl font-semibold mb-2">VIII. Third-Party Services</h2>
             <p class="text-gray-700">User’s interactions with Independent Contractors through the use of the Platform or
                 service of JustRepair, including payment and delivery of goods, services, and any other terms, conditions,
@@ -121,7 +121,7 @@ you in relation to this website and the JustRepair App and the Services provided
 
 
         <!-- Section 9 -->
-        <div class="mt-8 max-w-4xl mx-auto">
+        <div class="mt-8  mx-auto">
             <h2 class="text-xl font-semibold mb-2">IX. Indemnity</h2>
             <p class="text-gray-700">You agree to defend, indemnify, and hold harmless JustRepair, its subsidiaries,
                 affiliates, subcontractors, officers, directors, employees, consultants, representatives, and agents, from
@@ -131,7 +131,7 @@ you in relation to this website and the JustRepair App and the Services provided
         </div>
 
         <!-- Section 10 -->
-        <div class="mt-8 max-w-4xl mx-auto">
+        <div class="mt-8  mx-auto">
             <h2 class="text-xl font-semibold mb-2">X. Force Majeure</h2>
             <p class="text-gray-700">Without limiting the foregoing, under no circumstances shall JustRepair be held liable
                 for any damage or loss due to deficiency in performance of the Service resulting directly or indirectly from
@@ -141,7 +141,7 @@ you in relation to this website and the JustRepair App and the Services provided
 
 
         <!-- Section 11 -->
-        <div class="mt-8 max-w-4xl mx-auto">
+        <div class="mt-8  mx-auto">
             <h2 class="text-xl font-semibold mb-2">XI. Termination</h2>
             <p class="text-gray-700">Most content and some of the features on the website and JustRepair App are made
                 available to visitors free of charge. However, JustRepair reserves the right to terminate access to certain
@@ -149,7 +149,7 @@ you in relation to this website and the JustRepair App and the Services provided
             <!-- Add more content as needed -->
         </div>
 
-        <div class="mt-8 max-w-4xl mx-auto">
+        <div class="mt-8  mx-auto">
             <h2 class="text-xl font-semibold mb-2">XII. Dispute Resolution</h2>
             <p class="text-gray-700">If a dispute arises between you and JustRepair, we shall endeavor to provide you with a
                 neutral and cost-effective means of resolving the dispute quickly. Accordingly, you and JustRepair hereby
@@ -157,14 +157,14 @@ you in relation to this website and the JustRepair App and the Services provided
                 accordance with this section.</p>
         </div>
 
-        <div class="mt-8 max-w-4xl mx-auto">
+        <div class="mt-8  mx-auto">
             <h2 class="text-xl font-semibold mb-2">XIII. Governing Law</h2>
             <p class="text-gray-700">The Terms and Conditions shall be governed in all respects by the laws of India and any
                 legal proceeding arising out of this Agreement will occur exclusively in the courts located in [Your City
                 Name], India.</p>
         </div>
 
-        <div class="mt-8 max-w-4xl mx-auto">
+        <div class="mt-8  mx-auto">
             <h2 class="text-xl font-semibold mb-2">XIV. Terms & Conditions for Customers</h2>
             <p class="text-gray-700">The following Terms & Conditions shall apply to customers utilizing the Services
                 offered by the Company for the hiring of Servicemen:</p>
@@ -190,7 +190,7 @@ you in relation to this website and the JustRepair App and the Services provided
         </div>
 
 
-        <div class="mt-8 max-w-4xl mx-auto">
+        <div class="mt-8  mx-auto">
             <h2 class="text-xl font-semibold mb-2">XV. Disclaimer</h2>
             <p class="text-gray-700">The information contained in this website is for general information purposes only. The
                 information is provided by JustRepair and while we endeavor to keep the information up to date and correct,
