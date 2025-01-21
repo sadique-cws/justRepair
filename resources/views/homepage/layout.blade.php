@@ -224,7 +224,7 @@
                 <span class="text-sm text-gray-500  group-hover:text-blue-600 ">WhatsApp</span>
             </a>
 
-            <a href="tel:7080080080" target="_blank"
+            <a href="tel:7280080080" target="_blank"
                 class="inline-flex flex-col items-center justify-center px-1 hover:bg-gray-50 group">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-6 h-6 animate-vibrate text-slate-500"
                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -233,7 +233,7 @@
                 </svg>
 
                 <span class="text-sm text-nowrap text-gray-500 group-hover:text-blue-600">
-                    7080080080</span>
+                    7280080080</span>
             </a>
 
 
