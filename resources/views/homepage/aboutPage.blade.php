@@ -9,10 +9,10 @@
 
 @section('content')
     <!-- About Us Section -->
-    <div class="bg-gray-100 py-10 px-4 sm:px-6 lg:px-10 xl:px-16">
-        <div class="text-center">
+    <div class=" bg-gray-100 py-10 sm:px-6 lg:px-10 xl:px-16">
+        <div class="">
             <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">About JustRepair Service</h2>
-            <p class="mt-4 max-w-4xl text-xl text-gray-500 mx-auto">
+            <p class="mt-4 text-xl text-gray-500 mx-auto">
                 We are a team of experienced electronics repair technicians dedicated to providing high-quality repair
                 services for all your electronic devices. From ACs and washing machines to coolers and beyond, we've got you
                 covered. Our mission is to ensure that you can enjoy your devices hassle-free, without worrying about
@@ -55,7 +55,7 @@
             </div>
         </div>
 
-        <div class="mt-10 mb-10 max-w-4xl mx-auto ">
+        <div class="mt-10 mb-10 mx-auto ">
             <h3 class="text-2xl leading-6 font-semibold text-center text-gray-900 mb-2">Contact Us</h3>
             <p class="mt-2 text-lg text-gray-500 ">
                 If you have any questions or would like to schedule a repair, please don't hesitate to contact us. Our
