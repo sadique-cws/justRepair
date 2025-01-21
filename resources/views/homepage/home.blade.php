@@ -16,7 +16,7 @@
                 <h2 class="text-2xl font-semibold mb-5">What you Looking For?</h2>
 
                 {{-- search bar goes here --}}
-                <div class="w-full md:w-1/2 mb-3">
+                <div class="w-full md:w-full mb-3">
                     <div class="flex items-center space-x-2">
                         <input type="text" name="table_search" id="searchField"
                             class="w-full p-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -101,6 +101,7 @@
 
             </div>
         </div>
+        
     </div>
 
 

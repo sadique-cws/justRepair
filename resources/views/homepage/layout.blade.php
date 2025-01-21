@@ -201,7 +201,7 @@
                 </svg>
 
                 <span class="text-sm text-gray-500  group-hover:text-blue-600  text-nowrap">My
-                    Booking</span>
+                    Services</span>
             </a>
             {{-- <a href="{{ route('profile') }}"
                 class="inline-flex flex-col items-center justify-center px-3 hover:bg-gray-50  group">
