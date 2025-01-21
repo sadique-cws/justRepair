@@ -20,7 +20,7 @@
             </p>
         </div>
 
-        <div class="mt-16 max-w-4xl mx-auto grid grid-cols-1 gap-y-16 gap-x-8 lg:grid-cols-2">
+        <div class="mt-16  mx-auto grid grid-cols-1 gap-y-16 gap-x-8 lg:grid-cols-2">
             <div>
                 <h3 class="text-lg leading-6 font-medium text-gray-900">Fast and Reliable Service</h3>
                 <p class="mt-2 text-base text-gray-500">
@@ -68,7 +68,7 @@
                 <li>Phone: +91 72-800-800-80</li>
                 <li>Email: <a href="mailto:info@electronicsrepair.com"
                         class="text-blue-500 hover:text-blue-700">info@JustRepairepair.com</a></li>
-                <li>Address: 123 Line Bazar, Purnea , Bihar-854301</li>
+                <li>Address: Naka chowk, Purandevi road, Purnia city</li>
             </ul>
         </div>
     </div>
