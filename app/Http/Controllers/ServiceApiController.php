@@ -66,6 +66,7 @@ class ServiceApiController extends Controller
             return response()->json(['success' => false]);
         }
     }
+    
     public function update(Request $request, $slug)
     {
         // dd($request->icon);

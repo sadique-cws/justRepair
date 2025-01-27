@@ -42,7 +42,7 @@
                             .fullname + ', <br> Your appointment for  <b>' + JSON.parse(response.requirements).join(' and ') + '</b> has been successfully booked.  Our technician will be in touch with you soon.'
                         appointmentDetailsHtml += '<p class="border border-slate-300 my-5 bg-yellow-200 text-3xl text-center p-3 rounded text-slate-800"><strong>Complaint Number:</strong>  <span class="text-red-600 font-semibold">' +
                             response.complain_no + ' </span></p>';
-                        appointmentDetailsHtml += `<p>For more details, please call us at ${response.mobileno}</p>`;
+                        appointmentDetailsHtml += `<p>For more details, please call us at 70-800-800-80</p>`;
         
 
                         $('#appointmentDetails').html(appointmentDetailsHtml);
