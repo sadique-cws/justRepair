@@ -297,8 +297,9 @@
                         'Authorization': 'Bearer ' + localStorage.getItem('token')
                     },
                     success: function(response) {
-                        // Remove the token from localStorage
+                        // Remove the token and Id from localStorage
                         localStorage.removeItem('token');
+                        localStorage.removeItem("user_id");
                         // Redirect to the login page
                         window.location.href = '{{ route('login') }}';
                     },

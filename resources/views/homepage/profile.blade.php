@@ -102,7 +102,7 @@
                         $("#profile-name").text(response.name + "'s profile");
                         $("#name").text(response.name);
                         $("#email").text(response.email);
-                        $("#mobile").text(response.mobile);
+                        $("#mobile").text(response.mobile_no);
                         $("#avatar").attr("src", response.avatar ? response.avatar :
                             `https://dummyimage.com/150x150/cccccc/000000&text=${response.name}`);
 

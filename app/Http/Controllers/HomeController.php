@@ -19,7 +19,9 @@ class HomeController extends Controller
     public function myBookingApi(Request $request)
     {
         $user = auth()->user();
-        $appointment = Appointment::where("user_id", $user->id)->get();
+        $appointment = Appointment::where("user_id", $user->id)
+            ->orWhere("mobileno", $user->mobile_no)
+            ->get();
         return response()->json($appointment);
     }
 
@@ -69,6 +71,4 @@ class HomeController extends Controller
     {
         return view("homepage.searchAppointment");
     }
-
-   
 }
