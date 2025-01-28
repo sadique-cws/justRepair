@@ -22,7 +22,7 @@ class BannerApiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,avif|max:2048',
         ]);
 
         $banner = new Banner(); 
