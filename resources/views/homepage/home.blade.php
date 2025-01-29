@@ -10,7 +10,7 @@
 
 
 @section('content')
-    <div class=" mx-auto px-5 py-10">
+    <div class=" mx-auto py-10">
         <div class="flex items-center gap-5 md:flex-row flex-col ">
             <div class="flex-1">
                 <h2 class="text-2xl font-semibold mb-5">What you Looking For?</h2>
