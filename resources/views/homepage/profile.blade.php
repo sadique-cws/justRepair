@@ -5,7 +5,8 @@
     {{ ' Our Profile - ' . env('APP_NAME') . ' | Book Expert Home Appalince Online | Purnea.' }}
 @endsection
 
-@section('description', 'View and manage your appointment list with JustRepair. Keep track of your scheduled repair
+@section('description',
+    'View and manage your appointment list with JustRepair. Keep track of your scheduled repair
     services and make changes as needed.')
 
 
@@ -49,8 +50,8 @@
                                     <label for="avatar" class="font-semibold">Display Picture:</label>
                                 </div>
                                 <div class="col-span-2">
-                                    <img src="https://via.placeholder.com/150" alt="avatar" id="avatar" class="rounded-lg"
-                                        style="width: 150px;">
+                                    <img src="https://via.placeholder.com/150" alt="avatar" id="avatar"
+                                        class="rounded-lg" style="width: 150px;">
                                 </div>
                             </div>
                         </div>
