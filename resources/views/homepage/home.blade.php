@@ -128,6 +128,7 @@
             let images = [];
             let currentIndex = 0;
             let autoSlideInterval; 
+            const defaultImage = "/default-banner/banner.jfif"; // Setting default image path here
 
             function loadImages() {
                 $.ajax({
@@ -136,12 +137,18 @@
                     dataType: 'json',
                     success: function(response) {
                         console.log(response);
-                        images = response.map(item => `/banners/${item.image}`);
+
+                        //if no images are found use the default image:
+                        images = response.length > 0
+                            ? response.map(item => `/banners/${item.image}`)
+                            : [defaultImage]; 
+
                         displayImages();
                         startAutoSlide();
                     },
                     error: function(error) {
                         console.error('Error fetching images:', error);
+                        images = [defaultImage]; //use default image if API call fails
                     }
                 });
             }
@@ -163,6 +170,7 @@
                 $('#carousel').css('transform', `translateX(-${currentIndex * 100}%)`);
             }
 
+            // manual navigation:
             $('#prev').click(() => {
                 resetAutoSlide();
                 currentIndex = (currentIndex - 1 + images.length) % images.length;
@@ -175,6 +183,7 @@
                 updateCarousel();
             });
 
+            // automatic sliding every 3 seconds:
             function startAutoSlide() {
                 autoSlideInterval = setInterval(() => {
                     currentIndex = (currentIndex + 1) % images.length;
@@ -187,6 +196,7 @@
                 startAutoSlide(); 
             }
 
+            // start the process:
             loadImages();
 
         })
