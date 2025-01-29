@@ -31,32 +31,9 @@
 
                 <div id="loader" class="text-5xl text-slate-300 py-5" style="display: none;">Loading...</div>
 
-                <div class="grid grid-cols-2 md:grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-5" id="serviceList">
+                <div class="grid grid-cols-2 md:grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 gap-5" id="serviceList">
                     <!-- Services will be loaded here dynamically -->
-                    <div class="animate-pulse bg-gray-200 rounded-lg shadow-md p-4">
-                        <div class="w-16 h-16 bg-gray-300 rounded-full mb-2"></div>
-                        <div class="h-4 bg-gray-300 rounded w-3/4"></div>
-                    </div>
-                    <div class="animate-pulse bg-gray-200 rounded-lg shadow-md p-4">
-                        <div class="w-16 h-16 bg-gray-300 rounded-full mb-2"></div>
-                        <div class="h-4 bg-gray-300 rounded w-3/4"></div>
-                    </div>
-                    <div class="animate-pulse bg-gray-200 rounded-lg shadow-md p-4">
-                        <div class="w-16 h-16 bg-gray-300 rounded-full mb-2"></div>
-                        <div class="h-4 bg-gray-300 rounded w-3/4"></div>
-                    </div>
-                    <div class="animate-pulse bg-gray-200 rounded-lg shadow-md p-4">
-                        <div class="w-16 h-16 bg-gray-300 rounded-full mb-2"></div>
-                        <div class="h-4 bg-gray-300 rounded w-3/4"></div>
-                    </div>
-                    <div class="animate-pulse bg-gray-200 rounded-lg shadow-md p-4">
-                        <div class="w-16 h-16 bg-gray-300 rounded-full mb-2"></div>
-                        <div class="h-4 bg-gray-300 rounded w-3/4"></div>
-                    </div>
-                    <div class="animate-pulse bg-gray-200 rounded-lg shadow-md p-4">
-                        <div class="w-16 h-16 bg-gray-300 rounded-full mb-2"></div>
-                        <div class="h-4 bg-gray-300 rounded w-3/4"></div>
-                    </div>
+                    
                 </div>
             </div>
 
