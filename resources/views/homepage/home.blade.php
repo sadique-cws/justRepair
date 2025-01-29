@@ -126,128 +126,146 @@
     <script>
         $(document).ready(function() {
 
-                    let callingServices = (search) => {
-                        $('#loader').show();
+            let callingServices = (search) => {
+                $('#loader').show();
 
-                        $.ajax({
-                            url: `{{ route('service.index') }}`,
-                            type: "GET",
-                            data: {
-                                'search': search
-                            },
-                            // processData:false,
-                            success: function(response) {
-                                $('#loader').hide();
+                $.ajax({
+                    url: `{{ route('service.index') }}`,
+                    type: "GET",
+                    data: {
+                        'search': search
+                    },
+                    // processData:false,
+                    success: function(response) {
+                        $('#loader').hide();
 
-                                let serviceList = $("#serviceList");
-                                serviceList.empty();
-                                response.forEach((item, index) => {
-                                    let colors = ['bg-blue-200', 'bg-green-200', 'bg-yellow-200',
-                                        'bg-pink-200', 'bg-purple-200'
-                                    ];
-                                    let colorClass = colors[index % colors.length];
+                        let serviceList = $("#serviceList");
+                        serviceList.empty();
+                        response.forEach((item, index) => {
+                            let colors = ['bg-blue-200', 'bg-green-200', 'bg-yellow-200',
+                                'bg-pink-200', 'bg-purple-200'
+                            ];
+                            let colorClass = colors[index % colors.length];
 
-                                    serviceList.append(`
+                            serviceList.append(`
                                 <a href="/view/${item.slug}" class="flex flex-col items-center ${colorClass} p-4 rounded-lg shadow-md hover:bg-gray-100 transition duration-300">
                                     <img src="/uploads/${item.icon}" alt="${item.name}" class="w-16 h-16 object-cover rounded-full">
                                     <h3 class="mt-2 text-sm text-center">${item.name}</h3>
                                 </a>
                             `)
-                                })
-                            }
-                        });
+                        })
                     }
+                });
+            }
+            callingServices();
+
+            $('#searchField').on("keyup", function() {
+                let searchValue = $("#searchField").val();
+                if (searchValue.length > 3) {
+                    callingServices(searchValue);
+                } else {
                     callingServices();
+                }
+            });
 
-                    $('#searchField').on("keyup", function() {
-                        let searchValue = $("#searchField").val();
-                        if (searchValue.length > 3) {
-                            callingServices(searchValue);
-                        } else {
-                            callingServices();
-                        }
-                    });
+            //banner calling goes here:
+            // let callingBanner = () => {
+            //     $.ajax({
+            //         type: "GET",
+            //         url: "/api/admin/banner",
+            //         success: function(response) {
+            //             // console.log(response);
+            //             let banners = $('#bannerImage');
+            //             banners.empty();
+            //             let data = response;
+            //             // console.log(data);
 
-                    //banner calling goes here:
-                    // let callingBanner = () => {
-                    //     $.ajax({
-                    //         type: "GET",
-                    //         url: "/api/admin/banner",
-                    //         success: function(response) {
-                    //             // console.log(response);
-                    //             let banners = $('#bannerImage');
-                    //             banners.empty();
-                    //             let data = response;
-                    //             // console.log(data);
+            //             data.forEach((banner, index) => {
+            //                 banners.append(`                                
+        //                     <div class="${index === 0 ?? 'active'} duration-700 ease-in-out" data-carousel-item>
+        //                         <img src="/banners/${banner.image}" alt="banner-${index + 1}" 
+        //                         class="absolute block w-full h-full object-cover">
+        //                     </div>                                
+        //                 `);
+            //             });
+            //         },
+            //         error: function(err) {
+            //             console.error("Error loading banners:", err);
+            //         }
+            //     });
+            // }
+            // callingBanner();
 
-                    //             data.forEach((banner, index) => {
-                    //                 banners.append(`                                
-                //                     <div class="${index === 0 ?? 'active'} duration-700 ease-in-out" data-carousel-item>
-                //                         <img src="/banners/${banner.image}" alt="banner-${index + 1}" 
-                //                         class="absolute block w-full h-full object-cover">
-                //                     </div>                                
-                //                 `);
-                    //             });
-                    //         },
-                    //         error: function(err) {
-                    //             console.error("Error loading banners:", err);
-                    //         }
-                    //     });
-                    // }
-                    // callingBanner();
 
-                    
-                        let images = [];
-                        let currentIndex = 0;
+            let images = [];
+            let currentIndex = 0;
+            let autoSlideInterval; //store interval refrence
 
-                    // Fetch images using jQuery AJAX
-                    function loadImages() {
-                        $.ajax({
-                            type: "GET",
-                            url: "/api/admin/banner",
-                            dataType: 'json',
-                            success: function(response) {
-                                console.log(response);
-                                // images = response; // Assuming data is an array of image URLs
-                                images = response.map(item => `/banners/${item.image}`);
-                                displayImages();
-                            },
-                            error: function(error) {
-                                console.error('Error fetching images:', error);
-                            }
-                        });
+            // Fetch images using jQuery AJAX
+            function loadImages() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/admin/banner",
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log(response);
+                        // images = response; // Assuming data is an array of image URLs
+                        images = response.map(item => `/banners/${item.image}`);
+                        displayImages();
+                        startAutoSlide();
+                    },
+                    error: function(error) {
+                        console.error('Error fetching images:', error);
                     }
+                });
+            }
 
-                    function displayImages() {
-                        const carousel = $('#carousel');
-                        carousel.empty();
+            function displayImages() {
+                const carousel = $('#carousel');
+                carousel.empty();
 
-                        images.forEach(imgSrc => {
-                            const img = $('<img>').attr('src', imgSrc).addClass(
-                                'w-full h-full object-cover shrink-0');
-                            carousel.append(img);
-                        });
+                images.forEach(imgSrc => {
+                    const img = $('<img>').attr('src', imgSrc).addClass(
+                        'w-full h-full object-cover shrink-0');
+                    carousel.append(img);
+                });
 
-                        updateCarousel();
-                    }
+                updateCarousel();
+            }
 
-                    function updateCarousel() {
-                        $('#carousel').css('transform', `translateX(-${currentIndex * 100}%)`);
-                    }
+            function updateCarousel() {
+                $('#carousel').css('transform', `translateX(-${currentIndex * 100}%)`);
+            }
 
-                    $('#prev').click(() => {
-                        currentIndex = (currentIndex - 1 + images.length) % images.length;
-                        updateCarousel();
-                    });
+            $('#prev').click(() => {
+                resetAutoSlide();
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                updateCarousel();
+            });
 
-                    $('#next').click(() => {
-                        currentIndex = (currentIndex + 1) % images.length;
-                        updateCarousel();
-                    });
+            $('#next').click(() => {
+                resetAutoSlide(); //reset timer when manually sliding
+                currentIndex = (currentIndex + 1) % images.length;
+                updateCarousel();
+            });
 
-                    loadImages();
+            // Automatic sliding every 3 seconds:
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % images.length;
+                    updateCarousel();
+                }, 3000); // Change slide every 3 seconds
+            }
 
-         })
+            // Reset auto-slide when user interacts manually
+            function resetAutoSlide() {
+                clearInterval(autoSlideInterval); // Stop the current interval
+                startAutoSlide(); // Restart the auto-slide
+            }
+
+            loadImages();
+
+        })
     </script>
 
 
