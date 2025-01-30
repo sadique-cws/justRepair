@@ -3,7 +3,8 @@
 
 @section('title', 'Book Appointment - JustRepair | Book Expert Home Appalince Online | Purnea.')
 
-@section('description', 'Schedule a repair service appointment with JustRepair for your appliances. Choose your
+@section('description',
+    'Schedule a repair service appointment with JustRepair for your appliances. Choose your
     preferred date and time, and our experts will take care of the rest.')
 
 
@@ -182,7 +183,7 @@
             }
             callingReq();
 
-            
+
             // insert code
             $("#createAppointment").submit(function(e) {
                 e.preventDefault();
@@ -220,19 +221,21 @@
             });
 
 
-            // mobile no check
-            // $('#mobile_no').on('keydown', function(e) {
-            //     var maxLength = 10;
-            //     if ($(this).val().length >= maxLength && e.keyCode !== 8) {
-            //         e.preventDefault();
-            //     }
-            // });
 
-            $('#mobile_no').on('keydown', function(e) {
+            $('#mobile_no').on('input', function() {
                 var maxLength = 10;
-                if ($(this).val().length >= maxLength) {
-                    $(this).next('input').focus();
+                var value = $(this).val();
+
+                // Remove non-numeric characters
+                value = value.replace(/\D/g, '');
+
+                // Trim input to 10 digits max
+                if (value.length > maxLength) {
+                    value = value.substring(0, maxLength);
                 }
+
+                // Set the formatted value back
+                $(this).val(value);
             });
 
 
