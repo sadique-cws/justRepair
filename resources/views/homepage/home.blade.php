@@ -31,7 +31,7 @@
 
                 <div id="loader" class="text-5xl text-slate-300 py-5" style="display: none;">Loading...</div>
 
-                <div class="grid grid-cols-2 md:grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 gap-5" id="serviceList">
+                <div id="serviceList" class="grid grid-cols-2 md:grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 gap-5" >
                     <!-- Services will be loaded here dynamically -->
                     
                 </div>
@@ -82,7 +82,7 @@
 
                             serviceList.append(`
                                 <a href="/view/${item.slug}" class="flex flex-col items-center ${colorClass} p-4 rounded-lg shadow-md hover:bg-gray-100 transition duration-300">
-                                    <img src="/uploads/${item.icon}" alt="${item.name}" class="w-16 h-16 object-cover rounded-full">
+                                    <img src="/uploads/${item.icon}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg">
                                     <h3 class="mt-2 text-sm text-center">${item.name}</h3>
                                 </a>
                             `)
