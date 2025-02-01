@@ -25,15 +25,15 @@ class BannerApiController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,avif|max:2048',
         ]);
 
-        $banner = new Banner(); 
-        
-        if($request->hasFile('image')){
-            $imageName = time() . '.' . $request->image->getClientOriginalExtension(); 
-            $request->image->move(public_path('banners'),$imageName); 
-            $banner->image = $imageName; 
+        $banner = new Banner();
+
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+            $request->image->move(public_path('banners'), $imageName);
+            $banner->image = $imageName;
         }
 
-        $banner->save(); 
+        $banner->save();
 
         return response()->json(['success' => true]);
     }
@@ -57,8 +57,16 @@ class BannerApiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $banner = Banner::find($id);
+
+        if (!$banner) {
+            return response()->json(['message' => 'Banner not found.'], 404);
+        }
+
+        $banner->delete();
+
+        return response()->json(['message' => 'Banner deleted successfully.'], 200);
     }
 }

@@ -24,12 +24,12 @@ class BannerController extends Controller
         return view('admin.banner.view', compact("banner"));
     }
 
-    public function destroy($id){
-        $banner = Banner::findOrFail($id);
-        $banner->delete();
+    // public function destroy($id){
+    //     $banner = Banner::findOrFail($id);
+    //     $banner->delete();
 
-        return redirect()->back()->with('success','Banner has been deleted successfully!');
-    }
+    //     return redirect()->back()->with('success','Banner has been deleted successfully!');
+    // }
 
     public function getBanners(){
         $banners = Banner::pluck('image')->toArray();
