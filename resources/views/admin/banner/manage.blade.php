@@ -46,7 +46,7 @@
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover text-nowrap">
                                 <tbody id="tableBody">
-                                    <!-- Table rows will be dynamically added here -->
+                                   
                                 </tbody>
                             </table>
                         </div>
@@ -83,24 +83,19 @@
                                 // Add the current image with footer buttons to the row
                                 tableRows +=
                                     `<td style="text-align: center; padding: 10px;">
-                                    <div style="border: 1px solid #ccc; padding: 10px;">
-                                        <img src='/banners/${row.image}' width='500px' style="display: block; margin: auto;"/>
-                                        <div style="margin-top: 10px;">
-                                            <button type='submit' class='btn btn-danger deleteBtn' banner-id=${row.id}>Delete</button>
+                                        <div style="border: 1px solid #ccc; padding: 10px; max-width: 100%; display: inline-block;">
+                                            <img src='/banners/${row.image}' style="width: 100%; max-width: 500px; height: auto; display: block; margin: auto;" />
+                                            <div style="margin-top: 10px;">
+                                                <button type='submit' class='btn btn-danger deleteBtn w-100' banner-id=${row.id}>Delete</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>`;
-
-
+                                    </td>`;
 
                                 // Close the row after two images
                                 if (index % 2 === 1 || index === response.length - 1) {
                                     tableRows += '</tr>';
                                 }
                             });
-
-                            // delete work for banner goes here:
-
 
                             $('#tableBody').html(tableRows);
                         }
@@ -112,7 +107,8 @@
             }
             callingBanners();
 
-            $(document).on("click",".deleteBtn",function() {
+            // delete work goes here:
+            $(document).on("click", ".deleteBtn", function() {
                 let id = $(this).attr("banner-id");
                 $.ajax({
                     type: 'DELETE',
