@@ -483,7 +483,7 @@
                                         $('#editServiceRequirementsContainer').html(
                                             ''); // Clear the field if invalid
                                     }
-
+                                    serviesfees
                                     // Open the modal
                                     $('#editServiceModal').modal('show');
                                 },
@@ -503,28 +503,28 @@
                     }
                 });
 
-                // // here goes the services and the required fee:
-                // $.ajax({
-                //     url: '{{ route('servicefee.index') }}',
-                //     type: 'GET',
-                //     dataType: 'json',
-                //     data: {
-                //         "service_id": service_id
-                //     },
-                //     success: function(response) {
-                //         // Populate the selected dropdown with service fees
-                //         var select = $('#parent_id');
-                //         select.empty();
-                //         select.append($('<option>').text('Main Category').attr('value', ""));
-                //         $.each(response, function(index, item) {
-                //             select.append($('<option>').text(item.service_fees_name).attr('value',
-                //                 item.id));
-                //         });
-                //     },
-                //     error: function(xhr, status, error) {
-                //         console.error(error);
-                //     }
-                // });
+                // here goes the services and the required fee:
+                $.ajax({
+                    url: '{{ route('servicefee.index') }}',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        "service_id": service_id
+                    },
+                    success: function(response) {
+                        // Populate the selected dropdown with service fees
+                        var select = $('#parent_id');
+                        select.empty();
+                        select.append($('<option>').text('Main Category').attr('value', ""));
+                        $.each(response, function(index, item) {
+                            select.append($('<option>').text(item.service_fees_name).attr('value',
+                                item.id));
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
 
 
 

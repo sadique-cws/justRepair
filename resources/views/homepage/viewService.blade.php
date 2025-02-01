@@ -115,10 +115,9 @@
                         </div>
 
                         <div id="accordion-flush" data-accordion="collapse"
-                            data-active-classes="bg-white text-gray-900 "
-                            data-inactive-classes="text-gray-500">
+                        data-active-classes="bg-blue-100 dark:bg-gray-50 text-blue-600 dark:text-black">
                             @foreach ($service->servicefees as $item)
-                                @if (!$item->parent_id)
+                            @if (!$item->parent_id)
                                     <h2 id="accordion-flush-heading-{{ $item->id }}">
                                         <button type="button"
                                             class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200  gap-3"
