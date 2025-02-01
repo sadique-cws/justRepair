@@ -65,44 +65,65 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            // AJAX call to fetch data
-            $.ajax({
-                url: "{{ route('banner.index') }}",
-                type: 'GET',
-                success: function(response) {
-                    // Update the table with the response data
-                    if (response && response.length > 0) {
-                        var tableRows = '';
-                        response.forEach(function(row, index) {
-                            // Start a new row for every two images
-                            if (index % 2 === 0) {
-                                tableRows += '<tr>';
-                            }
+            // AJAX call to fetch the banner
+            let callingBanners = () => {
+                $.ajax({
+                    url: "{{ route('banner.index') }}",
+                    type: 'GET',
+                    success: function(response) {
+                        // Update the table with the response data
+                        if (response && response.length > 0) {
+                            var tableRows = '';
+                            response.forEach(function(row, index) {
+                                // Start a new row for every two images
+                                if (index % 2 === 0) {
+                                    tableRows += '<tr>';
+                                }
 
-                            // Add the current image with footer buttons to the row
-                            tableRows +=
-                                `<td style="text-align: center; padding: 10px;">
+                                // Add the current image with footer buttons to the row
+                                tableRows +=
+                                    `<td style="text-align: center; padding: 10px;">
                                     <div style="border: 1px solid #ccc; padding: 10px;">
                                         <img src='/banners/${row.image}' width='500px' style="display: block; margin: auto;"/>
                                         <div style="margin-top: 10px;">
-                                            <a href='/admin/banner/view/${row.id}' class='btn btn-warning' style="margin-right: 5px;">View</a>
-                                            <a href='/admin/banner/destroy/${row.id}' class='btn btn-danger'>Delete</a>
+                                            <button type='submit' class='btn btn-danger deleteBtn' banner-id=${row.id}>Delete</button>
                                         </div>
                                     </div>
                                 </td>`;
 
-                            // Close the row after two images
-                            if (index % 2 === 1 || index === response.length - 1) {
-                                tableRows += '</tr>';
-                            }
-                        });
 
-                        $('#tableBody').html(tableRows);
+
+                                // Close the row after two images
+                                if (index % 2 === 1 || index === response.length - 1) {
+                                    tableRows += '</tr>';
+                                }
+                            });
+
+                            // delete work for banner goes here:
+
+
+                            $('#tableBody').html(tableRows);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
                     }
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
+                });
+            }
+            callingBanners();
+
+            $(document).on("click",".deleteBtn",function() {
+                let id = $(this).attr("banner-id");
+                $.ajax({
+                    type: 'DELETE',
+                    url: `/api/admin/banner/${id}`,
+                    success: function(response) {
+                        alert(response.message);
+
+                        // to refresh the page:
+                        callingBanners();
+                    },
+                });
             });
         });
     </script>
