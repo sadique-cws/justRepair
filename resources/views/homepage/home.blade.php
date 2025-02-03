@@ -31,7 +31,7 @@
 
                 <div id="loader" class="text-5xl text-slate-300 py-5" style="display: none;">Loading...</div>
 
-                <div id="serviceList" class="grid grid-cols-2 md:grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 gap-5 py-5" >
+                <div id="serviceList" class="grid grid-cols-2 md:grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 gap-5 pt-5 py-10" >
                     <!-- Services will be loaded here dynamically -->
                     
                 </div>

@@ -201,7 +201,7 @@
                 </svg>
 
                 <span class="text-sm text-gray-500  group-hover:text-blue-600  text-nowrap">My
-                    Services</span>
+                    Booking</span>
             </a>
             
             <a href="https://wa.me/+917280080080" target="_blank"
