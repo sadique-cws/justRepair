@@ -19,7 +19,6 @@ class ServiceFeeApiController extends Controller
         return response()->json($serviceFee, 200);
     }
 
-
     public function store(Request $request)
     {
 

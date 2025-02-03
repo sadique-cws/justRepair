@@ -1,10 +1,10 @@
 @extends('homepage.layout')
 
-@section("title")
-{{$service->name . "-" . env("APP_NAME") . " | Book Expert Home Appalince Online | Purnea."}}
+@section('title')
+    {{ $service->name . '-' . env('APP_NAME') . ' | Book Expert Home Appalince Online | Purnea.' }}
 @endsection
 
-@section("description", $service->description)
+@section('description', $service->description)
 
 
 @section('content')
@@ -115,9 +115,9 @@
                         </div>
 
                         <div id="accordion-flush" data-accordion="collapse"
-                        data-active-classes="bg-blue-100 dark:bg-gray-50 text-blue-600 dark:text-black">
+                            data-active-classes="bg-blue-100 dark:bg-gray-50 text-blue-600 dark:text-black">
                             @foreach ($service->servicefees as $item)
-                            @if (!$item->parent_id)
+                                @if (!$item->parent_id)
                                     <h2 id="accordion-flush-heading-{{ $item->id }}">
                                         <button type="button"
                                             class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200  gap-3"
@@ -148,7 +148,7 @@
                                             @foreach ($item->subfees as $subitem)
                                                 <span class="flex justify-between text-sm bg-slate-200 p-2 rounded">
                                                     <span>{{ $loop->index + 1 }}. {{ $subitem->service_fees_name }}</span>
-                                                    <span>₹{{ $subitem->service_fees }}</span>
+                                                    <span>{{ $subitem->service_fees == 0 ? 'On Spection' : '₹' . $subitem->service_fees }}</span>
                                                 </span>
                                             @endforeach
                                         </div>
