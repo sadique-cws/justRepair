@@ -39,7 +39,7 @@
 
             <div class="relative flex-1 h-56 md:h-96 overflow-hidden rounded-lg">
                 <!-- Carousel Wrapper -->
-                <div id="carousel" class="flex transition-transform duration-500 ease-in-out rounded-lg bg-red-500"></div>
+                <div id="carousel" class="flex transition-transform duration-500 ease-in-out rounded-lg"></div>
 
                 <!-- Navigation Buttons -->
                 <button id="prev"
