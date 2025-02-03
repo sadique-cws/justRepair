@@ -437,12 +437,12 @@
                                         <td> 
                                             <button class="btn btn-danger btn-sm mr-4 deleteBtn" data-id="${response.id}">Delete</button> 
                                             <button class="btn btn-primary btn-sm editBtn" data-id="${response.slug}">Edit</button>
-                                            {{-- model for service-edit work goes here --}}
                                         </td>
                                 </tr>`;
                             $('#tableBody').html(tableRows);
                         }
 
+                        //edit work goes here
                         $(document).on('click', '.editBtn', function() {
                             const id = $(this).data('id'); // Get the service ID
                             const url = `/api/admin/service/${id}`; // Construct the API URL
@@ -483,7 +483,6 @@
                                         $('#editServiceRequirementsContainer').html(
                                             ''); // Clear the field if invalid
                                     }
-                                    serviesfees
                                     // Open the modal
                                     $('#editServiceModal').modal('show');
                                 },
@@ -495,7 +494,6 @@
 
                         });
 
-                        //edit work goes here
 
                     },
                     error: function(xhr, status, error) {
