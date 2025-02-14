@@ -148,7 +148,7 @@
                                             @foreach ($item->subfees as $subitem)
                                                 <span class="flex justify-between text-sm bg-slate-200 p-2 rounded">
                                                     <span>{{ $loop->index + 1 }}. {{ $subitem->service_fees_name }}</span>
-                                                    <span>{{ $subitem->service_fees == 0 ? 'On Spection' : '₹' . $subitem->service_fees }}</span>
+                                                    <span>{{ $subitem->service_fees == 0 ? 'On inspection' : '₹' . $subitem->service_fees }}</span>
                                                 </span>
                                             @endforeach
                                         </div>
